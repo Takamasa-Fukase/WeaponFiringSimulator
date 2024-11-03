@@ -1,0 +1,612 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9B02CD74E4200025518 /* AppDelegate.swift */; };
+		BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */; };
+		BC5AC9B52CD74E4200025518 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9B42CD74E4200025518 /* ViewController.swift */; };
+		BC5AC9B82CD74E4200025518 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BC5AC9B72CD74E4200025518 /* Base */; };
+		BC5AC9BA2CD74E4300025518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC5AC9B92CD74E4300025518 /* Assets.xcassets */; };
+		BC5AC9BD2CD74E4300025518 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BC5AC9BC2CD74E4300025518 /* Base */; };
+		BC5AC9C82CD74E4300025518 /* WeaponFiringSimulaterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9C72CD74E4300025518 /* WeaponFiringSimulaterTests.swift */; };
+		BC5AC9D22CD74E4300025518 /* WeaponFiringSimulaterUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9D12CD74E4300025518 /* WeaponFiringSimulaterUITests.swift */; };
+		BC5AC9D42CD74E4300025518 /* WeaponFiringSimulaterUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9D32CD74E4300025518 /* WeaponFiringSimulaterUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BC5AC9C42CD74E4300025518 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC5AC9A52CD74E4200025518 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BC5AC9AC2CD74E4200025518;
+			remoteInfo = WeaponFiringSimulater;
+		};
+		BC5AC9CE2CD74E4300025518 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BC5AC9A52CD74E4200025518 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BC5AC9AC2CD74E4200025518;
+			remoteInfo = WeaponFiringSimulater;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		BC5AC9AD2CD74E4200025518 /* WeaponFiringSimulater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeaponFiringSimulater.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5AC9B02CD74E4200025518 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		BC5AC9B42CD74E4200025518 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		BC5AC9B72CD74E4200025518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		BC5AC9B92CD74E4300025518 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		BC5AC9BC2CD74E4300025518 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		BC5AC9BE2CD74E4300025518 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC5AC9C32CD74E4300025518 /* WeaponFiringSimulaterTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeaponFiringSimulaterTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5AC9C72CD74E4300025518 /* WeaponFiringSimulaterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFiringSimulaterTests.swift; sourceTree = "<group>"; };
+		BC5AC9CD2CD74E4300025518 /* WeaponFiringSimulaterUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeaponFiringSimulaterUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5AC9D12CD74E4300025518 /* WeaponFiringSimulaterUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFiringSimulaterUITests.swift; sourceTree = "<group>"; };
+		BC5AC9D32CD74E4300025518 /* WeaponFiringSimulaterUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFiringSimulaterUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BC5AC9AA2CD74E4200025518 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5AC9C02CD74E4300025518 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5AC9CA2CD74E4300025518 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BC5AC9A42CD74E4200025518 = {
+			isa = PBXGroup;
+			children = (
+				BC5AC9AF2CD74E4200025518 /* WeaponFiringSimulater */,
+				BC5AC9C62CD74E4300025518 /* WeaponFiringSimulaterTests */,
+				BC5AC9D02CD74E4300025518 /* WeaponFiringSimulaterUITests */,
+				BC5AC9AE2CD74E4200025518 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BC5AC9AE2CD74E4200025518 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BC5AC9AD2CD74E4200025518 /* WeaponFiringSimulater.app */,
+				BC5AC9C32CD74E4300025518 /* WeaponFiringSimulaterTests.xctest */,
+				BC5AC9CD2CD74E4300025518 /* WeaponFiringSimulaterUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BC5AC9AF2CD74E4200025518 /* WeaponFiringSimulater */ = {
+			isa = PBXGroup;
+			children = (
+				BC5AC9B02CD74E4200025518 /* AppDelegate.swift */,
+				BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */,
+				BC5AC9B42CD74E4200025518 /* ViewController.swift */,
+				BC5AC9B62CD74E4200025518 /* Main.storyboard */,
+				BC5AC9B92CD74E4300025518 /* Assets.xcassets */,
+				BC5AC9BB2CD74E4300025518 /* LaunchScreen.storyboard */,
+				BC5AC9BE2CD74E4300025518 /* Info.plist */,
+			);
+			path = WeaponFiringSimulater;
+			sourceTree = "<group>";
+		};
+		BC5AC9C62CD74E4300025518 /* WeaponFiringSimulaterTests */ = {
+			isa = PBXGroup;
+			children = (
+				BC5AC9C72CD74E4300025518 /* WeaponFiringSimulaterTests.swift */,
+			);
+			path = WeaponFiringSimulaterTests;
+			sourceTree = "<group>";
+		};
+		BC5AC9D02CD74E4300025518 /* WeaponFiringSimulaterUITests */ = {
+			isa = PBXGroup;
+			children = (
+				BC5AC9D12CD74E4300025518 /* WeaponFiringSimulaterUITests.swift */,
+				BC5AC9D32CD74E4300025518 /* WeaponFiringSimulaterUITestsLaunchTests.swift */,
+			);
+			path = WeaponFiringSimulaterUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BC5AC9AC2CD74E4200025518 /* WeaponFiringSimulater */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC5AC9D72CD74E4300025518 /* Build configuration list for PBXNativeTarget "WeaponFiringSimulater" */;
+			buildPhases = (
+				BC5AC9A92CD74E4200025518 /* Sources */,
+				BC5AC9AA2CD74E4200025518 /* Frameworks */,
+				BC5AC9AB2CD74E4200025518 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = WeaponFiringSimulater;
+			productName = WeaponFiringSimulater;
+			productReference = BC5AC9AD2CD74E4200025518 /* WeaponFiringSimulater.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BC5AC9C22CD74E4300025518 /* WeaponFiringSimulaterTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC5AC9DA2CD74E4300025518 /* Build configuration list for PBXNativeTarget "WeaponFiringSimulaterTests" */;
+			buildPhases = (
+				BC5AC9BF2CD74E4300025518 /* Sources */,
+				BC5AC9C02CD74E4300025518 /* Frameworks */,
+				BC5AC9C12CD74E4300025518 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BC5AC9C52CD74E4300025518 /* PBXTargetDependency */,
+			);
+			name = WeaponFiringSimulaterTests;
+			productName = WeaponFiringSimulaterTests;
+			productReference = BC5AC9C32CD74E4300025518 /* WeaponFiringSimulaterTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		BC5AC9CC2CD74E4300025518 /* WeaponFiringSimulaterUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BC5AC9DD2CD74E4300025518 /* Build configuration list for PBXNativeTarget "WeaponFiringSimulaterUITests" */;
+			buildPhases = (
+				BC5AC9C92CD74E4300025518 /* Sources */,
+				BC5AC9CA2CD74E4300025518 /* Frameworks */,
+				BC5AC9CB2CD74E4300025518 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BC5AC9CF2CD74E4300025518 /* PBXTargetDependency */,
+			);
+			name = WeaponFiringSimulaterUITests;
+			productName = WeaponFiringSimulaterUITests;
+			productReference = BC5AC9CD2CD74E4300025518 /* WeaponFiringSimulaterUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BC5AC9A52CD74E4200025518 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1530;
+				LastUpgradeCheck = 1530;
+				TargetAttributes = {
+					BC5AC9AC2CD74E4200025518 = {
+						CreatedOnToolsVersion = 15.3;
+					};
+					BC5AC9C22CD74E4300025518 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = BC5AC9AC2CD74E4200025518;
+					};
+					BC5AC9CC2CD74E4300025518 = {
+						CreatedOnToolsVersion = 15.3;
+						TestTargetID = BC5AC9AC2CD74E4200025518;
+					};
+				};
+			};
+			buildConfigurationList = BC5AC9A82CD74E4200025518 /* Build configuration list for PBXProject "WeaponFiringSimulater" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BC5AC9A42CD74E4200025518;
+			productRefGroup = BC5AC9AE2CD74E4200025518 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BC5AC9AC2CD74E4200025518 /* WeaponFiringSimulater */,
+				BC5AC9C22CD74E4300025518 /* WeaponFiringSimulaterTests */,
+				BC5AC9CC2CD74E4300025518 /* WeaponFiringSimulaterUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BC5AC9AB2CD74E4200025518 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC5AC9BA2CD74E4300025518 /* Assets.xcassets in Resources */,
+				BC5AC9BD2CD74E4300025518 /* Base in Resources */,
+				BC5AC9B82CD74E4200025518 /* Base in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5AC9C12CD74E4300025518 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5AC9CB2CD74E4300025518 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BC5AC9A92CD74E4200025518 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC5AC9B52CD74E4200025518 /* ViewController.swift in Sources */,
+				BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */,
+				BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5AC9BF2CD74E4300025518 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC5AC9C82CD74E4300025518 /* WeaponFiringSimulaterTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BC5AC9C92CD74E4300025518 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC5AC9D42CD74E4300025518 /* WeaponFiringSimulaterUITestsLaunchTests.swift in Sources */,
+				BC5AC9D22CD74E4300025518 /* WeaponFiringSimulaterUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BC5AC9C52CD74E4300025518 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BC5AC9AC2CD74E4200025518 /* WeaponFiringSimulater */;
+			targetProxy = BC5AC9C42CD74E4300025518 /* PBXContainerItemProxy */;
+		};
+		BC5AC9CF2CD74E4300025518 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BC5AC9AC2CD74E4200025518 /* WeaponFiringSimulater */;
+			targetProxy = BC5AC9CE2CD74E4300025518 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		BC5AC9B62CD74E4200025518 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC5AC9B72CD74E4200025518 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		BC5AC9BB2CD74E4300025518 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BC5AC9BC2CD74E4300025518 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		BC5AC9D52CD74E4300025518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BC5AC9D62CD74E4300025518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BC5AC9D82CD74E4300025518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 37MFDT4LMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeaponFiringSimulater/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.WeaponFiringSimulater;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BC5AC9D92CD74E4300025518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 37MFDT4LMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = WeaponFiringSimulater/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.WeaponFiringSimulater;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BC5AC9DB2CD74E4300025518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 37MFDT4LMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.WeaponFiringSimulaterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeaponFiringSimulater.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WeaponFiringSimulater";
+			};
+			name = Debug;
+		};
+		BC5AC9DC2CD74E4300025518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 37MFDT4LMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.WeaponFiringSimulaterTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/WeaponFiringSimulater.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/WeaponFiringSimulater";
+			};
+			name = Release;
+		};
+		BC5AC9DE2CD74E4300025518 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 37MFDT4LMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.WeaponFiringSimulaterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WeaponFiringSimulater;
+			};
+			name = Debug;
+		};
+		BC5AC9DF2CD74E4300025518 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 37MFDT4LMQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = test.WeaponFiringSimulaterUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = WeaponFiringSimulater;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BC5AC9A82CD74E4200025518 /* Build configuration list for PBXProject "WeaponFiringSimulater" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC5AC9D52CD74E4300025518 /* Debug */,
+				BC5AC9D62CD74E4300025518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BC5AC9D72CD74E4300025518 /* Build configuration list for PBXNativeTarget "WeaponFiringSimulater" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC5AC9D82CD74E4300025518 /* Debug */,
+				BC5AC9D92CD74E4300025518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BC5AC9DA2CD74E4300025518 /* Build configuration list for PBXNativeTarget "WeaponFiringSimulaterTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC5AC9DB2CD74E4300025518 /* Debug */,
+				BC5AC9DC2CD74E4300025518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BC5AC9DD2CD74E4300025518 /* Build configuration list for PBXNativeTarget "WeaponFiringSimulaterUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BC5AC9DE2CD74E4300025518 /* Debug */,
+				BC5AC9DF2CD74E4300025518 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BC5AC9A52CD74E4200025518 /* Project object */;
+}
