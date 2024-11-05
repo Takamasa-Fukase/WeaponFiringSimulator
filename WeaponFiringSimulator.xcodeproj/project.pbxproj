@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC15DECD2CDA3DE20058EBE7 /* Presenter2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DECC2CDA3DE20058EBE7 /* Presenter2.swift */; };
+		BC15DECF2CDA3DF90058EBE7 /* WeaponFireUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DECE2CDA3DF90058EBE7 /* WeaponFireUseCase.swift */; };
+		BC15DED12CDA3E000058EBE7 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DED02CDA3E000058EBE7 /* Weapon.swift */; };
+		BC15DED32CDA49AE0058EBE7 /* WeaponReloadUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DED22CDA49AE0058EBE7 /* WeaponReloadUseCase.swift */; };
+		BC15DED52CDA515D0058EBE7 /* WeaponChangeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DED42CDA515D0058EBE7 /* WeaponChangeUseCase.swift */; };
 		BC4B2EB12CDA087C00C82827 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4B2EB02CDA087C00C82827 /* Presenter.swift */; };
 		BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */; };
 		BC4B2EB52CDA0AD300C82827 /* SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4B2EB42CDA0AD300C82827 /* SoundType.swift */; };
@@ -55,6 +60,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BC15DECC2CDA3DE20058EBE7 /* Presenter2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter2.swift; sourceTree = "<group>"; };
+		BC15DECE2CDA3DF90058EBE7 /* WeaponFireUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFireUseCase.swift; sourceTree = "<group>"; };
+		BC15DED02CDA3E000058EBE7 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
+		BC15DED22CDA49AE0058EBE7 /* WeaponReloadUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponReloadUseCase.swift; sourceTree = "<group>"; };
+		BC15DED42CDA515D0058EBE7 /* WeaponChangeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponChangeUseCase.swift; sourceTree = "<group>"; };
 		BC4B2EB02CDA087C00C82827 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		BC4B2EB42CDA0AD300C82827 /* SoundType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundType.swift; sourceTree = "<group>"; };
@@ -174,7 +184,12 @@
 				BC5AC9B42CD74E4200025518 /* ViewController.swift */,
 				BC5AC9B62CD74E4200025518 /* Main.storyboard */,
 				BC4B2EB02CDA087C00C82827 /* Presenter.swift */,
+				BC15DECC2CDA3DE20058EBE7 /* Presenter2.swift */,
 				BC4B2EB62CDA0C4B00C82827 /* DomainLayer.swift */,
+				BC15DECE2CDA3DF90058EBE7 /* WeaponFireUseCase.swift */,
+				BC15DED22CDA49AE0058EBE7 /* WeaponReloadUseCase.swift */,
+				BC15DED42CDA515D0058EBE7 /* WeaponChangeUseCase.swift */,
+				BC15DED02CDA3E000058EBE7 /* Weapon.swift */,
 				BC4B2EC92CDA113100C82827 /* Resources */,
 				BC5AC9B92CD74E4300025518 /* Assets.xcassets */,
 				BC5AC9BB2CD74E4300025518 /* LaunchScreen.storyboard */,
@@ -347,10 +362,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */,
+				BC15DED52CDA515D0058EBE7 /* WeaponChangeUseCase.swift in Sources */,
+				BC15DECF2CDA3DF90058EBE7 /* WeaponFireUseCase.swift in Sources */,
+				BC15DED32CDA49AE0058EBE7 /* WeaponReloadUseCase.swift in Sources */,
 				BC5AC9B52CD74E4200025518 /* ViewController.swift in Sources */,
 				BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */,
 				BC4B2EB12CDA087C00C82827 /* Presenter.swift in Sources */,
+				BC15DED12CDA3E000058EBE7 /* Weapon.swift in Sources */,
 				BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */,
+				BC15DECD2CDA3DE20058EBE7 /* Presenter2.swift in Sources */,
 				BC4B2EB52CDA0AD300C82827 /* SoundType.swift in Sources */,
 				BC4B2EB72CDA0C4B00C82827 /* DomainLayer.swift in Sources */,
 			);

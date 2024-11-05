@@ -9,7 +9,7 @@ import UIKit
 
 class ViewController: UIViewController {
     var soundPlayer: SoundPlayerInterface!
-    let presenter = Presenter()
+    let presenter = Presenter2()
     
     @IBOutlet weak var weaponImageView: UIImageView!
     @IBOutlet weak var bulletsCountImageView: UIImageView!
