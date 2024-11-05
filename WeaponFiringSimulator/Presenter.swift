@@ -12,7 +12,7 @@ class Presenter {
     let domainLayer = DomainLayer()
     
     var weaponType: WeaponType = .pistol
-    var bulletsCount: Int = 0
+    var bulletsCount: Int = WeaponType.pistol.capacity
     var isReloading = false
     
     private func resetProperties() {
@@ -29,12 +29,10 @@ class Presenter {
 
 extension Presenter {
     func viewDidLoad() {
-        print("Presenter viewDidLoad")
         showWeapon()
     }
     
     func fireButtonTapped() {
-        print("Presenter fireButtonTapped")
         if domainLayer.canFire(
             type: weaponType,
             bulletsCount: bulletsCount,
@@ -45,7 +43,7 @@ extension Presenter {
             bulletsCount -= 1
             view?.playFireSound(type: weaponType)
             view?.showBulletsCountImage(type: weaponType, count: bulletsCount)
-            if bulletsCount <= 0 && weaponType == .bazooka {
+            if bulletsCount == 0 && weaponType == .bazooka {
                 reloadButtonTapped()
             }
             
@@ -57,7 +55,6 @@ extension Presenter {
     }
     
     func reloadButtonTapped() {
-        print("Presenter reloadButtonTapped")
         if domainLayer.canReload(
             type: weaponType,
             bulletsCount: bulletsCount,
@@ -66,10 +63,10 @@ extension Presenter {
             print("reloadButtonTapped リロードできる")
             // リロードできる
             isReloading = true
-            bulletsCount = weaponType.capacity
-            view?.playReloadSound(type: weaponType)
-            view?.showBulletsCountImage(type: weaponType, count: bulletsCount)
+            view?.playReloadSound(type: self.weaponType)
             DispatchQueue.main.asyncAfter(deadline: .now() + self.weaponType.reloadWaitingTime, execute: {
+                self.bulletsCount = self.weaponType.capacity
+                self.view?.showBulletsCountImage(type: self.weaponType, count: self.bulletsCount)
                 self.isReloading = false
             })
             
@@ -80,7 +77,6 @@ extension Presenter {
     }
     
     func changeWeaponButtonTapped() {
-        print("Presenter changeWeaponButtonTapped")
         switch weaponType {
         case .pistol:
             weaponType = .bazooka
