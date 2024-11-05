@@ -38,7 +38,7 @@ class WeaponReloadUseCase {
                     // 残弾数をその武器の装弾数（MAX）にする
                     bulletsCount: weapon.capacity,
                     // リロード中をfalseにする
-                    isReloading: true,
+                    isReloading: false,
                     reloadType: weapon.reloadType
                 )
                 onReloadEnded(reloadedWeapon)

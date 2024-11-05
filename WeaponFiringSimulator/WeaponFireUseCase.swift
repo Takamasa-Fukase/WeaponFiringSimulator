@@ -28,9 +28,9 @@ class WeaponFireUseCase {
                 reloadType: weapon.reloadType
             )
             let needsAutoReload = firedWeapon.needsAutoReload(
-                bulletsCount: weapon.bulletsCount,
-                isReloading: weapon.isReloading,
-                reloadType: weapon.reloadType
+                bulletsCount: firedWeapon.bulletsCount,
+                isReloading: firedWeapon.isReloading,
+                reloadType: firedWeapon.reloadType
             )
             onFired(firedWeapon, needsAutoReload)
             
