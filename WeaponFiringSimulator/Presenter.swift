@@ -7,90 +7,80 @@
 
 import Foundation
 
-//class Presenter {
-//    weak var view: ViewController?
-//    let domainLayer = DomainLayer()
-//    
-//    var weaponType: WeaponType = .pistol
-//    var bulletsCount: Int = WeaponType.pistol.capacity
-//    var isReloading = false
-//    
-//    private func resetProperties() {
-//        bulletsCount = weaponType.capacity
-//        isReloading = false
-//    }
-//    
-//    private func showWeapon() {
-//        view?.showWeaponImage(type: weaponType)
-//        view?.showBulletsCountImage(type: weaponType, count: bulletsCount)
-//        view?.playShowingSound(type: weaponType)
-//    }
-//}
-//
-//extension Presenter {
-//    func viewDidLoad() {
-//        showWeapon()
-//    }
-//    
-//    func fireButtonTapped() {
-//        if domainLayer.canFire(
-//            type: weaponType,
-//            bulletsCount: bulletsCount,
-//            isReloading: isReloading
-//        ) {
-//            print("fireButtonTapped 撃てる")
-//            // 撃てる
-//            bulletsCount -= 1
-//            view?.playFireSound(type: weaponType)
-//            view?.showBulletsCountImage(type: weaponType, count: bulletsCount)
-//            
-//            if domainLayer.shouldExecuteAutomaticReload(
-//                type: weaponType,
-//                bulletsCount: bulletsCount,
-//                isReloading: isReloading
-//            ) {
-//                // リロードを自動的に実行
-//                reloadButtonTapped()
-//            }
-//            
-//        }else {
-//            print("fireButtonTapped 撃てない")
-//            // 撃てない
-//            view?.playNoBulletsSound(type: weaponType)
-//        }
-//    }
-//    
-//    func reloadButtonTapped() {
-//        if domainLayer.canReload(
-//            type: weaponType,
-//            bulletsCount: bulletsCount,
-//            isReloading: isReloading
-//        ) {
-//            print("reloadButtonTapped リロードできる")
-//            // リロードできる
-//            isReloading = true
-//            view?.playReloadSound(type: self.weaponType)
-//            DispatchQueue.main.asyncAfter(deadline: .now() + self.weaponType.reloadWaitingTime, execute: {
-//                self.bulletsCount = self.weaponType.capacity
-//                self.view?.showBulletsCountImage(type: self.weaponType, count: self.bulletsCount)
-//                self.isReloading = false
-//            })
-//            
-//        }else {
-//            // リロードできない
-//            print("reloadButtonTapped リロードできない")
-//        }
-//    }
-//    
-//    func changeWeaponButtonTapped() {
-//        switch weaponType {
-//        case .pistol:
-//            weaponType = .bazooka
-//        case .bazooka:
-//            weaponType = .pistol
-//        }
-//        
-//        resetProperties()
-//        showWeapon()
-//    }
-//}
+class Presenter {
+    let weaponFireUseCase: WeaponFireUseCase
+    let weaponReloadUseCase: WeaponReloadUseCase
+    let weaponChangeUseCase: WeaponChangeUseCase
+    weak var view: ViewController?
+    var currentWeapon: Weapon
+    
+    init() {
+        weaponFireUseCase = WeaponFireUseCase()
+        weaponReloadUseCase = WeaponReloadUseCase()
+        weaponChangeUseCase = WeaponChangeUseCase()
+        currentWeapon = .init(
+            type: .pistol,
+            imageName: "pistol",
+            capacity: 7,
+            reloadWaitingTime: 0,
+            bulletsCount: 7,
+            isReloading: false,
+            reloadType: .manual
+        )
+    }
+
+    func viewDidLoad() {
+        showWeapon()
+    }
+        
+    func fireButtonTapped() {
+        weaponFireUseCase.execute(
+            weapon: currentWeapon,
+            onFired: { (firedWeapon, needsAutoReload) in
+                currentWeapon = firedWeapon
+                view?.playFireSound(type: firedWeapon.type)
+                view?.showBulletsCountImage(type: firedWeapon.type,
+                                            count: firedWeapon.bulletsCount)
+                if needsAutoReload {
+                    // リロードを自動的に実行
+                    reloadButtonTapped()
+                }
+            },
+            onCanceled: {
+                view?.playNoBulletsSound(type: currentWeapon.type)
+            }
+        )
+    }
+    
+    func reloadButtonTapped() {
+        weaponReloadUseCase.execute(
+            weapon: currentWeapon,
+            onReloadStarted: { reloadingWeapon in
+                currentWeapon = reloadingWeapon
+                view?.playReloadSound(type: reloadingWeapon.type)
+            },
+            onReloadEnded: { [weak self] reloadedWeapon in
+                self?.currentWeapon = reloadedWeapon
+                self?.view?.showBulletsCountImage(type: reloadedWeapon.type,
+                                            count: reloadedWeapon.bulletsCount)
+            }
+        )
+    }
+    
+    func changeWeaponButtonTapped() {
+        weaponChangeUseCase.execute(
+            weapon: currentWeapon,
+            onCompleted: { newWeapon in
+                currentWeapon = newWeapon
+                showWeapon()
+            }
+        )
+    }
+    
+    private func showWeapon() {
+        view?.showWeaponImage(type: currentWeapon.type)
+        view?.showBulletsCountImage(type: currentWeapon.type,
+                                    count: currentWeapon.bulletsCount)
+        view?.playShowingSound(type: currentWeapon.type)
+    }
+}
