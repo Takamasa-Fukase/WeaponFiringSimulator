@@ -7,29 +7,6 @@
 
 import UIKit
 
-enum WeaponType {
-    case pistol
-    case bazooka
-    
-    var capacity: Int {
-        switch self {
-        case .pistol:
-            return 7
-        case .bazooka:
-            return 1
-        }
-    }
-    
-    var reloadWaitingTime: TimeInterval {
-        switch self {
-        case .pistol:
-            return 0
-        case .bazooka:
-            return 3.2
-        }
-    }
-}
-
 class ViewController: UIViewController {
     var soundPlayer: SoundPlayerInterface!
     let presenter = Presenter()
