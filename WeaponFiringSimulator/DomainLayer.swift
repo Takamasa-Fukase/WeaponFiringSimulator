@@ -62,4 +62,16 @@ class DomainLayer {
             return false
         }
     }
+    
+    func shouldExecuteAutomaticReload(
+        type: WeaponType,
+        bulletsCount: Int,
+        isReloading: Bool
+    ) -> Bool {
+        if bulletsCount == 0 && type == .bazooka {
+            return true
+        }else {
+            return false
+        }
+    }
 }

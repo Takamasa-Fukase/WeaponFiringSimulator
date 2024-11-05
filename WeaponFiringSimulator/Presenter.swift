@@ -43,7 +43,13 @@ extension Presenter {
             bulletsCount -= 1
             view?.playFireSound(type: weaponType)
             view?.showBulletsCountImage(type: weaponType, count: bulletsCount)
-            if bulletsCount == 0 && weaponType == .bazooka {
+            
+            if domainLayer.shouldExecuteAutomaticReload(
+                type: weaponType,
+                bulletsCount: bulletsCount,
+                isReloading: isReloading
+            ) {
+                // リロードを自動的に実行
                 reloadButtonTapped()
             }
             
