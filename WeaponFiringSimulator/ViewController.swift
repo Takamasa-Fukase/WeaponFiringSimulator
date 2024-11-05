@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        soundPlayer = SoundPlayer.shared
+        soundPlayer = SoundPlayer()
         presenter.view = self
         presenter.viewDidLoad()
     }
