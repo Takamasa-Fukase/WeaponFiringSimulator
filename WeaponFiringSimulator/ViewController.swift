@@ -46,14 +46,17 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fireButtonTapped(_ sender: Any) {
+        print("VC fireButtonTapped presenter: \(presenter)")
         presenter.fireButtonTapped()
     }
     
     @IBAction func reloadButtonTapped(_ sender: Any) {
+        print("VC reloadButtonTapped")
         presenter.reloadButtonTapped()
     }
     
     @IBAction func changeWeaponButtonTapped(_ sender: Any) {
+        print("VC changeWeaponButtonTapped")
         presenter.changeWeaponButtonTapped()
     }
 }

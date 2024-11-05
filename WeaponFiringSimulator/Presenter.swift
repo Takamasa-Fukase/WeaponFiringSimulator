@@ -29,15 +29,18 @@ class Presenter {
 
 extension Presenter {
     func viewDidLoad() {
+        print("Presenter viewDidLoad")
         showWeapon()
     }
     
     func fireButtonTapped() {
+        print("Presenter fireButtonTapped")
         if domainLayer.canFire(
             type: weaponType,
             bulletsCount: bulletsCount,
             isReloading: isReloading
         ) {
+            print("fireButtonTapped 撃てる")
             // 撃てる
             bulletsCount -= 1
             view?.playFireSound(type: weaponType)
@@ -47,17 +50,20 @@ extension Presenter {
             }
             
         }else {
+            print("fireButtonTapped 撃てない")
             // 撃てない
             view?.playNoBulletsSound(type: weaponType)
         }
     }
     
     func reloadButtonTapped() {
-        if domainLayer.canFire(
+        print("Presenter reloadButtonTapped")
+        if domainLayer.canReload(
             type: weaponType,
             bulletsCount: bulletsCount,
             isReloading: isReloading
         ) {
+            print("reloadButtonTapped リロードできる")
             // リロードできる
             isReloading = true
             bulletsCount = weaponType.capacity
@@ -69,10 +75,12 @@ extension Presenter {
             
         }else {
             // リロードできない
+            print("reloadButtonTapped リロードできない")
         }
     }
     
     func changeWeaponButtonTapped() {
+        print("Presenter changeWeaponButtonTapped")
         switch weaponType {
         case .pistol:
             weaponType = .bazooka

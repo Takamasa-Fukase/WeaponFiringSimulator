@@ -13,11 +13,14 @@ class DomainLayer {
         bulletsCount: Int,
         isReloading: Bool
     ) -> Bool {
+        print("DomainLayer canFire type: \(type), bulletsCount: \(bulletsCount), isReloading: \(isReloading)")
         if isReloading { return false }
-        
+        print("canFire 0")
         if bulletsCount > 0 {
+            print("canFire return true")
             return true
         }else {
+            print("canFire return flase")
             return false
         }
     }
@@ -27,11 +30,15 @@ class DomainLayer {
         bulletsCount: Int,
         isReloading: Bool
     ) -> Bool {
+        print("DomainLayer canReload type: \(type), bulletsCount: \(bulletsCount), isReloading: \(isReloading)")
         if isReloading { return false }
-        
+        print("canReload 0")
+
         if bulletsCount <= 0 {
+            print("canReload return true")
             return true
         }else {
+            print("canReload return true")
             return false
         }
     }
