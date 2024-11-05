@@ -9,37 +9,27 @@ import Foundation
 
 class WeaponReloadUseCase {
     func execute(
-        weapon: Weapon,
-        onReloadStarted: ((_ reloadingWeapon: Weapon) -> Void),
-        onReloadEnded: @escaping ((_ reloadedWeapon: Weapon) -> Void)
+        weapon: AnyWeaponType,
+        onReloadStarted: ((_ reloadingWeapon: AnyWeaponType) -> Void),
+        onReloadEnded: @escaping ((_ reloadedWeapon: AnyWeaponType) -> Void)
     ) {
         if weapon.canReload(
             bulletsCount: weapon.bulletsCount,
             isReloading: weapon.isReloading
         ) {
-            let reloadingWeapon = Weapon(
-                type: weapon.type,
-                imageName: weapon.imageName,
-                capacity: weapon.capacity,
-                reloadWaitingTime: weapon.reloadWaitingTime,
+            let reloadingWeapon = weapon.copyWith(
                 bulletsCount: weapon.bulletsCount,
                 // リロード中をtrueにする
-                isReloading: true,
-                reloadType: weapon.reloadType
+                isReloading: true
             )
             onReloadStarted(reloadingWeapon)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + weapon.reloadWaitingTime, execute: {
-                let reloadedWeapon = Weapon(
-                    type: weapon.type,
-                    imageName: weapon.imageName,
-                    capacity: weapon.capacity,
-                    reloadWaitingTime: weapon.reloadWaitingTime,
+                let reloadedWeapon = weapon.copyWith(
                     // 残弾数をその武器の装弾数（MAX）にする
                     bulletsCount: weapon.capacity,
-                    // リロード中をfalseにする
-                    isReloading: false,
-                    reloadType: weapon.reloadType
+                    // リロード中をtrueにする
+                    isReloading: false
                 )
                 onReloadEnded(reloadedWeapon)
             })

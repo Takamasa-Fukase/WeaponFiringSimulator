@@ -12,6 +12,7 @@
 		BC15DED12CDA3E000058EBE7 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DED02CDA3E000058EBE7 /* Weapon.swift */; };
 		BC15DED32CDA49AE0058EBE7 /* WeaponReloadUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DED22CDA49AE0058EBE7 /* WeaponReloadUseCase.swift */; };
 		BC15DED52CDA515D0058EBE7 /* WeaponChangeUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DED42CDA515D0058EBE7 /* WeaponChangeUseCase.swift */; };
+		BC15DEDE2CDA5A800058EBE7 /* AnyWeaponType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DEDD2CDA5A800058EBE7 /* AnyWeaponType.swift */; };
 		BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */; };
 		BC4B2EB52CDA0AD300C82827 /* SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4B2EB42CDA0AD300C82827 /* SoundType.swift */; };
 		BC4B2ECA2CDA113100C82827 /* bazookaHit_small2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC4B2EB82CDA113100C82827 /* bazookaHit_small2.mp3 */; };
@@ -63,6 +64,7 @@
 		BC15DED02CDA3E000058EBE7 /* Weapon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
 		BC15DED22CDA49AE0058EBE7 /* WeaponReloadUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponReloadUseCase.swift; sourceTree = "<group>"; };
 		BC15DED42CDA515D0058EBE7 /* WeaponChangeUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponChangeUseCase.swift; sourceTree = "<group>"; };
+		BC15DEDD2CDA5A800058EBE7 /* AnyWeaponType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyWeaponType.swift; sourceTree = "<group>"; };
 		BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		BC4B2EB42CDA0AD300C82827 /* SoundType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundType.swift; sourceTree = "<group>"; };
 		BC4B2EB82CDA113100C82827 /* bazookaHit_small2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bazookaHit_small2.mp3; sourceTree = "<group>"; };
@@ -149,9 +151,9 @@
 		BC15DEDA2CDA597A0058EBE7 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				BC15DECE2CDA3DF90058EBE7 /* WeaponFireUseCase.swift */,
 				BC15DED22CDA49AE0058EBE7 /* WeaponReloadUseCase.swift */,
 				BC15DED42CDA515D0058EBE7 /* WeaponChangeUseCase.swift */,
-				BC15DECE2CDA3DF90058EBE7 /* WeaponFireUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -169,6 +171,7 @@
 			isa = PBXGroup;
 			children = (
 				BC15DED02CDA3E000058EBE7 /* Weapon.swift */,
+				BC15DEDD2CDA5A800058EBE7 /* AnyWeaponType.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */,
+				BC15DEDE2CDA5A800058EBE7 /* AnyWeaponType.swift in Sources */,
 				BC15DED52CDA515D0058EBE7 /* WeaponChangeUseCase.swift in Sources */,
 				BC15DECF2CDA3DF90058EBE7 /* WeaponFireUseCase.swift in Sources */,
 				BC15DED32CDA49AE0058EBE7 /* WeaponReloadUseCase.swift in Sources */,

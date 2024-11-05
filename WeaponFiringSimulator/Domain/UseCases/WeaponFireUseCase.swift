@@ -9,23 +9,18 @@ import Foundation
 
 class WeaponFireUseCase {
     func execute(
-        weapon: Weapon,
-        onFired: ((_ firedWeapon: Weapon, _ needsAutoReload: Bool) -> Void),
+        weapon: AnyWeaponType,
+        onFired: ((_ firedWeapon: AnyWeaponType, _ needsAutoReload: Bool) -> Void),
         onCanceled: (() -> Void)
     ) {
         if weapon.canFire(
             bulletsCount: weapon.bulletsCount,
             isReloading: weapon.isReloading
         ) {
-            let firedWeapon = Weapon(
-                type: weapon.type,
-                imageName: weapon.imageName,
-                capacity: weapon.capacity,
-                reloadWaitingTime: weapon.reloadWaitingTime,
+            let firedWeapon = weapon.copyWith(
                 // 弾数をマイナス1する
                 bulletsCount: weapon.bulletsCount - 1,
-                isReloading: weapon.isReloading,
-                reloadType: weapon.reloadType
+                isReloading: weapon.isReloading
             )
             let needsAutoReload = firedWeapon.needsAutoReload(
                 bulletsCount: firedWeapon.bulletsCount,

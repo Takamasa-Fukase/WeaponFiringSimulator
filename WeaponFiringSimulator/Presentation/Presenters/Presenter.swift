@@ -12,21 +12,13 @@ class Presenter {
     let weaponReloadUseCase: WeaponReloadUseCase
     let weaponChangeUseCase: WeaponChangeUseCase
     weak var view: ViewController?
-    var currentWeapon: Weapon
+    var currentWeapon: AnyWeaponType
     
     init() {
         weaponFireUseCase = WeaponFireUseCase()
         weaponReloadUseCase = WeaponReloadUseCase()
         weaponChangeUseCase = WeaponChangeUseCase()
-        currentWeapon = .init(
-            type: .pistol,
-            imageName: "pistol",
-            capacity: 7,
-            reloadWaitingTime: 0,
-            bulletsCount: 7,
-            isReloading: false,
-            reloadType: .manual
-        )
+        currentWeapon = Pistol(bulletsCount: 7, isReloading: false)
     }
 
     func viewDidLoad() {
@@ -38,16 +30,17 @@ class Presenter {
             weapon: currentWeapon,
             onFired: { (firedWeapon, needsAutoReload) in
                 currentWeapon = firedWeapon
-                view?.playFireSound(type: firedWeapon.type)
-                view?.showBulletsCountImage(type: firedWeapon.type,
-                                            count: firedWeapon.bulletsCount)
+                view?.playFireSound(type: firedWeapon.firingSound)
+                view?.showBulletsCountImage(name: firedWeapon.bulletsCountImageBaseName + String(firedWeapon.bulletsCount))
                 if needsAutoReload {
                     // リロードを自動的に実行
                     reloadButtonTapped()
                 }
             },
             onCanceled: {
-                view?.playNoBulletsSound(type: currentWeapon.type)
+                if let noBulletsSound = currentWeapon.noBulletsSound {
+                    view?.playNoBulletsSound(type: noBulletsSound)
+                }
             }
         )
     }
@@ -57,12 +50,11 @@ class Presenter {
             weapon: currentWeapon,
             onReloadStarted: { reloadingWeapon in
                 currentWeapon = reloadingWeapon
-                view?.playReloadSound(type: reloadingWeapon.type)
+                view?.playReloadSound(type: reloadingWeapon.reloadingSound)
             },
             onReloadEnded: { [weak self] reloadedWeapon in
                 self?.currentWeapon = reloadedWeapon
-                self?.view?.showBulletsCountImage(type: reloadedWeapon.type,
-                                            count: reloadedWeapon.bulletsCount)
+                self?.view?.showBulletsCountImage(name: reloadedWeapon.bulletsCountImageBaseName + String(reloadedWeapon.bulletsCount))
             }
         )
     }
@@ -78,9 +70,8 @@ class Presenter {
     }
     
     private func showWeapon() {
-        view?.showWeaponImage(type: currentWeapon.type)
-        view?.showBulletsCountImage(type: currentWeapon.type,
-                                    count: currentWeapon.bulletsCount)
-        view?.playShowingSound(type: currentWeapon.type)
+        view?.showWeaponImage(name: currentWeapon.weaponImageName)
+        view?.showBulletsCountImage(name: currentWeapon.bulletsCountImageBaseName + String(currentWeapon.bulletsCount))
+        view?.playShowingSound(type: currentWeapon.showingSound)
     }
 }

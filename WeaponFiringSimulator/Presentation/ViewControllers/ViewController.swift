@@ -23,7 +23,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fireButtonTapped(_ sender: Any) {
-        presenter.fireButtonTapped()
+        soundPlayer.play(.pistolShoot)
+//        presenter.fireButtonTapped()
     }
     
     @IBAction func reloadButtonTapped(_ sender: Any) {
@@ -36,57 +37,27 @@ class ViewController: UIViewController {
 }
 
 extension ViewController {
-    func showWeaponImage(type: WeaponType) {
-        switch type {
-        case .pistol:
-            weaponImageView.image = UIImage(named: "pistol")
-        case .bazooka:
-            weaponImageView.image = UIImage(named: "bazooka")
-        }
+    func showWeaponImage(name: String) {
+        weaponImageView.image = UIImage(named: name)
     }
     
-    func showBulletsCountImage(type: WeaponType, count: Int) {
-        switch type {
-        case .pistol:
-            bulletsCountImageView.image = UIImage(named: "bullets\(count)")
-        case .bazooka:
-            bulletsCountImageView.image = UIImage(named: "bazookaRocket\(count)")
-        }
+    func showBulletsCountImage(name: String) {
+        bulletsCountImageView.image = UIImage(named: name)
     }
     
-    func playShowingSound(type: WeaponType) {
-        switch type {
-        case .pistol:
-            soundPlayer.play(.pistolSet)
-        case .bazooka:
-            soundPlayer.play(.bazookaSet)
-        }
+    func playShowingSound(type: SoundType) {
+        soundPlayer.play(type)
     }
     
-    func playFireSound(type: WeaponType) {
-        switch type {
-        case .pistol:
-            soundPlayer.play(.pistolShoot)
-        case .bazooka:
-            soundPlayer.play(.bazookaShoot)
-        }
+    func playFireSound(type: SoundType) {
+        soundPlayer.play(type)
     }
     
-    func playReloadSound(type: WeaponType) {
-        switch type {
-        case .pistol:
-            soundPlayer.play(.pistolReload)
-        case .bazooka:
-            soundPlayer.play(.bazookaReload)
-        }
+    func playReloadSound(type: SoundType) {
+        soundPlayer.play(type)
     }
     
-    func playNoBulletsSound(type: WeaponType) {
-        switch type {
-        case .pistol:
-            soundPlayer.play(.pistolOutBullets)
-        case .bazooka:
-            break
-        }
+    func playNoBulletsSound(type: SoundType) {
+        soundPlayer.play(type)
     }
 }
