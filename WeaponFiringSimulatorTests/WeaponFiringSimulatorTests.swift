@@ -1,14 +1,14 @@
 //
-//  WeaponFiringSimulaterTests.swift
-//  WeaponFiringSimulaterTests
+//  WeaponFiringSimulatorTests.swift
+//  WeaponFiringSimulatorTests
 //
 //  Created by ウルトラ深瀬 on 3/11/24.
 //
 
 import XCTest
-@testable import WeaponFiringSimulater
+@testable import WeaponFiringSimulator
 
-final class WeaponFiringSimulaterTests: XCTestCase {
+final class WeaponFiringSimulatorTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

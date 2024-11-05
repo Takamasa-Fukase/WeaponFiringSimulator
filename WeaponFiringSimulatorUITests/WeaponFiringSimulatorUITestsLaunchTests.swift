@@ -1,13 +1,13 @@
 //
-//  WeaponFiringSimulaterUITestsLaunchTests.swift
-//  WeaponFiringSimulaterUITests
+//  WeaponFiringSimulatorUITestsLaunchTests.swift
+//  WeaponFiringSimulatorUITests
 //
 //  Created by ウルトラ深瀬 on 3/11/24.
 //
 
 import XCTest
 
-final class WeaponFiringSimulaterUITestsLaunchTests: XCTestCase {
+final class WeaponFiringSimulatorUITestsLaunchTests: XCTestCase {
 
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true

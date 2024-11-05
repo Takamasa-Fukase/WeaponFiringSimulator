@@ -1,6 +1,6 @@
 //
 //  Presenter.swift
-//  WeaponFiringSimulater
+//  WeaponFiringSimulator
 //
 //  Created by ウルトラ深瀬 on 5/11/24.
 //

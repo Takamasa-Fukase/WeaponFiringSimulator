@@ -1,6 +1,6 @@
 //
 //  ViewController.swift
-//  WeaponFiringSimulater
+//  WeaponFiringSimulator
 //
 //  Created by ウルトラ深瀬 on 3/11/24.
 //
