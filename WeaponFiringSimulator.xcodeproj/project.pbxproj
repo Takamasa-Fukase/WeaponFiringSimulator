@@ -48,6 +48,7 @@
 		BCE5BCE92CDB72A00040C14A /* WeaponFireUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCE82CDB72A00040C14A /* WeaponFireUseCaseMock.swift */; };
 		BCE5BCEB2CDB7AD70040C14A /* WeaponReloadUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCEA2CDB7AD70040C14A /* WeaponReloadUseCaseMock.swift */; };
 		BCE5BCED2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCEC2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift */; };
+		BCE5BCF02CDB905D0040C14A /* WeaponReloadUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCEF2CDB905D0040C14A /* WeaponReloadUseCaseTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -113,6 +114,7 @@
 		BCE5BCE82CDB72A00040C14A /* WeaponFireUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFireUseCaseMock.swift; sourceTree = "<group>"; };
 		BCE5BCEA2CDB7AD70040C14A /* WeaponReloadUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponReloadUseCaseMock.swift; sourceTree = "<group>"; };
 		BCE5BCEC2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponChangeUseCaseMock.swift; sourceTree = "<group>"; };
+		BCE5BCEF2CDB905D0040C14A /* WeaponReloadUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponReloadUseCaseTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -293,11 +295,8 @@
 			children = (
 				BC5AC9C72CD74E4300025518 /* WeaponFiringSimulatorTests.swift */,
 				BCE5BCE22CDB6F1B0040C14A /* PresenterTests.swift */,
-				BCE5BCE42CDB71170040C14A /* ViewControllerMock.swift */,
-				BCE5BCE62CDB716C0040C14A /* InitialWeaponGetUseCaseMock.swift */,
-				BCE5BCE82CDB72A00040C14A /* WeaponFireUseCaseMock.swift */,
-				BCE5BCEA2CDB7AD70040C14A /* WeaponReloadUseCaseMock.swift */,
-				BCE5BCEC2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift */,
+				BCE5BCEF2CDB905D0040C14A /* WeaponReloadUseCaseTests.swift */,
+				BCE5BCEE2CDB903D0040C14A /* Mocks */,
 			);
 			path = WeaponFiringSimulatorTests;
 			sourceTree = "<group>";
@@ -309,6 +308,18 @@
 				BC5AC9D32CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift */,
 			);
 			path = WeaponFiringSimulatorUITests;
+			sourceTree = "<group>";
+		};
+		BCE5BCEE2CDB903D0040C14A /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				BCE5BCE42CDB71170040C14A /* ViewControllerMock.swift */,
+				BCE5BCE62CDB716C0040C14A /* InitialWeaponGetUseCaseMock.swift */,
+				BCE5BCE82CDB72A00040C14A /* WeaponFireUseCaseMock.swift */,
+				BCE5BCEA2CDB7AD70040C14A /* WeaponReloadUseCaseMock.swift */,
+				BCE5BCEC2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -484,6 +495,7 @@
 				BCE5BCED2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift in Sources */,
 				BCE5BCE92CDB72A00040C14A /* WeaponFireUseCaseMock.swift in Sources */,
 				BCE5BCE52CDB71170040C14A /* ViewControllerMock.swift in Sources */,
+				BCE5BCF02CDB905D0040C14A /* WeaponReloadUseCaseTests.swift in Sources */,
 				BC5AC9C82CD74E4300025518 /* WeaponFiringSimulatorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
