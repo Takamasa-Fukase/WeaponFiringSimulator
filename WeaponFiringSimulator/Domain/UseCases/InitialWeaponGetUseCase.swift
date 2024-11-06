@@ -26,9 +26,7 @@ class InitialWeaponGetUseCase {
     func execute(
         onCompleted: ((InitialWeaponGetResponse) -> Void)
     ) throws {
-        guard let weapon = weaponRepository.getList().first else {
-            throw CustomError.other(message: "Weaponが1つも存在しません")
-        }
+        let weapon = try weaponRepository.get(by: .pistol)
         let response = InitialWeaponGetResponse(
             weaponType: weapon.type,
             weaponImageName: weapon.weaponImageName,
