@@ -7,30 +7,57 @@
 
 import Foundation
 
+struct WeaponFireRequest {
+    let weaponType: WeaponType
+    let bulletsCount: Int
+    let isReloading: Bool
+}
+
+struct WeaponFireCompletedResponse {
+    let firingSound: SoundType
+    let bulletsCountImageBaseName: String
+    let bulletsCount: Int
+    let needsAutoReload: Bool
+}
+
+struct WeaponFireCanceledResponse {
+    let noBulletsSound: SoundType?
+}
+
 class WeaponFireUseCase {
+    let weaponRepository: WeaponRepositoryInterface
+    
+    init(weaponRepository: WeaponRepositoryInterface) {
+        self.weaponRepository = weaponRepository
+    }
+    
     func execute(
-        weapon: AnyWeaponType,
-        onFired: ((_ firedWeapon: AnyWeaponType, _ needsAutoReload: Bool) -> Void),
-        onCanceled: (() -> Void)
-    ) {
+        request: WeaponFireRequest,
+        onFired: ((WeaponFireCompletedResponse) -> Void),
+        onCanceled: ((WeaponFireCanceledResponse) -> Void)
+    ) throws {
+        let weapon = try weaponRepository.get(by: request.weaponType)
+        
         if weapon.canFire(
-            bulletsCount: weapon.bulletsCount,
-            isReloading: weapon.isReloading
+            bulletsCount: request.bulletsCount,
+            isReloading: request.isReloading
         ) {
-            let firedWeapon = weapon.copyWith(
-                // 弾数をマイナス1する
-                bulletsCount: weapon.bulletsCount - 1,
-                isReloading: weapon.isReloading
+            let needsAutoReload = weapon.needsAutoReload(
+                bulletsCount: request.bulletsCount - 1,
+                isReloading: request.isReloading,
+                reloadType: weapon.reloadType
             )
-            let needsAutoReload = firedWeapon.needsAutoReload(
-                bulletsCount: firedWeapon.bulletsCount,
-                isReloading: firedWeapon.isReloading,
-                reloadType: firedWeapon.reloadType
+            let response = WeaponFireCompletedResponse(
+                firingSound: weapon.firingSound,
+                bulletsCountImageBaseName: weapon.bulletsCountImageBaseName,
+                bulletsCount: request.bulletsCount - 1,
+                needsAutoReload: needsAutoReload
             )
-            onFired(firedWeapon, needsAutoReload)
+            onFired(response)
             
         }else {
-            onCanceled()
+            let response = WeaponFireCanceledResponse(noBulletsSound: weapon.noBulletsSound)
+            onCanceled(response)
         }
     }
 }

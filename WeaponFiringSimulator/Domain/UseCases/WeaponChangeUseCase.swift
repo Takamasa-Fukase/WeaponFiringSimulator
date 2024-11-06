@@ -7,18 +7,47 @@
 
 import Foundation
 
+struct WeaponChangeRequest {
+    let weaponType: WeaponType
+}
+
+struct WeaponChangeResponse {
+    let weaponType: WeaponType
+    let weaponImageName: String
+    let bulletsCountImageBaseName: String
+    let bulletsCount: Int
+    let isReloading: Bool
+    let showingSound: SoundType
+}
+
 class WeaponChangeUseCase {
+    let weaponRepository: WeaponRepositoryInterface
+    
+    init(weaponRepository: WeaponRepositoryInterface) {
+        self.weaponRepository = weaponRepository
+    }
+    
     func execute(
-        weapon: AnyWeaponType,
-        onCompleted: ((_ newWeapon: AnyWeaponType) -> Void)
-    ) {
-        let newWeapon: AnyWeaponType = {
-            if weapon is Pistol {
-                return Bazooka(bulletsCount: 1, isReloading: false)
-            }else {
-                return Pistol(bulletsCount: 7, isReloading: false)
+        request: WeaponChangeRequest,
+        onCompleted: ((WeaponChangeResponse) -> Void)
+    ) throws {
+        let newWeaponType: WeaponType = {
+            switch request.weaponType {
+            case .pistol:
+                return .bazooka
+            case .bazooka:
+                return .pistol
             }
         }()
-        onCompleted(newWeapon)
+        let newWeapon = try weaponRepository.get(by: newWeaponType)
+        let response = WeaponChangeResponse(
+            weaponType: newWeaponType,
+            weaponImageName: newWeapon.weaponImageName,
+            bulletsCountImageBaseName: newWeapon.bulletsCountImageBaseName,
+            bulletsCount: newWeapon.capacity,
+            isReloading: false,
+            showingSound: newWeapon.showingSound
+        )
+        onCompleted(response)
     }
 }

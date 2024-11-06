@@ -8,70 +8,122 @@
 import Foundation
 
 class Presenter {
+    let initialWeaponGetUseCase: InitialWeaponGetUseCase
     let weaponFireUseCase: WeaponFireUseCase
     let weaponReloadUseCase: WeaponReloadUseCase
     let weaponChangeUseCase: WeaponChangeUseCase
     weak var view: ViewController?
-    var currentWeapon: AnyWeaponType
+    var weaponType: WeaponType = .pistol
+    var bulletsCount: Int = 0
+    var isReloading: Bool = false
     
     init() {
-        weaponFireUseCase = WeaponFireUseCase()
-        weaponReloadUseCase = WeaponReloadUseCase()
-        weaponChangeUseCase = WeaponChangeUseCase()
-        currentWeapon = Pistol(bulletsCount: 7, isReloading: false)
+        initialWeaponGetUseCase = InitialWeaponGetUseCase(weaponRepository: WeaponRepository())
+        weaponFireUseCase = WeaponFireUseCase(weaponRepository: WeaponRepository())
+        weaponReloadUseCase = WeaponReloadUseCase(weaponRepository: WeaponRepository())
+        weaponChangeUseCase = WeaponChangeUseCase(weaponRepository: WeaponRepository())
+        weaponType = .pistol
+        bulletsCount = 7
+        isReloading = false
     }
 
     func viewDidLoad() {
-        showWeapon()
+        do {
+            try initialWeaponGetUseCase.execute(
+                onCompleted: { response in
+                    weaponType = response.weaponType
+                    bulletsCount = response.bulletsCount
+                    isReloading = response.isReloading
+                    showWeapon(weaponImageName: response.weaponImageName,
+                               bulletsCountImageName: response.bulletsCountImageBaseName + String(response.bulletsCount),
+                               showingSound: response.showingSound
+                    )
+                }
+            )
+        } catch {
+            print("initialWeaponGetUseCase error: \(error)")
+        }
     }
         
     func fireButtonTapped() {
-        weaponFireUseCase.execute(
-            weapon: currentWeapon,
-            onFired: { (firedWeapon, needsAutoReload) in
-                currentWeapon = firedWeapon
-                view?.playFireSound(type: firedWeapon.firingSound)
-                view?.showBulletsCountImage(name: firedWeapon.bulletsCountImageBaseName + String(firedWeapon.bulletsCount))
-                if needsAutoReload {
-                    // リロードを自動的に実行
-                    reloadButtonTapped()
-                }
-            },
-            onCanceled: {
-                if let noBulletsSound = currentWeapon.noBulletsSound {
-                    view?.playNoBulletsSound(type: noBulletsSound)
-                }
-            }
+        let request = WeaponFireRequest(
+            weaponType: weaponType,
+            bulletsCount: bulletsCount,
+            isReloading: isReloading
         )
+        do {
+            try weaponFireUseCase.execute(
+                request: request,
+                onFired: { response in
+                    bulletsCount = response.bulletsCount
+                    view?.playFireSound(type: response.firingSound)
+                    view?.showBulletsCountImage(name: response.bulletsCountImageBaseName + String(response.bulletsCount))
+                    
+                    if response.needsAutoReload {
+                        // リロードを自動的に実行
+                        reloadButtonTapped()
+                    }
+                },
+                onCanceled: { response in
+                    if let noBulletsSound = response.noBulletsSound {
+                        view?.playNoBulletsSound(type: noBulletsSound)
+                    }
+                }
+            )
+        } catch {
+            print("weaponFireUseCase error: \(error)")
+        }
     }
     
     func reloadButtonTapped() {
-        weaponReloadUseCase.execute(
-            weapon: currentWeapon,
-            onReloadStarted: { reloadingWeapon in
-                currentWeapon = reloadingWeapon
-                view?.playReloadSound(type: reloadingWeapon.reloadingSound)
-            },
-            onReloadEnded: { [weak self] reloadedWeapon in
-                self?.currentWeapon = reloadedWeapon
-                self?.view?.showBulletsCountImage(name: reloadedWeapon.bulletsCountImageBaseName + String(reloadedWeapon.bulletsCount))
-            }
+        let request = WeaponReloadRequest(
+            weaponType: weaponType,
+            bulletsCount: bulletsCount,
+            isReloading: isReloading
         )
+        do {
+            try weaponReloadUseCase.execute(
+                request: request,
+                onReloadStarted: { response in
+                    view?.playReloadSound(type: response.reloadingSound)
+                    isReloading = response.isReloading
+                },
+                onReloadEnded: { [weak self] response in
+                    self?.bulletsCount = response.bulletsCount
+                    self?.isReloading = response.isReloading
+                    self?.view?.showBulletsCountImage(name: response.bulletsCountImageBaseName + String(response.bulletsCount))
+                }
+            )
+        } catch {
+            print("weaponReloadUseCase error: \(error)")
+        }
     }
     
     func changeWeaponButtonTapped() {
-        weaponChangeUseCase.execute(
-            weapon: currentWeapon,
-            onCompleted: { newWeapon in
-                currentWeapon = newWeapon
-                showWeapon()
-            }
+        let request = WeaponChangeRequest(
+            weaponType: weaponType
         )
+        do {
+            try weaponChangeUseCase.execute(
+                request: request,
+                onCompleted: { response in
+                    weaponType = response.weaponType
+                    bulletsCount = response.bulletsCount
+                    isReloading = response.isReloading
+                    showWeapon(weaponImageName: response.weaponImageName,
+                               bulletsCountImageName: response.bulletsCountImageBaseName + String(response.bulletsCount),
+                               showingSound: response.showingSound
+                    )
+                }
+            )
+        } catch {
+            print("weaponChangeUseCase error: \(error)")
+        }
     }
     
-    private func showWeapon() {
-        view?.showWeaponImage(name: currentWeapon.weaponImageName)
-        view?.showBulletsCountImage(name: currentWeapon.bulletsCountImageBaseName + String(currentWeapon.bulletsCount))
-        view?.playShowingSound(type: currentWeapon.showingSound)
+    private func showWeapon(weaponImageName: String, bulletsCountImageName: String, showingSound: SoundType) {
+        view?.showWeaponImage(name: weaponImageName)
+        view?.showBulletsCountImage(name: bulletsCountImageName)
+        view?.playShowingSound(type: showingSound)
     }
 }

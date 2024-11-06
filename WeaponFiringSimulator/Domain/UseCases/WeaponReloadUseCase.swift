@@ -7,31 +7,54 @@
 
 import Foundation
 
+struct WeaponReloadRequest {
+    let weaponType: WeaponType
+    let bulletsCount: Int
+    let isReloading: Bool
+}
+
+struct WeaponReloadStartedResponse {
+    let reloadingSound: SoundType
+    let isReloading: Bool
+}
+
+struct WeaponReloadEndedResponse {
+    let bulletsCountImageBaseName: String
+    let bulletsCount: Int
+    let isReloading: Bool
+}
+
 class WeaponReloadUseCase {
+    let weaponRepository: WeaponRepositoryInterface
+    
+    init(weaponRepository: WeaponRepositoryInterface) {
+        self.weaponRepository = weaponRepository
+    }
+    
     func execute(
-        weapon: AnyWeaponType,
-        onReloadStarted: ((_ reloadingWeapon: AnyWeaponType) -> Void),
-        onReloadEnded: @escaping ((_ reloadedWeapon: AnyWeaponType) -> Void)
-    ) {
+        request: WeaponReloadRequest,
+        onReloadStarted: ((WeaponReloadStartedResponse) -> Void),
+        onReloadEnded: @escaping ((WeaponReloadEndedResponse) -> Void)
+    ) throws {
+        let weapon = try weaponRepository.get(by: request.weaponType)
+
         if weapon.canReload(
-            bulletsCount: weapon.bulletsCount,
-            isReloading: weapon.isReloading
+            bulletsCount: request.bulletsCount,
+            isReloading: request.isReloading
         ) {
-            let reloadingWeapon = weapon.copyWith(
-                bulletsCount: weapon.bulletsCount,
-                // リロード中をtrueにする
+            let startedResponse = WeaponReloadStartedResponse(
+                reloadingSound: weapon.reloadingSound,
                 isReloading: true
             )
-            onReloadStarted(reloadingWeapon)
+            onReloadStarted(startedResponse)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + weapon.reloadWaitingTime, execute: {
-                let reloadedWeapon = weapon.copyWith(
-                    // 残弾数をその武器の装弾数（MAX）にする
+                let endedResponse = WeaponReloadEndedResponse(
+                    bulletsCountImageBaseName: weapon.bulletsCountImageBaseName,
                     bulletsCount: weapon.capacity,
-                    // リロード中をtrueにする
                     isReloading: false
                 )
-                onReloadEnded(reloadedWeapon)
+                onReloadEnded(endedResponse)
             })
         }
     }
