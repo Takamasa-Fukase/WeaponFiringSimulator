@@ -8,17 +8,25 @@
 import UIKit
 
 protocol ViewControllerInterface: AnyObject {
+    func updateWeaponType(_ weaponType: WeaponType)
+    func updateBulletsCount(_ bulletsCount: Int)
+    func updateReloadingFlag(_ isReloading: Bool)
     func showWeaponImage(name: String)
     func showBulletsCountImage(name: String)
     func playShowingSound(type: SoundType)
     func playFireSound(type: SoundType)
     func playReloadSound(type: SoundType)
     func playNoBulletsSound(type: SoundType)
+    func executeAutoReload()
 }
 
 final class ViewController: UIViewController {
     private var soundPlayer: SoundPlayerInterface!
     private var presenter: PresenterInterface!
+    
+    private var weaponType: WeaponType = .pistol
+    private var bulletsCount: Int = 0
+    private var isReloading: Bool = false
     
     @IBOutlet private weak var weaponImageView: UIImageView!
     @IBOutlet private weak var bulletsCountImageView: UIImageView!
@@ -39,19 +47,35 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func fireButtonTapped(_ sender: Any) {
-        presenter.fireButtonTapped()
+        presenter.fireButtonTapped(weaponType: weaponType,
+                                   bulletsCount: bulletsCount,
+                                   isReloading: isReloading)
     }
     
     @IBAction func reloadButtonTapped(_ sender: Any) {
-        presenter.reloadButtonTapped()
+        presenter.reloadButtonTapped(weaponType: weaponType,
+                                     bulletsCount: bulletsCount,
+                                     isReloading: isReloading)
     }
     
     @IBAction func changeWeaponButtonTapped(_ sender: Any) {
-        presenter.changeWeaponButtonTapped()
+        presenter.changeWeaponButtonTapped(weaponType: weaponType)
     }
 }
 
 extension ViewController: ViewControllerInterface {
+    func updateWeaponType(_ weaponType: WeaponType) {
+        self.weaponType = weaponType
+    }
+    
+    func updateBulletsCount(_ bulletsCount: Int) {
+        self.bulletsCount = bulletsCount
+    }
+    
+    func updateReloadingFlag(_ isReloading: Bool) {
+        self.isReloading = isReloading
+    }
+    
     func showWeaponImage(name: String) {
         weaponImageView.image = UIImage(named: name)
     }
@@ -74,5 +98,11 @@ extension ViewController: ViewControllerInterface {
     
     func playNoBulletsSound(type: SoundType) {
         soundPlayer.play(type)
+    }
+    
+    func executeAutoReload() {
+        presenter.reloadButtonTapped(weaponType: weaponType,
+                                     bulletsCount: bulletsCount,
+                                     isReloading: isReloading)
     }
 }

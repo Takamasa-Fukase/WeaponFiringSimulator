@@ -9,9 +9,19 @@ import Foundation
 
 protocol PresenterInterface {
     func viewDidLoad()
-    func fireButtonTapped()
-    func reloadButtonTapped()
-    func changeWeaponButtonTapped()
+    func fireButtonTapped(
+        weaponType: WeaponType,
+        bulletsCount: Int,
+        isReloading: Bool
+    )
+    func reloadButtonTapped(
+        weaponType: WeaponType,
+        bulletsCount: Int,
+        isReloading: Bool
+    )
+    func changeWeaponButtonTapped(
+        weaponType: WeaponType
+    )
 }
 
 final class Presenter {
@@ -20,10 +30,6 @@ final class Presenter {
     private let weaponFireUseCase: WeaponFireUseCaseInterface
     private let weaponReloadUseCase: WeaponReloadUseCaseInterface
     private let weaponChangeUseCase: WeaponChangeUseCaseInterface
-    
-    private var weaponType: WeaponType = .pistol
-    private var bulletsCount: Int = 0
-    private var isReloading: Bool = false
     
     init(
         view: ViewControllerInterface,
@@ -51,9 +57,9 @@ extension Presenter: PresenterInterface {
         do {
             try initialWeaponGetUseCase.execute(
                 onCompleted: { response in
-                    weaponType = response.weaponType
-                    bulletsCount = response.bulletsCount
-                    isReloading = response.isReloading
+                    view?.updateWeaponType(response.weaponType)
+                    view?.updateBulletsCount(response.bulletsCount)
+                    view?.updateReloadingFlag(response.isReloading)
                     
                     showWeapon(weaponImageName: response.weaponImageName,
                                bulletsCountImageName: response.bulletsCountImageBaseName + String(response.bulletsCount),
@@ -64,7 +70,11 @@ extension Presenter: PresenterInterface {
         }
     }
     
-    func fireButtonTapped() {
+    func fireButtonTapped(
+        weaponType: WeaponType,
+        bulletsCount: Int,
+        isReloading: Bool
+    ) {
         let request = WeaponFireRequest(
             weaponType: weaponType,
             bulletsCount: bulletsCount,
@@ -74,13 +84,13 @@ extension Presenter: PresenterInterface {
             try weaponFireUseCase.execute(
                 request: request,
                 onFired: { response in
-                    bulletsCount = response.bulletsCount
+                    view?.updateBulletsCount(response.bulletsCount)
                     view?.playFireSound(type: response.firingSound)
                     view?.showBulletsCountImage(name: response.bulletsCountImageBaseName + String(response.bulletsCount))
                     
                     if response.needsAutoReload {
                         // リロードを自動的に実行
-                        reloadButtonTapped()
+                        view?.executeAutoReload()
                     }
                 },
                 onCanceled: { response in
@@ -93,7 +103,11 @@ extension Presenter: PresenterInterface {
         }
     }
     
-    func reloadButtonTapped() {
+    func reloadButtonTapped(
+        weaponType: WeaponType,
+        bulletsCount: Int,
+        isReloading: Bool
+    ) {
         let request = WeaponReloadRequest(
             weaponType: weaponType,
             bulletsCount: bulletsCount,
@@ -104,11 +118,11 @@ extension Presenter: PresenterInterface {
                 request: request,
                 onReloadStarted: { response in
                     view?.playReloadSound(type: response.reloadingSound)
-                    isReloading = response.isReloading
+                    view?.updateReloadingFlag(response.isReloading)
                 },
                 onReloadEnded: { [weak self] response in
-                    self?.bulletsCount = response.bulletsCount
-                    self?.isReloading = response.isReloading
+                    self?.view?.updateBulletsCount(response.bulletsCount)
+                    self?.view?.updateReloadingFlag(response.isReloading)
                     self?.view?.showBulletsCountImage(name: response.bulletsCountImageBaseName + String(response.bulletsCount))
                 })
         } catch {
@@ -116,7 +130,9 @@ extension Presenter: PresenterInterface {
         }
     }
     
-    func changeWeaponButtonTapped() {
+    func changeWeaponButtonTapped(
+        weaponType: WeaponType
+    ) {
         let request = WeaponChangeRequest(
             weaponType: weaponType
         )
@@ -124,9 +140,9 @@ extension Presenter: PresenterInterface {
             try weaponChangeUseCase.execute(
                 request: request,
                 onCompleted: { response in
-                    weaponType = response.weaponType
-                    bulletsCount = response.bulletsCount
-                    isReloading = response.isReloading
+                    view?.updateWeaponType(response.weaponType)
+                    view?.updateBulletsCount(response.bulletsCount)
+                    view?.updateReloadingFlag(response.isReloading)
                     
                     showWeapon(weaponImageName: response.weaponImageName,
                                bulletsCountImageName: response.bulletsCountImageBaseName + String(response.bulletsCount),
