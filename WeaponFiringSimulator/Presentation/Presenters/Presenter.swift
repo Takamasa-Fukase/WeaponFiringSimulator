@@ -23,7 +23,7 @@ class Presenter {
         weaponReloadUseCase = WeaponReloadUseCase(weaponRepository: WeaponRepository())
         weaponChangeUseCase = WeaponChangeUseCase(weaponRepository: WeaponRepository())
     }
-
+    
     func viewDidLoad() {
         do {
             try initialWeaponGetUseCase.execute(
@@ -31,17 +31,16 @@ class Presenter {
                     weaponType = response.weaponType
                     bulletsCount = response.bulletsCount
                     isReloading = response.isReloading
+                    
                     showWeapon(weaponImageName: response.weaponImageName,
                                bulletsCountImageName: response.bulletsCountImageBaseName + String(response.bulletsCount),
-                               showingSound: response.showingSound
-                    )
-                }
-            )
+                               showingSound: response.showingSound)
+                })
         } catch {
             print("initialWeaponGetUseCase error: \(error)")
         }
     }
-        
+    
     func fireButtonTapped() {
         let request = WeaponFireRequest(
             weaponType: weaponType,
@@ -65,8 +64,7 @@ class Presenter {
                     if let noBulletsSound = response.noBulletsSound {
                         view?.playNoBulletsSound(type: noBulletsSound)
                     }
-                }
-            )
+                })
         } catch {
             print("weaponFireUseCase error: \(error)")
         }
@@ -89,8 +87,7 @@ class Presenter {
                     self?.bulletsCount = response.bulletsCount
                     self?.isReloading = response.isReloading
                     self?.view?.showBulletsCountImage(name: response.bulletsCountImageBaseName + String(response.bulletsCount))
-                }
-            )
+                })
         } catch {
             print("weaponReloadUseCase error: \(error)")
         }
@@ -107,12 +104,11 @@ class Presenter {
                     weaponType = response.weaponType
                     bulletsCount = response.bulletsCount
                     isReloading = response.isReloading
+                    
                     showWeapon(weaponImageName: response.weaponImageName,
                                bulletsCountImageName: response.bulletsCountImageBaseName + String(response.bulletsCount),
-                               showingSound: response.showingSound
-                    )
-                }
-            )
+                               showingSound: response.showingSound)
+                })
         } catch {
             print("weaponChangeUseCase error: \(error)")
         }
