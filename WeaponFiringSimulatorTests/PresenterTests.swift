@@ -38,7 +38,15 @@ final class PresenterTests: XCTestCase {
         weaponChangeUseCaseMock = nil
     }
     
-    func test_viewDidLoad() {
-        
+    func test_viewDidLoad() throws {
+        XCTAssertEqual(false, vcMock.updateWeaponTypeCalled)
+        XCTAssertEqual(false, vcMock.updateBulletsCountCalled)
+        XCTAssertEqual(false, vcMock.updateReloadingFlagCalled)
+
+        presenter.viewDidLoad()
+
+        XCTAssertEqual(true, vcMock.updateWeaponTypeCalled)
+        XCTAssertEqual(true, vcMock.updateBulletsCountCalled)
+        XCTAssertEqual(true, vcMock.updateReloadingFlagCalled)
     }
 }
