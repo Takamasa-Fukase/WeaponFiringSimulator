@@ -37,12 +37,13 @@ class WeaponFireUseCase {
         onCanceled: ((WeaponFireCanceledResponse) -> Void)
     ) throws {
         let weapon = try weaponRepository.get(by: request.weaponType)
-        
-        if weapon.canFire(
+        let canFire = Weapon.canFire(
             bulletsCount: request.bulletsCount,
             isReloading: request.isReloading
-        ) {
-            let needsAutoReload = weapon.needsAutoReload(
+        )
+        
+        if canFire {
+            let needsAutoReload = Weapon.needsAutoReload(
                 bulletsCount: request.bulletsCount - 1,
                 isReloading: request.isReloading,
                 reloadType: weapon.reloadType

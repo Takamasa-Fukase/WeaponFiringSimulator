@@ -37,11 +37,12 @@ class WeaponReloadUseCase {
         onReloadEnded: @escaping ((WeaponReloadEndedResponse) -> Void)
     ) throws {
         let weapon = try weaponRepository.get(by: request.weaponType)
-
-        if weapon.canReload(
+        let canReload = Weapon.canReload(
             bulletsCount: request.bulletsCount,
             isReloading: request.isReloading
-        ) {
+        )
+
+        if canReload {
             let startedResponse = WeaponReloadStartedResponse(
                 reloadingSound: weapon.reloadingSound,
                 isReloading: true

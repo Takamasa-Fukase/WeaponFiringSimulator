@@ -29,7 +29,7 @@ struct Weapon {
     let reloadingSound: SoundType
     let noBulletsSound: SoundType?
     
-    func canFire(
+    static func canFire(
         bulletsCount: Int,
         isReloading: Bool
     ) -> Bool {
@@ -41,7 +41,7 @@ struct Weapon {
         }
     }
     
-    func canReload(
+    static func canReload(
         bulletsCount: Int,
         isReloading: Bool
     ) -> Bool {
@@ -53,7 +53,7 @@ struct Weapon {
         }
     }
     
-    func needsAutoReload(
+    static func needsAutoReload(
         bulletsCount: Int,
         isReloading: Bool,
         reloadType: ReloadType
