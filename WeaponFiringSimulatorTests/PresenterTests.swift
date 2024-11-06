@@ -38,19 +38,25 @@ final class PresenterTests: XCTestCase {
         weaponChangeUseCaseMock = nil
     }
     
-    func test_viewDidLoad_武器タイプと弾数とリロード中フラグが全て更新されたら成功() throws {
+    func test_viewDidLoad_武器タイプと弾数とリロード中フラグが全て更新される且つ武器画像と弾数画像の表示と表示音声が再生されたら成功() throws {
         XCTAssertEqual(false, vcMock.updateWeaponTypeCalled)
         XCTAssertEqual(false, vcMock.updateBulletsCountCalled)
         XCTAssertEqual(false, vcMock.updateReloadingFlagCalled)
-
+        XCTAssertEqual(false, vcMock.showWeaponImageCalled)
+        XCTAssertEqual(false, vcMock.showBulletsCountImageCalled)
+        XCTAssertEqual(false, vcMock.playShowingSoundCalled)
+        
         presenter.viewDidLoad()
 
         XCTAssertEqual(true, vcMock.updateWeaponTypeCalled)
         XCTAssertEqual(true, vcMock.updateBulletsCountCalled)
         XCTAssertEqual(true, vcMock.updateReloadingFlagCalled)
+        XCTAssertEqual(true, vcMock.showWeaponImageCalled)
+        XCTAssertEqual(true, vcMock.showBulletsCountImageCalled)
+        XCTAssertEqual(true, vcMock.playShowingSoundCalled)
     }
     
-    func test_fireButtonTapped_canFireがtrueでneedsAutoReloadがfalseの時にピストルでFireボタンを押したら弾数と発射音声再生と弾数画像が更新される且つ自動リロードが呼ばれなければ成功() throws {
+    func test_fireButtonTapped_canFireがtrueでneedsAutoReloadがfalseの時に弾数と発射音声再生と弾数画像が更新される且つ自動リロードが呼ばれなければ成功() throws {
         XCTAssertEqual(false, vcMock.updateBulletsCountCalled)
         XCTAssertEqual(false, vcMock.playFireSoundCalled)
         XCTAssertEqual(false, vcMock.showBulletsCountImageCalled)
@@ -68,7 +74,7 @@ final class PresenterTests: XCTestCase {
         XCTAssertEqual(false, vcMock.executeAutoReloadCalled)
     }
     
-    func test_fireButtonTapped_canFireがfalseでneedsAutoReloadがfalseの時にピストルでFireボタンを押したら弾数と発射音声再生と弾数画像が更新されない且つ自動リロードも呼ばれなければ成功() throws {
+    func test_fireButtonTapped_canFireがfalseでneedsAutoReloadがfalseの時に弾数と発射音声再生と弾数画像が更新されない且つ自動リロードも呼ばれなければ成功() throws {
         XCTAssertEqual(false, vcMock.updateBulletsCountCalled)
         XCTAssertEqual(false, vcMock.playFireSoundCalled)
         XCTAssertEqual(false, vcMock.showBulletsCountImageCalled)
@@ -86,7 +92,7 @@ final class PresenterTests: XCTestCase {
         XCTAssertEqual(false, vcMock.executeAutoReloadCalled)
     }
     
-    func test_fireButtonTapped_canFireがtrueでneedsAutoReloadがtrueの時にピストルでFireボタンを押したら弾数と発射音声再生と弾数画像が更新される且つ自動リロードも呼ばれたら成功() throws {
+    func test_fireButtonTapped_canFireがtrueでneedsAutoReloadがtrueの時に弾数と発射音声再生と弾数画像が更新される且つ自動リロードも呼ばれたら成功() throws {
         XCTAssertEqual(false, vcMock.updateBulletsCountCalled)
         XCTAssertEqual(false, vcMock.playFireSoundCalled)
         XCTAssertEqual(false, vcMock.showBulletsCountImageCalled)
@@ -104,7 +110,7 @@ final class PresenterTests: XCTestCase {
         XCTAssertEqual(true, vcMock.executeAutoReloadCalled)
     }
     
-    func test_fireButtonTapped_canFireがfalseでneedsAutoReloadがtrueの時にピストルでFireボタンを押したら弾数と発射音声再生と弾数画像が更新されない且つ自動リロードも呼ばれなければ成功() throws {
+    func test_fireButtonTapped_canFireがfalseでneedsAutoReloadがtrueの時に弾数と発射音声再生と弾数画像が更新されない且つ自動リロードも呼ばれなければ成功() throws {
         XCTAssertEqual(false, vcMock.updateBulletsCountCalled)
         XCTAssertEqual(false, vcMock.playFireSoundCalled)
         XCTAssertEqual(false, vcMock.showBulletsCountImageCalled)
@@ -120,5 +126,23 @@ final class PresenterTests: XCTestCase {
         XCTAssertEqual(false, vcMock.playFireSoundCalled)
         XCTAssertEqual(false, vcMock.showBulletsCountImageCalled)
         XCTAssertEqual(false, vcMock.executeAutoReloadCalled)
+    }
+    
+    func test_changeWeaponButtonTapped_武器タイプと弾数とリロード中フラグが全て更新される且つ武器画像と弾数画像の表示と表示音声が再生されたら成功() throws {
+        XCTAssertEqual(false, vcMock.updateWeaponTypeCalled)
+        XCTAssertEqual(false, vcMock.updateBulletsCountCalled)
+        XCTAssertEqual(false, vcMock.updateReloadingFlagCalled)
+        XCTAssertEqual(false, vcMock.showWeaponImageCalled)
+        XCTAssertEqual(false, vcMock.showBulletsCountImageCalled)
+        XCTAssertEqual(false, vcMock.playShowingSoundCalled)
+        
+        presenter.changeWeaponButtonTapped(weaponType: .pistol)
+
+        XCTAssertEqual(true, vcMock.updateWeaponTypeCalled)
+        XCTAssertEqual(true, vcMock.updateBulletsCountCalled)
+        XCTAssertEqual(true, vcMock.updateReloadingFlagCalled)
+        XCTAssertEqual(true, vcMock.showWeaponImageCalled)
+        XCTAssertEqual(true, vcMock.showBulletsCountImageCalled)
+        XCTAssertEqual(true, vcMock.playShowingSoundCalled)
     }
 }
