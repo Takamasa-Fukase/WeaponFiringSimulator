@@ -22,9 +22,6 @@ class Presenter {
         weaponFireUseCase = WeaponFireUseCase(weaponRepository: WeaponRepository())
         weaponReloadUseCase = WeaponReloadUseCase(weaponRepository: WeaponRepository())
         weaponChangeUseCase = WeaponChangeUseCase(weaponRepository: WeaponRepository())
-        weaponType = .pistol
-        bulletsCount = 7
-        isReloading = false
     }
 
     func viewDidLoad() {
