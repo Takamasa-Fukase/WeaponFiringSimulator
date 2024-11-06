@@ -23,8 +23,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func fireButtonTapped(_ sender: Any) {
-        soundPlayer.play(.pistolShoot)
-//        presenter.fireButtonTapped()
+        presenter.fireButtonTapped()
     }
     
     @IBAction func reloadButtonTapped(_ sender: Any) {
