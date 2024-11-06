@@ -12,6 +12,7 @@ final class ViewControllerMock: ViewControllerInterface {
     var updateWeaponTypeCalled = false
     var updateBulletsCountCalled = false
     var updateReloadingFlagCalled = false
+    var updateReloadingFlagCalledValues: [Bool] = []
     var showWeaponImageCalled = false
     var showBulletsCountImageCalled = false
     var playShowingSoundCalled = false
@@ -30,6 +31,7 @@ final class ViewControllerMock: ViewControllerInterface {
     
     func updateReloadingFlag(_ isReloading: Bool) {
         updateReloadingFlagCalled = true
+        updateReloadingFlagCalledValues.append(isReloading)
     }
     
     func showWeaponImage(name: String) {
