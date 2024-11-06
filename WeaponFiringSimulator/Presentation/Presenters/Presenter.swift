@@ -7,23 +7,46 @@
 
 import Foundation
 
-class Presenter {
-    let initialWeaponGetUseCase: InitialWeaponGetUseCase
-    let weaponFireUseCase: WeaponFireUseCase
-    let weaponReloadUseCase: WeaponReloadUseCase
-    let weaponChangeUseCase: WeaponChangeUseCase
-    weak var view: ViewController?
-    var weaponType: WeaponType = .pistol
-    var bulletsCount: Int = 0
-    var isReloading: Bool = false
+protocol PresenterInterface {
+    func viewDidLoad()
+    func fireButtonTapped()
+    func reloadButtonTapped()
+    func changeWeaponButtonTapped()
+}
+
+final class Presenter {
+    private weak var view: ViewControllerInterface?
+    private let initialWeaponGetUseCase: InitialWeaponGetUseCaseInterface
+    private let weaponFireUseCase: WeaponFireUseCaseInterface
+    private let weaponReloadUseCase: WeaponReloadUseCaseInterface
+    private let weaponChangeUseCase: WeaponChangeUseCaseInterface
     
-    init() {
-        initialWeaponGetUseCase = InitialWeaponGetUseCase(weaponRepository: WeaponRepository())
-        weaponFireUseCase = WeaponFireUseCase(weaponRepository: WeaponRepository())
-        weaponReloadUseCase = WeaponReloadUseCase(weaponRepository: WeaponRepository())
-        weaponChangeUseCase = WeaponChangeUseCase(weaponRepository: WeaponRepository())
+    private var weaponType: WeaponType = .pistol
+    private var bulletsCount: Int = 0
+    private var isReloading: Bool = false
+    
+    init(
+        view: ViewControllerInterface,
+        initialWeaponGetUseCase: InitialWeaponGetUseCaseInterface,
+        weaponFireUseCase: WeaponFireUseCaseInterface,
+        weaponReloadUseCase: WeaponReloadUseCaseInterface,
+        weaponChangeUseCase: WeaponChangeUseCaseInterface
+    ) {
+        self.view = view
+        self.initialWeaponGetUseCase = initialWeaponGetUseCase
+        self.weaponFireUseCase = weaponFireUseCase
+        self.weaponReloadUseCase = weaponReloadUseCase
+        self.weaponChangeUseCase = weaponChangeUseCase
     }
     
+    private func showWeapon(weaponImageName: String, bulletsCountImageName: String, showingSound: SoundType) {
+        view?.showWeaponImage(name: weaponImageName)
+        view?.showBulletsCountImage(name: bulletsCountImageName)
+        view?.playShowingSound(type: showingSound)
+    }
+}
+
+extension Presenter: PresenterInterface {
     func viewDidLoad() {
         do {
             try initialWeaponGetUseCase.execute(
@@ -112,11 +135,5 @@ class Presenter {
         } catch {
             print("weaponChangeUseCase error: \(error)")
         }
-    }
-    
-    private func showWeapon(weaponImageName: String, bulletsCountImageName: String, showingSound: SoundType) {
-        view?.showWeaponImage(name: weaponImageName)
-        view?.showBulletsCountImage(name: bulletsCountImageName)
-        view?.playShowingSound(type: showingSound)
     }
 }

@@ -24,7 +24,15 @@ struct WeaponReloadEndedResponse {
     let isReloading: Bool
 }
 
-class WeaponReloadUseCase {
+protocol WeaponReloadUseCaseInterface {
+    func execute(
+        request: WeaponReloadRequest,
+        onReloadStarted: ((WeaponReloadStartedResponse) -> Void),
+        onReloadEnded: @escaping ((WeaponReloadEndedResponse) -> Void)
+    ) throws
+}
+
+final class WeaponReloadUseCase: WeaponReloadUseCaseInterface {
     let weaponRepository: WeaponRepositoryInterface
     
     init(weaponRepository: WeaponRepositoryInterface) {

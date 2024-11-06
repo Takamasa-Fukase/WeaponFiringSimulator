@@ -24,7 +24,15 @@ struct WeaponFireCanceledResponse {
     let noBulletsSound: SoundType?
 }
 
-class WeaponFireUseCase {
+protocol WeaponFireUseCaseInterface {
+    func execute(
+        request: WeaponFireRequest,
+        onFired: ((WeaponFireCompletedResponse) -> Void),
+        onCanceled: ((WeaponFireCanceledResponse) -> Void)
+    ) throws
+}
+
+final class WeaponFireUseCase: WeaponFireUseCaseInterface {
     let weaponRepository: WeaponRepositoryInterface
     
     init(weaponRepository: WeaponRepositoryInterface) {

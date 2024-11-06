@@ -7,18 +7,34 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    var soundPlayer: SoundPlayerInterface!
-    let presenter = Presenter()
+protocol ViewControllerInterface: AnyObject {
+    func showWeaponImage(name: String)
+    func showBulletsCountImage(name: String)
+    func playShowingSound(type: SoundType)
+    func playFireSound(type: SoundType)
+    func playReloadSound(type: SoundType)
+    func playNoBulletsSound(type: SoundType)
+}
+
+final class ViewController: UIViewController {
+    private var soundPlayer: SoundPlayerInterface!
+    private var presenter: PresenterInterface!
     
-    @IBOutlet weak var weaponImageView: UIImageView!
-    @IBOutlet weak var bulletsCountImageView: UIImageView!
+    @IBOutlet private weak var weaponImageView: UIImageView!
+    @IBOutlet private weak var bulletsCountImageView: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         soundPlayer = SoundPlayer()
-        presenter.view = self
+        let weaponRepository = WeaponRepository()
+        presenter = Presenter(
+            view: self,
+            initialWeaponGetUseCase: InitialWeaponGetUseCase(weaponRepository: weaponRepository),
+            weaponFireUseCase: WeaponFireUseCase(weaponRepository: weaponRepository),
+            weaponReloadUseCase: WeaponReloadUseCase(weaponRepository: weaponRepository),
+            weaponChangeUseCase: WeaponChangeUseCase(weaponRepository: weaponRepository)
+        )
         presenter.viewDidLoad()
     }
     
@@ -35,7 +51,7 @@ class ViewController: UIViewController {
     }
 }
 
-extension ViewController {
+extension ViewController: ViewControllerInterface {
     func showWeaponImage(name: String) {
         weaponImageView.image = UIImage(named: name)
     }

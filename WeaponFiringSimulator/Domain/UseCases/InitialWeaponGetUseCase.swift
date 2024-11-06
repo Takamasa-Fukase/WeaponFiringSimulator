@@ -16,16 +16,18 @@ struct InitialWeaponGetResponse {
     let showingSound: SoundType
 }
 
-class InitialWeaponGetUseCase {
+protocol InitialWeaponGetUseCaseInterface {
+    func execute(onCompleted: ((InitialWeaponGetResponse) -> Void)) throws
+}
+
+final class InitialWeaponGetUseCase: InitialWeaponGetUseCaseInterface {
     let weaponRepository: WeaponRepositoryInterface
     
     init(weaponRepository: WeaponRepositoryInterface) {
         self.weaponRepository = weaponRepository
     }
     
-    func execute(
-        onCompleted: ((InitialWeaponGetResponse) -> Void)
-    ) throws {
+    func execute(onCompleted: ((InitialWeaponGetResponse) -> Void)) throws {
         let weapon = try weaponRepository.get(by: .pistol)
         let response = InitialWeaponGetResponse(
             weaponType: weapon.type,

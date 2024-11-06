@@ -20,7 +20,14 @@ struct WeaponChangeResponse {
     let showingSound: SoundType
 }
 
-class WeaponChangeUseCase {
+protocol WeaponChangeUseCaseInterface {
+    func execute(
+        request: WeaponChangeRequest,
+        onCompleted: ((WeaponChangeResponse) -> Void)
+    ) throws
+}
+
+final class WeaponChangeUseCase: WeaponChangeUseCaseInterface {
     let weaponRepository: WeaponRepositoryInterface
     
     init(weaponRepository: WeaponRepositoryInterface) {

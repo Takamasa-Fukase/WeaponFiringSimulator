@@ -157,10 +157,10 @@
 		BC15DEDA2CDA597A0058EBE7 /* UseCases */ = {
 			isa = PBXGroup;
 			children = (
+				BC15DEEA2CDB2E390058EBE7 /* InitialWeaponGetUseCase.swift */,
 				BC15DECE2CDA3DF90058EBE7 /* WeaponFireUseCase.swift */,
 				BC15DED22CDA49AE0058EBE7 /* WeaponReloadUseCase.swift */,
 				BC15DED42CDA515D0058EBE7 /* WeaponChangeUseCase.swift */,
-				BC15DEEA2CDB2E390058EBE7 /* InitialWeaponGetUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
