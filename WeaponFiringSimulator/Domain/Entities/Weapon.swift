@@ -33,13 +33,10 @@ struct Weapon {
         bulletsCount: Int,
         isReloading: Bool
     ) -> Bool {
-        print("Weapon canFire bulletsCount: \(bulletsCount), isReloading: \(isReloading)")
         if isReloading { return false }
         if bulletsCount > 0 {
-            print("canFire return true")
             return true
         }else {
-            print("canFire return flase")
             return false
         }
     }
@@ -48,13 +45,10 @@ struct Weapon {
         bulletsCount: Int,
         isReloading: Bool
     ) -> Bool {
-        print("Weapon canReload bulletsCount: \(bulletsCount), isReloading: \(isReloading)")
         if isReloading { return false }
         if bulletsCount <= 0 {
-            print("canReload return true")
             return true
         }else {
-            print("canReload return false")
             return false
         }
     }
@@ -64,13 +58,10 @@ struct Weapon {
         isReloading: Bool,
         reloadType: ReloadType
     ) -> Bool {
-        print("Weapon needsAutoReload bulletsCount: \(bulletsCount), isReloading: \(isReloading), reloadType: \(reloadType)")
         if isReloading { return false }
         if bulletsCount == 0 && reloadType == .auto {
-            print("needsAutoReload return true")
             return true
         }else {
-            print("needsAutoReload return false")
             return false
         }
     }
