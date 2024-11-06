@@ -10,6 +10,7 @@ import Foundation
 
 final class WeaponFireUseCaseMock: WeaponFireUseCaseInterface {
     var canFire = false
+    var needsAutoReload = false
     
     func execute(
         request: WeaponFiringSimulator.WeaponFireRequest,
@@ -21,7 +22,7 @@ final class WeaponFireUseCaseMock: WeaponFireUseCaseInterface {
                 firingSound: .pistolShoot,
                 bulletsCountImageBaseName: "",
                 bulletsCount: 0,
-                needsAutoReload: false
+                needsAutoReload: needsAutoReload
             )
             onFired(response)
             
