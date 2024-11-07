@@ -28,41 +28,4 @@ struct Weapon {
     let firingSound: SoundType
     let reloadingSound: SoundType
     let noBulletsSound: SoundType?
-    
-    static func canFire(
-        bulletsCount: Int,
-        isReloading: Bool
-    ) -> Bool {
-        if isReloading { return false }
-        if bulletsCount > 0 {
-            return true
-        }else {
-            return false
-        }
-    }
-    
-    static func canReload(
-        bulletsCount: Int,
-        isReloading: Bool
-    ) -> Bool {
-        if isReloading { return false }
-        if bulletsCount <= 0 {
-            return true
-        }else {
-            return false
-        }
-    }
-    
-    static func needsAutoReload(
-        bulletsCount: Int,
-        isReloading: Bool,
-        reloadType: ReloadType
-    ) -> Bool {
-        if isReloading { return false }
-        if bulletsCount == 0 && reloadType == .auto {
-            return true
-        }else {
-            return false
-        }
-    }
 }

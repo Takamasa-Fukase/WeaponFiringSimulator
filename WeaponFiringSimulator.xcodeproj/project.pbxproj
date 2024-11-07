@@ -49,6 +49,9 @@
 		BCE5BCEB2CDB7AD70040C14A /* WeaponReloadUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCEA2CDB7AD70040C14A /* WeaponReloadUseCaseMock.swift */; };
 		BCE5BCED2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCEC2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift */; };
 		BCE5BCF02CDB905D0040C14A /* WeaponReloadUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCEF2CDB905D0040C14A /* WeaponReloadUseCaseTests.swift */; };
+		BCE5BCF22CDD79E30040C14A /* CanFireCheckUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCF12CDD79E30040C14A /* CanFireCheckUseCase.swift */; };
+		BCE5BCF42CDD79EF0040C14A /* CanReloadCheckUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCF32CDD79EF0040C14A /* CanReloadCheckUseCase.swift */; };
+		BCE5BCF62CDD79FF0040C14A /* NeedsAutoReloadCheckUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCF52CDD79FF0040C14A /* NeedsAutoReloadCheckUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -115,6 +118,9 @@
 		BCE5BCEA2CDB7AD70040C14A /* WeaponReloadUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponReloadUseCaseMock.swift; sourceTree = "<group>"; };
 		BCE5BCEC2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponChangeUseCaseMock.swift; sourceTree = "<group>"; };
 		BCE5BCEF2CDB905D0040C14A /* WeaponReloadUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponReloadUseCaseTests.swift; sourceTree = "<group>"; };
+		BCE5BCF12CDD79E30040C14A /* CanFireCheckUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanFireCheckUseCase.swift; sourceTree = "<group>"; };
+		BCE5BCF32CDD79EF0040C14A /* CanReloadCheckUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanReloadCheckUseCase.swift; sourceTree = "<group>"; };
+		BCE5BCF52CDD79FF0040C14A /* NeedsAutoReloadCheckUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedsAutoReloadCheckUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +178,9 @@
 			isa = PBXGroup;
 			children = (
 				BC15DEEA2CDB2E390058EBE7 /* InitialWeaponGetUseCase.swift */,
+				BCE5BCF12CDD79E30040C14A /* CanFireCheckUseCase.swift */,
+				BCE5BCF32CDD79EF0040C14A /* CanReloadCheckUseCase.swift */,
+				BCE5BCF52CDD79FF0040C14A /* NeedsAutoReloadCheckUseCase.swift */,
 				BC15DECE2CDA3DF90058EBE7 /* WeaponFireUseCase.swift */,
 				BC15DED22CDA49AE0058EBE7 /* WeaponReloadUseCase.swift */,
 				BC15DED42CDA515D0058EBE7 /* WeaponChangeUseCase.swift */,
@@ -471,13 +480,16 @@
 				BC15DEE52CDB1B990058EBE7 /* WeaponRepositoryInterface.swift in Sources */,
 				BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */,
 				BC15DED52CDA515D0058EBE7 /* WeaponChangeUseCase.swift in Sources */,
+				BCE5BCF22CDD79E30040C14A /* CanFireCheckUseCase.swift in Sources */,
 				BC15DEE12CDB1B5F0058EBE7 /* WeaponRepository.swift in Sources */,
 				BC15DECF2CDA3DF90058EBE7 /* WeaponFireUseCase.swift in Sources */,
+				BCE5BCF42CDD79EF0040C14A /* CanReloadCheckUseCase.swift in Sources */,
 				BC15DED32CDA49AE0058EBE7 /* WeaponReloadUseCase.swift in Sources */,
 				BC15DEE72CDB1DFA0058EBE7 /* CustomError.swift in Sources */,
 				BC5AC9B52CD74E4200025518 /* ViewController.swift in Sources */,
 				BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */,
 				BC15DED12CDA3E000058EBE7 /* Weapon.swift in Sources */,
+				BCE5BCF62CDD79FF0040C14A /* NeedsAutoReloadCheckUseCase.swift in Sources */,
 				BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */,
 				BC15DEEB2CDB2E390058EBE7 /* InitialWeaponGetUseCase.swift in Sources */,
 				BC15DECD2CDA3DE20058EBE7 /* Presenter.swift in Sources */,

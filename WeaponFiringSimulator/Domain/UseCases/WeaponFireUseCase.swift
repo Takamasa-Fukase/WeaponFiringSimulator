@@ -34,9 +34,17 @@ protocol WeaponFireUseCaseInterface {
 
 final class WeaponFireUseCase: WeaponFireUseCaseInterface {
     let weaponRepository: WeaponRepositoryInterface
+    let canFireCheckUseCase: CanFireCheckUseCaseInterface
+    let needsAutoReloadCheckUseCase: NeedsAutoReloadCheckUseCaseInterface
     
-    init(weaponRepository: WeaponRepositoryInterface) {
+    init(
+        weaponRepository: WeaponRepositoryInterface,
+        canFireCheckUseCase: CanFireCheckUseCaseInterface,
+        needsAutoReloadCheckUseCase: NeedsAutoReloadCheckUseCaseInterface
+    ) {
         self.weaponRepository = weaponRepository
+        self.canFireCheckUseCase = canFireCheckUseCase
+        self.needsAutoReloadCheckUseCase = needsAutoReloadCheckUseCase
     }
     
     func execute(
@@ -45,17 +53,20 @@ final class WeaponFireUseCase: WeaponFireUseCaseInterface {
         onCanceled: ((WeaponFireCanceledResponse) -> Void)
     ) throws {
         let weapon = try weaponRepository.get(by: request.weaponType)
-        let canFire = Weapon.canFire(
+        let canFireCheckRequest = CanFireCheckRequest(
             bulletsCount: request.bulletsCount,
             isReloading: request.isReloading
         )
+        let canFire = canFireCheckUseCase.execute(request: canFireCheckRequest).canFire
         
         if canFire {
-            let needsAutoReload = Weapon.needsAutoReload(
+            let needsAutoReloadCheckRequest = NeedsAutoReloadCheckRequest(
                 bulletsCount: request.bulletsCount - 1,
                 isReloading: request.isReloading,
                 reloadType: weapon.reloadType
             )
+            let needsAutoReload = needsAutoReloadCheckUseCase.execute(request: needsAutoReloadCheckRequest).needsAutoReload
+            
             let response = WeaponFireCompletedResponse(
                 firingSound: weapon.firingSound,
                 bulletsCountImageBaseName: weapon.bulletsCountImageBaseName,

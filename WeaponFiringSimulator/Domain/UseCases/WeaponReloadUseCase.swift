@@ -34,9 +34,14 @@ protocol WeaponReloadUseCaseInterface {
 
 final class WeaponReloadUseCase: WeaponReloadUseCaseInterface {
     let weaponRepository: WeaponRepositoryInterface
+    let canReloadCheckUseCase: CanReloadCheckUseCaseInterface
     
-    init(weaponRepository: WeaponRepositoryInterface) {
+    init(
+        weaponRepository: WeaponRepositoryInterface,
+        canReloadCheckUseCase: CanReloadCheckUseCaseInterface
+    ) {
         self.weaponRepository = weaponRepository
+        self.canReloadCheckUseCase = canReloadCheckUseCase
     }
     
     func execute(
@@ -45,10 +50,11 @@ final class WeaponReloadUseCase: WeaponReloadUseCaseInterface {
         onReloadEnded: @escaping ((WeaponReloadEndedResponse) -> Void)
     ) throws {
         let weapon = try weaponRepository.get(by: request.weaponType)
-        let canReload = Weapon.canReload(
+        let canReloadCheckRequest = CanReloadCheckRequest(
             bulletsCount: request.bulletsCount,
             isReloading: request.isReloading
         )
+        let canReload = canReloadCheckUseCase.execute(request: canReloadCheckRequest).canReload
 
         if canReload {
             let startedResponse = WeaponReloadStartedResponse(

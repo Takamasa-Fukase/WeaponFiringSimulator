@@ -39,8 +39,15 @@ final class ViewController: UIViewController {
         presenter = Presenter(
             view: self,
             initialWeaponGetUseCase: InitialWeaponGetUseCase(weaponRepository: weaponRepository),
-            weaponFireUseCase: WeaponFireUseCase(weaponRepository: weaponRepository),
-            weaponReloadUseCase: WeaponReloadUseCase(weaponRepository: weaponRepository),
+            weaponFireUseCase: WeaponFireUseCase(
+                weaponRepository: weaponRepository,
+                canFireCheckUseCase: CanFireCheckUseCase(),
+                needsAutoReloadCheckUseCase: NeedsAutoReloadCheckUseCase()
+            ),
+            weaponReloadUseCase: WeaponReloadUseCase(
+                weaponRepository: weaponRepository,
+                canReloadCheckUseCase: CanReloadCheckUseCase()
+            ),
             weaponChangeUseCase: WeaponChangeUseCase(weaponRepository: weaponRepository)
         )
         presenter.viewDidLoad()
