@@ -10,20 +10,29 @@ import XCTest
 
 final class WeaponReloadUseCaseTests: XCTestCase {
     private var weaponRepository: WeaponRepositoryInterface!
+    private var canReloadCheckUseCaseMock: CanReloadCheckUseCaseMock!
     private var weaponReloadUseCase: WeaponReloadUseCase!
     
     override func setUpWithError() throws {
         weaponRepository = WeaponRepository()
-        weaponReloadUseCase = WeaponReloadUseCase(weaponRepository: weaponRepository)
+        canReloadCheckUseCaseMock = CanReloadCheckUseCaseMock()
+        weaponReloadUseCase = WeaponReloadUseCase(
+            weaponRepository: weaponRepository,
+            canReloadCheckUseCase: canReloadCheckUseCaseMock
+        )
     }
     
     override func tearDownWithError() throws {
         weaponRepository = nil
+        canReloadCheckUseCaseMock = nil
         weaponReloadUseCase = nil
     }
     
     func test_execute_リロード完了までかかった経過時間と本来のピストルのリロード待ち時間との差分が０．５秒以内なら成功() throws {
         let expectation = expectation(description: "test_execute")
+        
+        // リロードできる様にする
+        canReloadCheckUseCaseMock.canReload = true
         
         let request = WeaponReloadRequest(
             weaponType: .pistol,
@@ -53,6 +62,9 @@ final class WeaponReloadUseCaseTests: XCTestCase {
     
     func test_execute_リロード完了までかかった経過時間と本来のバズーカのリロード待ち時間との差分が０．５秒以内なら成功() throws {
         let expectation = expectation(description: "test_execute")
+        
+        // リロードできる様にする
+        canReloadCheckUseCaseMock.canReload = true
         
         let request = WeaponReloadRequest(
             weaponType: .bazooka,
