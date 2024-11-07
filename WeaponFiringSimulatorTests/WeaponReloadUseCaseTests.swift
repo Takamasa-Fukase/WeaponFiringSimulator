@@ -28,7 +28,7 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         weaponReloadUseCase = nil
     }
     
-    func test_execute_リロード完了までかかった経過時間と本来のピストルのリロード待ち時間との差分が０．５秒以内なら成功() throws {
+    func test_execute_リロード開始から完了までかかった経過時間と本来のピストルのリロード待ち時間との差分が０．５秒以内なら成功() throws {
         let expectation = expectation(description: "test_execute")
         
         // リロードできる様にする
@@ -40,16 +40,16 @@ final class WeaponReloadUseCaseTests: XCTestCase {
             isReloading: false
         )
         
-        let startTime = Date()
+        var startTime: Date?
         let pistolReloadWaitTime = 0.0
         
         try weaponReloadUseCase.execute(
             request: request,
             onReloadStarted: { response in
-                
+                startTime = Date()
             },
             onReloadEnded: { response in
-                let elapsedTime = Date().timeIntervalSince(startTime)
+                let elapsedTime = Date().timeIntervalSince(startTime ?? Date())
                 let diff = abs(elapsedTime - pistolReloadWaitTime)
                 print("onReloadEnded elapsedTime: \(elapsedTime), diff: \(diff)")
 
@@ -60,7 +60,7 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func test_execute_リロード完了までかかった経過時間と本来のバズーカのリロード待ち時間との差分が０．５秒以内なら成功() throws {
+    func test_execute_リロード開始から完了までかかった経過時間と本来のバズーカのリロード待ち時間との差分が０．５秒以内なら成功() throws {
         let expectation = expectation(description: "test_execute")
         
         // リロードできる様にする
@@ -72,16 +72,16 @@ final class WeaponReloadUseCaseTests: XCTestCase {
             isReloading: false
         )
         
-        let startTime = Date()
+        var startTime: Date?
         let bazookaReloadWaitTime = 3.2
         
         try weaponReloadUseCase.execute(
             request: request,
             onReloadStarted: { response in
-                
+                startTime = Date()
             },
             onReloadEnded: { response in
-                let elapsedTime = Date().timeIntervalSince(startTime)
+                let elapsedTime = Date().timeIntervalSince(startTime ?? Date())
                 let diff = abs(elapsedTime - bazookaReloadWaitTime)
                 print("onReloadEnded elapsedTime: \(elapsedTime), diff: \(diff)")
 
