@@ -93,4 +93,25 @@ final class WeaponFireUseCaseTests: XCTestCase {
         
         XCTAssertEqual(isOnCanceledCalled, true)
     }
+    
+//    func test_execute_WeaponFireCompletedResponseの内容がrequestに対して期待した値で返ってくれば成功() throws {
+//        let pistolFullBulletsRequestWhenNotReloading = WeaponFireRequest(
+//            weaponType: .pistol,
+//            bulletsCount: 7,
+//            isReloading: false
+//        )
+//        try weaponFireUseCase.execute(
+//            request: pistolFullBulletsRequestWhenNotReloading,
+//            onFired: { response in
+//                let expectedResponse = WeaponFireCompletedResponse(
+//                    firingSound: .pistolShoot,
+//                    bulletsCountImageBaseName: "",
+//                    bulletsCount: ,
+//                    needsAutoReload:
+//                )
+//                
+//            }, onCanceled: { _ in
+//                XCTFail()
+//            })
+//    }
 }
