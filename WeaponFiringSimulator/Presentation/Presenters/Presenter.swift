@@ -24,20 +24,20 @@ protocol PresenterInterface {
 
 final class Presenter {
     private weak var view: ViewControllerInterface?
-    private let initialWeaponGetUseCase: InitialWeaponGetUseCaseInterface
+    private let weaponListGetUseCase: WeaponListGetUseCaseInterface
     private let weaponFireUseCase: WeaponFireUseCaseInterface
     private let weaponReloadUseCase: WeaponReloadUseCaseInterface
     private let weaponChangeUseCase: WeaponChangeUseCaseInterface
     
     init(
         view: ViewControllerInterface,
-        initialWeaponGetUseCase: InitialWeaponGetUseCaseInterface,
+        weaponListGetUseCase: WeaponListGetUseCaseInterface,
         weaponFireUseCase: WeaponFireUseCaseInterface,
         weaponReloadUseCase: WeaponReloadUseCaseInterface,
         weaponChangeUseCase: WeaponChangeUseCaseInterface
     ) {
         self.view = view
-        self.initialWeaponGetUseCase = initialWeaponGetUseCase
+        self.weaponListGetUseCase = weaponListGetUseCase
         self.weaponFireUseCase = weaponFireUseCase
         self.weaponReloadUseCase = weaponReloadUseCase
         self.weaponChangeUseCase = weaponChangeUseCase
@@ -51,7 +51,6 @@ final class Presenter {
         bulletsCountImageName: String,
         showingSound: SoundType
     ) {
-        view?.updateWeaponId(weaponId)
         view?.updateBulletsCount(bulletsCount)
         view?.updateReloadingFlag(isReloading)
         view?.showWeaponImage(name: weaponImageName)
@@ -62,19 +61,8 @@ final class Presenter {
 
 extension Presenter: PresenterInterface {
     func viewDidLoad() {
-        do {
-            try initialWeaponGetUseCase.execute(
-                onCompleted: { response in
-                    setupAndShowNewWeapon(weaponId: response.weaponId,
-                               bulletsCount: response.bulletsCount,
-                               isReloading: response.isReloading,
-                               weaponImageName: response.weaponImageName,
-                               bulletsCountImageName: response.bulletsCountImageName,
-                               showingSound: response.showingSound)
-                })
-        } catch {
-            print("initialWeaponGetUseCase error: \(error)")
-        }
+        let weaponListItems = weaponListGetUseCase.execute().weaponListItems
+        view?.showWeaponList(weaponListItems)
     }
     
     func fireButtonTapped(

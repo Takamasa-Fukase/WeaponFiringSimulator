@@ -5,6 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,8 +44,31 @@
                                     <constraint firstAttribute="trailing" secondItem="l7F-Dw-mHN" secondAttribute="trailing" id="q5D-g7-HCB"/>
                                 </constraints>
                             </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="fOs-0d-cNg">
+                                <rect key="frame" x="0.0" y="419" width="393" height="120"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="120" id="yUv-QZ-ppC"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LIK-yW-Zop">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Pw2-uD-y0K">
+                                        <rect key="frame" x="0.0" y="-4" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="FMV-Oo-C01">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="40" translatesAutoresizingMaskIntoConstraints="NO" id="kSA-yh-6jv">
-                                <rect key="frame" x="64" y="467" width="265" height="260"/>
+                                <rect key="frame" x="64" y="571" width="265" height="160"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Mz-Sp-VfF">
                                         <rect key="frame" x="0.0" y="0.0" width="265" height="60"/>
@@ -70,35 +94,27 @@
                                             <action selector="reloadButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Irv-Qg-z0d"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0vH-sj-aKm">
-                                        <rect key="frame" x="0.0" y="200" width="265" height="60"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="60" id="aSd-MF-sCo"/>
-                                        </constraints>
-                                        <color key="tintColor" systemColor="labelColor"/>
-                                        <state key="normal" title="Button"/>
-                                        <buttonConfiguration key="configuration" style="filled" title="Change Weapon"/>
-                                        <connections>
-                                            <action selector="changeWeaponButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="coA-Cs-DFS"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                             </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemYellowColor"/>
                         <constraints>
+                            <constraint firstItem="fOs-0d-cNg" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="DQx-wm-huv"/>
+                            <constraint firstItem="kSA-yh-6jv" firstAttribute="top" secondItem="fOs-0d-cNg" secondAttribute="bottom" constant="32" id="KJq-dV-hdF"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kSA-yh-6jv" secondAttribute="trailing" constant="64" id="QcQ-Nl-WKM"/>
                             <constraint firstItem="kSA-yh-6jv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="64" id="RNW-9w-Ie3"/>
                             <constraint firstItem="fxy-Cd-PrU" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="32" id="TlQ-qu-SAX"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="fxy-Cd-PrU" secondAttribute="trailing" constant="32" id="WsE-la-eEU"/>
-                            <constraint firstItem="kSA-yh-6jv" firstAttribute="top" secondItem="fxy-Cd-PrU" secondAttribute="bottom" constant="60" id="cgw-FT-Aoa"/>
+                            <constraint firstItem="fOs-0d-cNg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bLv-52-bw8"/>
                             <constraint firstItem="fxy-Cd-PrU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="eye-mD-zFW"/>
+                            <constraint firstItem="fOs-0d-cNg" firstAttribute="top" secondItem="fxy-Cd-PrU" secondAttribute="bottom" constant="12" id="pVj-hB-Dkg"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bulletsCountImageView" destination="3jG-CI-1pE" id="cxR-5G-UJD"/>
                         <outlet property="weaponImageView" destination="l7F-Dw-mHN" id="CdE-o3-pyi"/>
+                        <outlet property="weaponListCollectionView" destination="fOs-0d-cNg" id="tEp-xa-wlQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -111,7 +127,7 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

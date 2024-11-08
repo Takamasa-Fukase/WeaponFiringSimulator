@@ -56,6 +56,9 @@
 		BCE5BCFA2CDD8E750040C14A /* WeaponFireUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCF92CDD8E750040C14A /* WeaponFireUseCaseTests.swift */; };
 		BCE5BCFC2CDD8EAC0040C14A /* CanFireCheckUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCFB2CDD8EAC0040C14A /* CanFireCheckUseCaseMock.swift */; };
 		BCE5BCFE2CDD8F720040C14A /* NeedsAutoReloadCheckUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCFD2CDD8F720040C14A /* NeedsAutoReloadCheckUseCaseMock.swift */; };
+		BCE5BD032CDE07670040C14A /* WeaponListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BCE5BD022CDE07670040C14A /* WeaponListCell.xib */; };
+		BCE5BD042CDE07670040C14A /* WeaponListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BD012CDE07670040C14A /* WeaponListCell.swift */; };
+		BCE5BD062CDE0CDB0040C14A /* WeaponListGetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BD052CDE0CDB0040C14A /* WeaponListGetUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +132,9 @@
 		BCE5BCF92CDD8E750040C14A /* WeaponFireUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFireUseCaseTests.swift; sourceTree = "<group>"; };
 		BCE5BCFB2CDD8EAC0040C14A /* CanFireCheckUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanFireCheckUseCaseMock.swift; sourceTree = "<group>"; };
 		BCE5BCFD2CDD8F720040C14A /* NeedsAutoReloadCheckUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedsAutoReloadCheckUseCaseMock.swift; sourceTree = "<group>"; };
+		BCE5BD012CDE07670040C14A /* WeaponListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponListCell.swift; sourceTree = "<group>"; };
+		BCE5BD022CDE07670040C14A /* WeaponListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeaponListCell.xib; sourceTree = "<group>"; };
+		BCE5BD052CDE0CDB0040C14A /* WeaponListGetUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponListGetUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +184,8 @@
 			children = (
 				BC5AC9B42CD74E4200025518 /* ViewController.swift */,
 				BC5AC9B62CD74E4200025518 /* Main.storyboard */,
+				BCE5BD012CDE07670040C14A /* WeaponListCell.swift */,
+				BCE5BD022CDE07670040C14A /* WeaponListCell.xib */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -186,6 +194,7 @@
 			isa = PBXGroup;
 			children = (
 				BC15DEEA2CDB2E390058EBE7 /* InitialWeaponGetUseCase.swift */,
+				BCE5BD052CDE0CDB0040C14A /* WeaponListGetUseCase.swift */,
 				BCE5BCF12CDD79E30040C14A /* CanFireCheckUseCase.swift */,
 				BCE5BCF32CDD79EF0040C14A /* CanReloadCheckUseCase.swift */,
 				BCE5BCF52CDD79FF0040C14A /* NeedsAutoReloadCheckUseCase.swift */,
@@ -459,6 +468,7 @@
 				BC4B2ED32CDA113100C82827 /* pistol-out-bullets.mp3 in Resources */,
 				BC4B2ECA2CDA113100C82827 /* bazookaHit_small2.mp3 in Resources */,
 				BC4B2ED12CDA113100C82827 /* kyuiin.mp3 in Resources */,
+				BCE5BD032CDE07670040C14A /* WeaponListCell.xib in Resources */,
 				BC4B2ED42CDA113100C82827 /* pistol-reload.mp3 in Resources */,
 				BC4B2ED22CDA113100C82827 /* pistol-fire.mp3 in Resources */,
 				BC4B2ECD2CDA113100C82827 /* bazookaSet.mp3 in Resources */,
@@ -490,6 +500,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC15DEE52CDB1B990058EBE7 /* WeaponRepositoryInterface.swift in Sources */,
+				BCE5BD042CDE07670040C14A /* WeaponListCell.swift in Sources */,
 				BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */,
 				BC15DED52CDA515D0058EBE7 /* WeaponChangeUseCase.swift in Sources */,
 				BCE5BCF22CDD79E30040C14A /* CanFireCheckUseCase.swift in Sources */,
@@ -497,6 +508,7 @@
 				BC15DECF2CDA3DF90058EBE7 /* WeaponFireUseCase.swift in Sources */,
 				BCE5BCF42CDD79EF0040C14A /* CanReloadCheckUseCase.swift in Sources */,
 				BC15DED32CDA49AE0058EBE7 /* WeaponReloadUseCase.swift in Sources */,
+				BCE5BD062CDE0CDB0040C14A /* WeaponListGetUseCase.swift in Sources */,
 				BC15DEE72CDB1DFA0058EBE7 /* CustomError.swift in Sources */,
 				BC5AC9B52CD74E4200025518 /* ViewController.swift in Sources */,
 				BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */,

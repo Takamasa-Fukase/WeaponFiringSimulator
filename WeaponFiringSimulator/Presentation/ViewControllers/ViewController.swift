@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ViewControllerInterface: AnyObject {
-    func updateWeaponId(_ weaponId: Int)
+    func showWeaponList(_ listItems: [WeaponListItem])
     func updateBulletsCount(_ bulletsCount: Int)
     func updateReloadingFlag(_ isReloading: Bool)
     func showWeaponImage(name: String)
@@ -24,21 +24,24 @@ final class ViewController: UIViewController {
     private var soundPlayer: SoundPlayerInterface!
     private var presenter: PresenterInterface!
     
-    private var weaponId: Int = 0
     private var bulletsCount: Int = 0
     private var isReloading = false
+    private var selectedIndex: Int = 0
+    private var weaponListItems: [WeaponListItem] = []
     
     @IBOutlet private weak var weaponImageView: UIImageView!
     @IBOutlet private weak var bulletsCountImageView: UIImageView!
-
+    @IBOutlet private weak var weaponListCollectionView: UICollectionView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupCollectionView()
         soundPlayer = SoundPlayer()
         let weaponRepository = WeaponRepository()
         presenter = Presenter(
             view: self,
-            initialWeaponGetUseCase: InitialWeaponGetUseCase(weaponRepository: weaponRepository),
+            weaponListGetUseCase: WeaponListGetUseCase(weaponRepository: weaponRepository),
             weaponFireUseCase: WeaponFireUseCase(
                 weaponRepository: weaponRepository,
                 canFireCheckUseCase: CanFireCheckUseCase(),
@@ -54,33 +57,38 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func fireButtonTapped(_ sender: Any) {
-        presenter.fireButtonTapped(weaponId: weaponId,
+        presenter.fireButtonTapped(weaponId: weaponId(),
                                    bulletsCount: bulletsCount,
                                    isReloading: isReloading)
     }
     
     @IBAction func reloadButtonTapped(_ sender: Any) {
-        presenter.reloadButtonTapped(weaponId: weaponId,
+        presenter.reloadButtonTapped(weaponId: weaponId(),
                                      bulletsCount: bulletsCount,
                                      isReloading: isReloading)
     }
     
     @IBAction func changeWeaponButtonTapped(_ sender: Any) {
-        // TODO: UI上で武器リストを表示して、そのタップ時のindexをnextWeaponIdとして使う様に変更する
-        let nextWeaponid: Int = {
-            if weaponId == 0 {
-                return 1
-            }else {
-                return 0
-            }
-        }()
-        presenter.changeWeaponButtonTapped(nextWeaponId: nextWeaponid)
+        let nextWeaponId = weaponListItems[selectedIndex].weaponId
+        presenter.changeWeaponButtonTapped(nextWeaponId: nextWeaponId)
+    }
+    
+    private func setupCollectionView() {
+        weaponListCollectionView.delegate = self
+        weaponListCollectionView.dataSource = self
+        weaponListCollectionView.register(UINib(nibName: "WeaponListCell", bundle: nil), forCellWithReuseIdentifier: "WeaponListCell")
+    }
+    
+    private func weaponId() -> Int {
+        return weaponListItems[selectedIndex].weaponId
     }
 }
 
 extension ViewController: ViewControllerInterface {
-    func updateWeaponId(_ weaponId: Int) {
-        self.weaponId = weaponId
+    func showWeaponList(_ listItems: [WeaponListItem]) {
+        self.weaponListItems = listItems
+        weaponListCollectionView.reloadData()
+        weaponListCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .left)
     }
     
     func updateBulletsCount(_ bulletsCount: Int) {
@@ -116,8 +124,53 @@ extension ViewController: ViewControllerInterface {
     }
     
     func executeAutoReload() {
-        presenter.reloadButtonTapped(weaponId: weaponId,
+        presenter.reloadButtonTapped(weaponId: weaponId(),
                                      bulletsCount: bulletsCount,
                                      isReloading: isReloading)
+    }
+}
+
+extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return weaponListItems.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeaponListCell", for: indexPath) as! WeaponListCell
+        let item = weaponListItems[indexPath.row]
+        cell.weaponImageView.image = UIImage(named: item.weaponImageName)
+        if indexPath.row == selectedIndex {
+            cell.weaponImageView.layer.borderColor = UIColor.systemGreen.cgColor
+            cell.weaponImageView.layer.borderWidth = 2
+        }else {
+            cell.weaponImageView.layer.borderColor = UIColor.clear.cgColor
+            cell.weaponImageView.layer.borderWidth = 0
+        }
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        weaponListCollectionView.reloadData()
+        let nextWeaponId = weaponListItems[selectedIndex].weaponId
+        presenter.changeWeaponButtonTapped(nextWeaponId: nextWeaponId)
+    }
+}
+
+extension ViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.height, height: collectionView.frame.height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
     }
 }
