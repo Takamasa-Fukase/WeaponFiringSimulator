@@ -28,7 +28,7 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         weaponReloadUseCase = nil
     }
     
-    func test_execute_リロード開始から完了までかかった経過時間と本来のピストルのリロード待ち時間との差分が０．５秒以内なら成功() throws {
+    func test_execute_リロード開始から終了までかかった経過時間と本来のピストルのリロード待ち時間との差分が０．５秒以内なら成功() throws {
         let expectation = expectation(description: "test_execute")
         
         // リロードできる様にする
@@ -45,10 +45,10 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         
         try weaponReloadUseCase.execute(
             request: request,
-            onReloadStarted: { response in
+            onReloadStarted: { _ in
                 startTime = Date()
             },
-            onReloadEnded: { response in
+            onReloadEnded: { _ in
                 let elapsedTime = Date().timeIntervalSince(startTime ?? Date())
                 let diff = abs(elapsedTime - pistolReloadWaitTime)
                 print("onReloadEnded elapsedTime: \(elapsedTime), diff: \(diff)")
@@ -60,7 +60,7 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         wait(for: [expectation], timeout: 5)
     }
     
-    func test_execute_リロード開始から完了までかかった経過時間と本来のバズーカのリロード待ち時間との差分が０．５秒以内なら成功() throws {
+    func test_execute_リロード開始から終了までかかった経過時間と本来のバズーカのリロード待ち時間との差分が０．５秒以内なら成功() throws {
         let expectation = expectation(description: "test_execute")
         
         // リロードできる様にする
@@ -77,10 +77,10 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         
         try weaponReloadUseCase.execute(
             request: request,
-            onReloadStarted: { response in
+            onReloadStarted: { _ in
                 startTime = Date()
             },
-            onReloadEnded: { response in
+            onReloadEnded: { _ in
                 let elapsedTime = Date().timeIntervalSince(startTime ?? Date())
                 let diff = abs(elapsedTime - bazookaReloadWaitTime)
                 print("onReloadEnded elapsedTime: \(elapsedTime), diff: \(diff)")
@@ -89,6 +89,50 @@ final class WeaponReloadUseCaseTests: XCTestCase {
                 
                 expectation.fulfill()
             })
+        wait(for: [expectation], timeout: 5)
+    }
+    
+    
+    func test_execute_リロード開始もリロード終了も呼ばれなければ成功() throws {
+        let expectation = expectation(description: "test_execute")
+        
+        // リロードできない様にする
+        canReloadCheckUseCaseMock.canReload = false
+        
+        let pistolReloadRequest = WeaponReloadRequest(
+            // ピストルのリロードをリクエスト
+            weaponType: .pistol,
+            bulletsCount: 0,
+            isReloading: false
+        )
+        try weaponReloadUseCase.execute(
+            request: pistolReloadRequest,
+            onReloadStarted: { _ in
+                XCTFail()
+            },
+            onReloadEnded: { _ in
+                XCTFail()
+            })
+        
+        let bazookaReloadRequest = WeaponReloadRequest(
+            // バズーカのリロードをリクエスト
+            weaponType: .bazooka,
+            bulletsCount: 0,
+            isReloading: false
+        )
+        try weaponReloadUseCase.execute(
+            request: bazookaReloadRequest,
+            onReloadStarted: { _ in
+                XCTFail()
+            },
+            onReloadEnded: { _ in
+                XCTFail()
+            })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5, execute: {
+            expectation.fulfill()
+        })
+        
         wait(for: [expectation], timeout: 5)
     }
 }
