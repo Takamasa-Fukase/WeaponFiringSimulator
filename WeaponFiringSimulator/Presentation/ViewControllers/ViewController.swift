@@ -77,6 +77,7 @@ final class ViewController: UIViewController {
         weaponListCollectionView.delegate = self
         weaponListCollectionView.dataSource = self
         weaponListCollectionView.register(UINib(nibName: "WeaponListCell", bundle: nil), forCellWithReuseIdentifier: "WeaponListCell")
+        weaponListCollectionView.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
     }
     
     private func weaponId() -> Int {
@@ -141,7 +142,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         cell.weaponImageView.image = UIImage(named: item.weaponImageName)
         if indexPath.row == selectedIndex {
             cell.weaponImageView.layer.borderColor = UIColor.systemGreen.cgColor
-            cell.weaponImageView.layer.borderWidth = 2
+            cell.weaponImageView.layer.borderWidth = 4
         }else {
             cell.weaponImageView.layer.borderColor = UIColor.clear.cgColor
             cell.weaponImageView.layer.borderWidth = 0
