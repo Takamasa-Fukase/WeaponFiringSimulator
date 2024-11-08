@@ -9,6 +9,5 @@ import Foundation
 
 protocol WeaponRepositoryInterface {
     func get(by id: Int) throws -> Weapon
-    func getFirst() throws -> Weapon
     func getAll() -> [Weapon]
 }

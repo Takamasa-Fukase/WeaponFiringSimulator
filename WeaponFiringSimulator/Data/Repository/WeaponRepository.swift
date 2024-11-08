@@ -43,14 +43,6 @@ final class WeaponRepository: WeaponRepositoryInterface {
         return weapon
     }
     
-    func getFirst() throws -> Weapon {
-        guard let weapon = weapons.first else {
-            //　エラーをthrowする
-            throw CustomError.other(message: "武器が1つも存在しません")
-        }
-        return weapon
-    }
-    
     func getAll() -> [Weapon] {
         return weapons
     }
