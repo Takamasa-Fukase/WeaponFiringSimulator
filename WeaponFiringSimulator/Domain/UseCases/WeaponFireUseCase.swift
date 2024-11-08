@@ -8,14 +8,14 @@
 import Foundation
 
 struct WeaponFireRequest {
-    let weaponType: WeaponType
+    let weaponId: Int
     let bulletsCount: Int
     let isReloading: Bool
 }
 
 struct WeaponFireCompletedResponse {
     let firingSound: SoundType
-    let bulletsCountImageBaseName: String
+    let bulletsCountImageName: String
     let bulletsCount: Int
     let needsAutoReload: Bool
 }
@@ -52,7 +52,7 @@ final class WeaponFireUseCase: WeaponFireUseCaseInterface {
         onFired: ((WeaponFireCompletedResponse) -> Void),
         onCanceled: ((WeaponFireCanceledResponse) -> Void)
     ) throws {
-        let weapon = try weaponRepository.get(by: request.weaponType)
+        let weapon = try weaponRepository.get(by: request.weaponId)
         let canFireCheckRequest = CanFireCheckRequest(
             bulletsCount: request.bulletsCount,
             isReloading: request.isReloading
@@ -69,7 +69,7 @@ final class WeaponFireUseCase: WeaponFireUseCaseInterface {
             
             let response = WeaponFireCompletedResponse(
                 firingSound: weapon.firingSound,
-                bulletsCountImageBaseName: weapon.bulletsCountImageBaseName,
+                bulletsCountImageName: weapon.bulletsCountImageBaseName + String(request.bulletsCount - 1),
                 bulletsCount: request.bulletsCount - 1,
                 needsAutoReload: needsAutoReload
             )

@@ -8,9 +8,9 @@
 import Foundation
 
 struct InitialWeaponGetResponse {
-    let weaponType: WeaponType
+    let weaponId: Int
     let weaponImageName: String
-    let bulletsCountImageBaseName: String
+    let bulletsCountImageName: String
     let bulletsCount: Int
     let isReloading: Bool
     let showingSound: SoundType
@@ -28,11 +28,11 @@ final class InitialWeaponGetUseCase: InitialWeaponGetUseCaseInterface {
     }
     
     func execute(onCompleted: ((InitialWeaponGetResponse) -> Void)) throws {
-        let weapon = try weaponRepository.get(by: .pistol)
+        let weapon = try weaponRepository.getFirst()
         let response = InitialWeaponGetResponse(
-            weaponType: weapon.type,
+            weaponId: weapon.id,
             weaponImageName: weapon.weaponImageName,
-            bulletsCountImageBaseName: weapon.bulletsCountImageBaseName,
+            bulletsCountImageName: weapon.bulletsCountImageBaseName + String(weapon.capacity),
             bulletsCount: weapon.capacity,
             isReloading: false,
             showingSound: weapon.showingSound

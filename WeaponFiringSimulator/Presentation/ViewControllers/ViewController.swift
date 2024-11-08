@@ -8,7 +8,7 @@
 import UIKit
 
 protocol ViewControllerInterface: AnyObject {
-    func updateWeaponType(_ weaponType: WeaponType)
+    func updateWeaponId(_ weaponId: Int)
     func updateBulletsCount(_ bulletsCount: Int)
     func updateReloadingFlag(_ isReloading: Bool)
     func showWeaponImage(name: String)
@@ -24,9 +24,9 @@ final class ViewController: UIViewController {
     private var soundPlayer: SoundPlayerInterface!
     private var presenter: PresenterInterface!
     
-    private var weaponType: WeaponType = .pistol
+    private var weaponId: Int = 0
     private var bulletsCount: Int = 0
-    private var isReloading: Bool = false
+    private var isReloading = false
     
     @IBOutlet private weak var weaponImageView: UIImageView!
     @IBOutlet private weak var bulletsCountImageView: UIImageView!
@@ -54,25 +54,33 @@ final class ViewController: UIViewController {
     }
     
     @IBAction func fireButtonTapped(_ sender: Any) {
-        presenter.fireButtonTapped(weaponType: weaponType,
+        presenter.fireButtonTapped(weaponId: weaponId,
                                    bulletsCount: bulletsCount,
                                    isReloading: isReloading)
     }
     
     @IBAction func reloadButtonTapped(_ sender: Any) {
-        presenter.reloadButtonTapped(weaponType: weaponType,
+        presenter.reloadButtonTapped(weaponId: weaponId,
                                      bulletsCount: bulletsCount,
                                      isReloading: isReloading)
     }
     
     @IBAction func changeWeaponButtonTapped(_ sender: Any) {
-        presenter.changeWeaponButtonTapped(weaponType: weaponType)
+        // TODO: UI上で武器リストを表示して、そのタップ時のindexをnextWeaponIdとして使う様に変更する
+        let nextWeaponid: Int = {
+            if weaponId == 0 {
+                return 1
+            }else {
+                return 0
+            }
+        }()
+        presenter.changeWeaponButtonTapped(nextWeaponId: nextWeaponid)
     }
 }
 
 extension ViewController: ViewControllerInterface {
-    func updateWeaponType(_ weaponType: WeaponType) {
-        self.weaponType = weaponType
+    func updateWeaponId(_ weaponId: Int) {
+        self.weaponId = weaponId
     }
     
     func updateBulletsCount(_ bulletsCount: Int) {
@@ -108,7 +116,7 @@ extension ViewController: ViewControllerInterface {
     }
     
     func executeAutoReload() {
-        presenter.reloadButtonTapped(weaponType: weaponType,
+        presenter.reloadButtonTapped(weaponId: weaponId,
                                      bulletsCount: bulletsCount,
                                      isReloading: isReloading)
     }

@@ -7,18 +7,13 @@
 
 import Foundation
 
-enum WeaponType {
-    case pistol
-    case bazooka
-}
-
 enum ReloadType {
     case manual
     case auto
 }
 
 struct Weapon {
-    let type: WeaponType
+    let id: Int
     let weaponImageName: String
     let bulletsCountImageBaseName: String
     let capacity: Int

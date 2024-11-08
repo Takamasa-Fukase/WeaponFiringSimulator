@@ -8,13 +8,13 @@
 import Foundation
 
 struct WeaponChangeRequest {
-    let weaponType: WeaponType
+    let nextWeaponId: Int
 }
 
 struct WeaponChangeResponse {
-    let weaponType: WeaponType
+    let weaponId: Int
     let weaponImageName: String
-    let bulletsCountImageBaseName: String
+    let bulletsCountImageName: String
     let bulletsCount: Int
     let isReloading: Bool
     let showingSound: SoundType
@@ -38,19 +38,11 @@ final class WeaponChangeUseCase: WeaponChangeUseCaseInterface {
         request: WeaponChangeRequest,
         onCompleted: ((WeaponChangeResponse) -> Void)
     ) throws {
-        let newWeaponType: WeaponType = {
-            switch request.weaponType {
-            case .pistol:
-                return .bazooka
-            case .bazooka:
-                return .pistol
-            }
-        }()
-        let newWeapon = try weaponRepository.get(by: newWeaponType)
+        let newWeapon = try weaponRepository.get(by: request.nextWeaponId)
         let response = WeaponChangeResponse(
-            weaponType: newWeaponType,
+            weaponId: newWeapon.id,
             weaponImageName: newWeapon.weaponImageName,
-            bulletsCountImageBaseName: newWeapon.bulletsCountImageBaseName,
+            bulletsCountImageName: newWeapon.bulletsCountImageBaseName + String(newWeapon.capacity),
             bulletsCount: newWeapon.capacity,
             isReloading: false,
             showingSound: newWeapon.showingSound

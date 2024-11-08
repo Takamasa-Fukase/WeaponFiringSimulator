@@ -10,9 +10,9 @@ import Foundation
 final class WeaponRepository: WeaponRepositoryInterface {
     private let weapons: [Weapon] = [
         .init(
-            type: .pistol,
+            id: 0,
             weaponImageName: "pistol",
-            bulletsCountImageBaseName: "bullets",
+            bulletsCountImageBaseName: "pistol_bullets_",
             capacity: 7,
             reloadWaitingTime: 0,
             reloadType: .manual,
@@ -22,9 +22,9 @@ final class WeaponRepository: WeaponRepositoryInterface {
             noBulletsSound: .pistolOutBullets
         ),
         .init(
-            type: .bazooka,
+            id: 1,
             weaponImageName: "bazooka",
-            bulletsCountImageBaseName: "bazookaRocket",
+            bulletsCountImageBaseName: "bazooka_bullets_",
             capacity: 1,
             reloadWaitingTime: 3.2,
             reloadType: .auto,
@@ -35,15 +35,23 @@ final class WeaponRepository: WeaponRepositoryInterface {
         )
     ]
     
-    func get(by type: WeaponType) throws -> Weapon {
-        guard let weapon = weapons.first(where: { $0.type == type }) else {
+    func get(by id: Int) throws -> Weapon {
+        guard let weapon = weapons.first(where: { $0.id == id }) else {
             //　エラーをthrowする
-            throw CustomError.other(message: "武器が存在しません type: \(type)")
+            throw CustomError.other(message: "武器が存在しません id: \(id)")
         }
         return weapon
     }
     
-    func getList() -> [Weapon] {
+    func getFirst() throws -> Weapon {
+        guard let weapon = weapons.first else {
+            //　エラーをthrowする
+            throw CustomError.other(message: "武器が1つも存在しません")
+        }
+        return weapon
+    }
+    
+    func getAll() -> [Weapon] {
         return weapons
     }
 }

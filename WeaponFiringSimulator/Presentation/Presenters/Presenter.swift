@@ -10,18 +10,16 @@ import Foundation
 protocol PresenterInterface {
     func viewDidLoad()
     func fireButtonTapped(
-        weaponType: WeaponType,
+        weaponId: Int,
         bulletsCount: Int,
         isReloading: Bool
     )
     func reloadButtonTapped(
-        weaponType: WeaponType,
+        weaponId: Int,
         bulletsCount: Int,
         isReloading: Bool
     )
-    func changeWeaponButtonTapped(
-        weaponType: WeaponType
-    )
+    func changeWeaponButtonTapped(nextWeaponId: Int)
 }
 
 final class Presenter {
@@ -45,7 +43,17 @@ final class Presenter {
         self.weaponChangeUseCase = weaponChangeUseCase
     }
     
-    private func showWeapon(weaponImageName: String, bulletsCountImageName: String, showingSound: SoundType) {
+    private func setupAndShowNewWeapon(
+        weaponId: Int,
+        bulletsCount: Int,
+        isReloading: Bool,
+        weaponImageName: String,
+        bulletsCountImageName: String,
+        showingSound: SoundType
+    ) {
+        view?.updateWeaponId(weaponId)
+        view?.updateBulletsCount(bulletsCount)
+        view?.updateReloadingFlag(isReloading)
         view?.showWeaponImage(name: weaponImageName)
         view?.showBulletsCountImage(name: bulletsCountImageName)
         view?.playShowingSound(type: showingSound)
@@ -57,12 +65,11 @@ extension Presenter: PresenterInterface {
         do {
             try initialWeaponGetUseCase.execute(
                 onCompleted: { response in
-                    view?.updateWeaponType(response.weaponType)
-                    view?.updateBulletsCount(response.bulletsCount)
-                    view?.updateReloadingFlag(response.isReloading)
-                    
-                    showWeapon(weaponImageName: response.weaponImageName,
-                               bulletsCountImageName: response.bulletsCountImageBaseName + String(response.bulletsCount),
+                    setupAndShowNewWeapon(weaponId: response.weaponId,
+                               bulletsCount: response.bulletsCount,
+                               isReloading: response.isReloading,
+                               weaponImageName: response.weaponImageName,
+                               bulletsCountImageName: response.bulletsCountImageName,
                                showingSound: response.showingSound)
                 })
         } catch {
@@ -71,12 +78,12 @@ extension Presenter: PresenterInterface {
     }
     
     func fireButtonTapped(
-        weaponType: WeaponType,
+        weaponId: Int,
         bulletsCount: Int,
         isReloading: Bool
     ) {
         let request = WeaponFireRequest(
-            weaponType: weaponType,
+            weaponId: weaponId,
             bulletsCount: bulletsCount,
             isReloading: isReloading
         )
@@ -86,7 +93,7 @@ extension Presenter: PresenterInterface {
                 onFired: { response in
                     view?.updateBulletsCount(response.bulletsCount)
                     view?.playFireSound(type: response.firingSound)
-                    view?.showBulletsCountImage(name: response.bulletsCountImageBaseName + String(response.bulletsCount))
+                    view?.showBulletsCountImage(name: response.bulletsCountImageName)
                     
                     if response.needsAutoReload {
                         // リロードを自動的に実行
@@ -104,12 +111,12 @@ extension Presenter: PresenterInterface {
     }
     
     func reloadButtonTapped(
-        weaponType: WeaponType,
+        weaponId: Int,
         bulletsCount: Int,
         isReloading: Bool
     ) {
         let request = WeaponReloadRequest(
-            weaponType: weaponType,
+            weaponId: weaponId,
             bulletsCount: bulletsCount,
             isReloading: isReloading
         )
@@ -123,29 +130,24 @@ extension Presenter: PresenterInterface {
                 onReloadEnded: { [weak self] response in
                     self?.view?.updateBulletsCount(response.bulletsCount)
                     self?.view?.updateReloadingFlag(response.isReloading)
-                    self?.view?.showBulletsCountImage(name: response.bulletsCountImageBaseName + String(response.bulletsCount))
+                    self?.view?.showBulletsCountImage(name: response.bulletsCountImageName)
                 })
         } catch {
             print("weaponReloadUseCase error: \(error)")
         }
     }
     
-    func changeWeaponButtonTapped(
-        weaponType: WeaponType
-    ) {
-        let request = WeaponChangeRequest(
-            weaponType: weaponType
-        )
+    func changeWeaponButtonTapped(nextWeaponId: Int) {
+        let request = WeaponChangeRequest(nextWeaponId: nextWeaponId)
         do {
             try weaponChangeUseCase.execute(
                 request: request,
                 onCompleted: { response in
-                    view?.updateWeaponType(response.weaponType)
-                    view?.updateBulletsCount(response.bulletsCount)
-                    view?.updateReloadingFlag(response.isReloading)
-                    
-                    showWeapon(weaponImageName: response.weaponImageName,
-                               bulletsCountImageName: response.bulletsCountImageBaseName + String(response.bulletsCount),
+                    setupAndShowNewWeapon(weaponId: response.weaponId,
+                               bulletsCount: response.bulletsCount,
+                               isReloading: response.isReloading,
+                               weaponImageName: response.weaponImageName,
+                               bulletsCountImageName: response.bulletsCountImageName,
                                showingSound: response.showingSound)
                 })
         } catch {

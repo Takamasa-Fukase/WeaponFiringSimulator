@@ -8,7 +8,7 @@
 import Foundation
 
 struct WeaponReloadRequest {
-    let weaponType: WeaponType
+    let weaponId: Int
     let bulletsCount: Int
     let isReloading: Bool
 }
@@ -19,7 +19,7 @@ struct WeaponReloadStartedResponse {
 }
 
 struct WeaponReloadEndedResponse {
-    let bulletsCountImageBaseName: String
+    let bulletsCountImageName: String
     let bulletsCount: Int
     let isReloading: Bool
 }
@@ -49,7 +49,7 @@ final class WeaponReloadUseCase: WeaponReloadUseCaseInterface {
         onReloadStarted: ((WeaponReloadStartedResponse) -> Void),
         onReloadEnded: @escaping ((WeaponReloadEndedResponse) -> Void)
     ) throws {
-        let weapon = try weaponRepository.get(by: request.weaponType)
+        let weapon = try weaponRepository.get(by: request.weaponId)
         let canReloadCheckRequest = CanReloadCheckRequest(
             bulletsCount: request.bulletsCount,
             isReloading: request.isReloading
@@ -65,7 +65,7 @@ final class WeaponReloadUseCase: WeaponReloadUseCaseInterface {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + weapon.reloadWaitingTime, execute: {
                 let endedResponse = WeaponReloadEndedResponse(
-                    bulletsCountImageBaseName: weapon.bulletsCountImageBaseName,
+                    bulletsCountImageName: weapon.bulletsCountImageBaseName + String(weapon.capacity),
                     bulletsCount: weapon.capacity,
                     isReloading: false
                 )
