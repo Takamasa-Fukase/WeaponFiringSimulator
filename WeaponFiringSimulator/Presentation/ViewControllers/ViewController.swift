@@ -9,6 +9,7 @@ import UIKit
 
 protocol ViewControllerInterface: AnyObject {
     func showWeaponList(_ listItems: [WeaponListItem])
+    func selectInitialItem(at indexPath: IndexPath)
     func updateBulletsCount(_ bulletsCount: Int)
     func updateReloadingFlag(_ isReloading: Bool)
     func showWeaponImage(name: String)
@@ -68,11 +69,6 @@ final class ViewController: UIViewController {
                                      isReloading: isReloading)
     }
     
-    @IBAction func changeWeaponButtonTapped(_ sender: Any) {
-        let nextWeaponId = weaponListItems[selectedIndex].weaponId
-        presenter.changeWeaponButtonTapped(nextWeaponId: nextWeaponId)
-    }
-    
     private func setupCollectionView() {
         weaponListCollectionView.delegate = self
         weaponListCollectionView.dataSource = self
@@ -89,7 +85,12 @@ extension ViewController: ViewControllerInterface {
     func showWeaponList(_ listItems: [WeaponListItem]) {
         self.weaponListItems = listItems
         weaponListCollectionView.reloadData()
-        weaponListCollectionView.selectItem(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .left)
+    }
+    
+    func selectInitialItem(at indexPath: IndexPath) {
+        selectedIndex = indexPath.row
+        weaponListCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
+        collectionView(weaponListCollectionView, didSelectItemAt: indexPath)
     }
     
     func updateBulletsCount(_ bulletsCount: Int) {

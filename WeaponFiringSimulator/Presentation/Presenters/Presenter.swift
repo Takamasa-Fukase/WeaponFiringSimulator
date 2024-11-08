@@ -63,6 +63,7 @@ extension Presenter: PresenterInterface {
     func viewDidLoad() {
         let weaponListItems = weaponListGetUseCase.execute().weaponListItems
         view?.showWeaponList(weaponListItems)
+        view?.selectInitialItem(at: IndexPath(row: 0, section: 0))
     }
     
     func fireButtonTapped(
