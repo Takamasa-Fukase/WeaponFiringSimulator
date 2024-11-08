@@ -49,7 +49,7 @@ final class WeaponFireUseCaseTests: XCTestCase {
             onFired: { response in
                 XCTAssertEqual(response.needsAutoReload, false)
             },
-            onCanceled: { response in
+            onCanceled: { _ in
                 XCTFail()
             })
         
@@ -66,8 +66,31 @@ final class WeaponFireUseCaseTests: XCTestCase {
             onFired: { response in
                 XCTAssertEqual(response.needsAutoReload, true)
             },
-            onCanceled: { response in
+            onCanceled: { _ in
                 XCTFail()
             })
+    }
+    
+    func test_execute_onFireが呼ばれずにonCanceledが呼ばれたら成功() throws {
+        // 発射できない様にする
+        canFireCheckUseCaseMock.canFire = false
+        
+        var isOnCanceledCalled = false
+        
+        let request = WeaponFireRequest(
+            weaponType: .pistol,
+            bulletsCount: 0,
+            isReloading: false
+        )
+        try weaponFireUseCase.execute(
+            request: request,
+            onFired: { _ in
+                XCTFail()
+            },
+            onCanceled: { _ in
+                isOnCanceledCalled = true
+            })
+        
+        XCTAssertEqual(isOnCanceledCalled, true)
     }
 }
