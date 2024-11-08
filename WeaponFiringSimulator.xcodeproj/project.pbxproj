@@ -53,6 +53,9 @@
 		BCE5BCF42CDD79EF0040C14A /* CanReloadCheckUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCF32CDD79EF0040C14A /* CanReloadCheckUseCase.swift */; };
 		BCE5BCF62CDD79FF0040C14A /* NeedsAutoReloadCheckUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCF52CDD79FF0040C14A /* NeedsAutoReloadCheckUseCase.swift */; };
 		BCE5BCF82CDD848E0040C14A /* CanReloadCheckUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCF72CDD848E0040C14A /* CanReloadCheckUseCaseMock.swift */; };
+		BCE5BCFA2CDD8E750040C14A /* WeaponFireUseCaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCF92CDD8E750040C14A /* WeaponFireUseCaseTests.swift */; };
+		BCE5BCFC2CDD8EAC0040C14A /* CanFireCheckUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCFB2CDD8EAC0040C14A /* CanFireCheckUseCaseMock.swift */; };
+		BCE5BCFE2CDD8F720040C14A /* NeedsAutoReloadCheckUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BCFD2CDD8F720040C14A /* NeedsAutoReloadCheckUseCaseMock.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -123,6 +126,9 @@
 		BCE5BCF32CDD79EF0040C14A /* CanReloadCheckUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanReloadCheckUseCase.swift; sourceTree = "<group>"; };
 		BCE5BCF52CDD79FF0040C14A /* NeedsAutoReloadCheckUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedsAutoReloadCheckUseCase.swift; sourceTree = "<group>"; };
 		BCE5BCF72CDD848E0040C14A /* CanReloadCheckUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanReloadCheckUseCaseMock.swift; sourceTree = "<group>"; };
+		BCE5BCF92CDD8E750040C14A /* WeaponFireUseCaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFireUseCaseTests.swift; sourceTree = "<group>"; };
+		BCE5BCFB2CDD8EAC0040C14A /* CanFireCheckUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanFireCheckUseCaseMock.swift; sourceTree = "<group>"; };
+		BCE5BCFD2CDD8F720040C14A /* NeedsAutoReloadCheckUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NeedsAutoReloadCheckUseCaseMock.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -306,6 +312,7 @@
 			children = (
 				BC5AC9C72CD74E4300025518 /* WeaponFiringSimulatorTests.swift */,
 				BCE5BCE22CDB6F1B0040C14A /* PresenterTests.swift */,
+				BCE5BCF92CDD8E750040C14A /* WeaponFireUseCaseTests.swift */,
 				BCE5BCEF2CDB905D0040C14A /* WeaponReloadUseCaseTests.swift */,
 				BCE5BCEE2CDB903D0040C14A /* Mocks */,
 			);
@@ -326,7 +333,9 @@
 			children = (
 				BCE5BCE42CDB71170040C14A /* ViewControllerMock.swift */,
 				BCE5BCE62CDB716C0040C14A /* InitialWeaponGetUseCaseMock.swift */,
+				BCE5BCFB2CDD8EAC0040C14A /* CanFireCheckUseCaseMock.swift */,
 				BCE5BCF72CDD848E0040C14A /* CanReloadCheckUseCaseMock.swift */,
+				BCE5BCFD2CDD8F720040C14A /* NeedsAutoReloadCheckUseCaseMock.swift */,
 				BCE5BCE82CDB72A00040C14A /* WeaponFireUseCaseMock.swift */,
 				BCE5BCEA2CDB7AD70040C14A /* WeaponReloadUseCaseMock.swift */,
 				BCE5BCEC2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift */,
@@ -510,9 +519,12 @@
 				BCE5BCED2CDB7B5A0040C14A /* WeaponChangeUseCaseMock.swift in Sources */,
 				BCE5BCE92CDB72A00040C14A /* WeaponFireUseCaseMock.swift in Sources */,
 				BCE5BCE52CDB71170040C14A /* ViewControllerMock.swift in Sources */,
+				BCE5BCFC2CDD8EAC0040C14A /* CanFireCheckUseCaseMock.swift in Sources */,
 				BCE5BCF02CDB905D0040C14A /* WeaponReloadUseCaseTests.swift in Sources */,
+				BCE5BCFE2CDD8F720040C14A /* NeedsAutoReloadCheckUseCaseMock.swift in Sources */,
 				BCE5BCF82CDD848E0040C14A /* CanReloadCheckUseCaseMock.swift in Sources */,
 				BC5AC9C82CD74E4300025518 /* WeaponFiringSimulatorTests.swift in Sources */,
+				BCE5BCFA2CDD8E750040C14A /* WeaponFireUseCaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
