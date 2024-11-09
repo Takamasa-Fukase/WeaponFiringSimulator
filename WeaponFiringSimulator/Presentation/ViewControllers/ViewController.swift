@@ -24,11 +24,10 @@ protocol ViewControllerInterface: AnyObject {
 final class ViewController: UIViewController {
     private var soundPlayer: SoundPlayerInterface!
     private var presenter: PresenterInterface!
-    
+
+    private var weaponListItems: [WeaponListItem] = []
     private var bulletsCount: Int = 0
     private var isReloading = false
-    private var selectedIndex: Int = 0
-    private var weaponListItems: [WeaponListItem] = []
     
     @IBOutlet private weak var weaponImageView: UIImageView!
     @IBOutlet private weak var bulletsCountImageView: UIImageView!
@@ -74,21 +73,26 @@ final class ViewController: UIViewController {
         weaponListCollectionView.dataSource = self
         weaponListCollectionView.register(UINib(nibName: "WeaponListCell", bundle: nil), forCellWithReuseIdentifier: "WeaponListCell")
         weaponListCollectionView.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+        weaponListCollectionView.allowsMultipleSelection = false
+        weaponListCollectionView.allowsSelection = true
+    }
+    
+    private func selectedIndex() -> Int {
+        return weaponListCollectionView.indexPathsForSelectedItems?.first?.row ?? 0
     }
     
     private func weaponId() -> Int {
-        return weaponListItems[selectedIndex].weaponId
+        return weaponListItems[selectedIndex()].weaponId
     }
 }
 
 extension ViewController: ViewControllerInterface {
     func showWeaponList(_ listItems: [WeaponListItem]) {
-        self.weaponListItems = listItems
+        weaponListItems = listItems
         weaponListCollectionView.reloadData()
     }
     
     func selectInitialItem(at indexPath: IndexPath) {
-        selectedIndex = indexPath.row
         weaponListCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
         collectionView(weaponListCollectionView, didSelectItemAt: indexPath)
     }
@@ -141,20 +145,11 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeaponListCell", for: indexPath) as! WeaponListCell
         let item = weaponListItems[indexPath.row]
         cell.weaponImageView.image = UIImage(named: item.weaponImageName)
-        if indexPath.row == selectedIndex {
-            cell.weaponImageView.layer.borderColor = UIColor.systemGreen.cgColor
-            cell.weaponImageView.layer.borderWidth = 4
-        }else {
-            cell.weaponImageView.layer.borderColor = UIColor.clear.cgColor
-            cell.weaponImageView.layer.borderWidth = 0
-        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        selectedIndex = indexPath.row
-        weaponListCollectionView.reloadData()
-        let nextWeaponId = weaponListItems[selectedIndex].weaponId
+        let nextWeaponId = weaponListItems[selectedIndex()].weaponId
         presenter.changeWeaponButtonTapped(nextWeaponId: nextWeaponId)
     }
 }

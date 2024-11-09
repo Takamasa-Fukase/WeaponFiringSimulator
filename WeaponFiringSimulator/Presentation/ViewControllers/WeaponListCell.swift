@@ -14,4 +14,16 @@ class WeaponListCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
+    
+    override var isSelected: Bool {
+        didSet {
+            if isSelected {
+                weaponImageView.layer.borderColor = UIColor.systemGreen.cgColor
+                weaponImageView.layer.borderWidth = 4
+            }else {
+                weaponImageView.layer.borderColor = UIColor.clear.cgColor
+                weaponImageView.layer.borderWidth = 0
+            }
+        }
+    }
 }
