@@ -20,7 +20,7 @@ final class WeaponFireUseCaseMock: WeaponFireUseCaseInterface {
         if canFire {
             let response = WeaponFireCompletedResponse(
                 firingSound: .pistolShoot,
-                bulletsCountImageBaseName: "",
+                bulletsCountImageName: "",
                 bulletsCount: 0,
                 needsAutoReload: needsAutoReload
             )

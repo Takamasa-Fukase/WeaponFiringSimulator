@@ -9,24 +9,24 @@ import XCTest
 @testable import WeaponFiringSimulator
 
 final class WeaponFireUseCaseTests: XCTestCase {
-    private var weaponRepository: WeaponRepositoryInterface!
+    private var weaponRepositoryMock: WeaponRepositoryMock!
     private var canFireCheckUseCaseMock: CanFireCheckUseCaseMock!
     private var needsAutoReloadCheckUseCaseMock: NeedsAutoReloadCheckUseCaseMock!
     private var weaponFireUseCase: WeaponFireUseCase!
     
     override func setUpWithError() throws {
-        weaponRepository = WeaponRepository()
+        weaponRepositoryMock = WeaponRepositoryMock()
         canFireCheckUseCaseMock = CanFireCheckUseCaseMock()
         needsAutoReloadCheckUseCaseMock = NeedsAutoReloadCheckUseCaseMock()
         weaponFireUseCase = WeaponFireUseCase(
-            weaponRepository: weaponRepository,
+            weaponRepository: weaponRepositoryMock,
             canFireCheckUseCase: canFireCheckUseCaseMock,
             needsAutoReloadCheckUseCase: needsAutoReloadCheckUseCaseMock
         )
     }
     
     override func tearDownWithError() throws {
-        weaponRepository = nil
+        weaponRepositoryMock = nil
         canFireCheckUseCaseMock = nil
         needsAutoReloadCheckUseCaseMock = nil
         weaponFireUseCase = nil
@@ -40,7 +40,7 @@ final class WeaponFireUseCaseTests: XCTestCase {
         needsAutoReloadCheckUseCaseMock.needsAutoReload = false
         
         let request1 = WeaponFireRequest(
-            weaponType: .pistol,
+            weaponId: 0,
             bulletsCount: 0,
             isReloading: false
         )
@@ -57,7 +57,7 @@ final class WeaponFireUseCaseTests: XCTestCase {
         needsAutoReloadCheckUseCaseMock.needsAutoReload = true
         
         let request2 = WeaponFireRequest(
-            weaponType: .pistol,
+            weaponId: 0,
             bulletsCount: 0,
             isReloading: false
         )
@@ -78,7 +78,7 @@ final class WeaponFireUseCaseTests: XCTestCase {
         var isOnCanceledCalled = false
         
         let request = WeaponFireRequest(
-            weaponType: .pistol,
+            weaponId: 0,
             bulletsCount: 0,
             isReloading: false
         )
@@ -94,24 +94,47 @@ final class WeaponFireUseCaseTests: XCTestCase {
         XCTAssertEqual(isOnCanceledCalled, true)
     }
     
-//    func test_execute_WeaponFireCompletedResponseの内容がrequestに対して期待した値で返ってくれば成功() throws {
-//        let pistolFullBulletsRequestWhenNotReloading = WeaponFireRequest(
-//            weaponType: .pistol,
-//            bulletsCount: 7,
-//            isReloading: false
-//        )
-//        try weaponFireUseCase.execute(
-//            request: pistolFullBulletsRequestWhenNotReloading,
-//            onFired: { response in
-//                let expectedResponse = WeaponFireCompletedResponse(
-//                    firingSound: .pistolShoot,
-//                    bulletsCountImageBaseName: "",
-//                    bulletsCount: ,
-//                    needsAutoReload:
-//                )
-//                
-//            }, onCanceled: { _ in
-//                XCTFail()
-//            })
-//    }
+    func test_execute_WeaponFireCompletedResponseの内容がrequestに対して期待した値で返ってくれば成功() throws {
+        // 手動リロードのテスト用の武器を追加
+        let testManualReloadWeapon = Weapon(
+            id: 100,
+            weaponImageName: "testManualReloadWeaponImage",
+            bulletsCountImageBaseName: "testManualReloadWeaponBulletsCountImage",
+            capacity: 100,
+            reloadWaitingTime: 100,
+            reloadType: .manual,
+            showingSound: .pistolSet,
+            firingSound: .pistolShoot,
+            reloadingSound: .pistolReload,
+            noBulletsSound: .pistolOutBullets
+        )
+        weaponRepositoryMock.weapons.append(testManualReloadWeapon)
+        // 撃てる様にする
+        canFireCheckUseCaseMock.canFire = true
+        // 自動リロードしない様にする
+        needsAutoReloadCheckUseCaseMock.needsAutoReload = false
+        
+        let testManualReloadWeaponFireRequest = WeaponFireRequest(
+            weaponId: 100,
+            bulletsCount: 100,
+            isReloading: false
+        )
+        try weaponFireUseCase.execute(
+            request: testManualReloadWeaponFireRequest,
+            onFired: { response in
+                let expectedResponse = WeaponFireCompletedResponse(
+                    firingSound: .pistolShoot,
+                    bulletsCountImageName: "testManualReloadWeaponBulletsCountImage99",
+                    bulletsCount: 99,
+                    needsAutoReload: false
+                )
+                XCTAssertEqual(response.firingSound, expectedResponse.firingSound)
+                XCTAssertEqual(response.bulletsCountImageName, expectedResponse.bulletsCountImageName)
+                XCTAssertEqual(response.bulletsCount, expectedResponse.bulletsCount)
+                XCTAssertEqual(response.needsAutoReload, expectedResponse.needsAutoReload)
+
+            }, onCanceled: { _ in
+                XCTFail()
+            })
+    }
 }

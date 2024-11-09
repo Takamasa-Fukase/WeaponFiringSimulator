@@ -23,7 +23,7 @@ final class WeaponReloadUseCaseMock: WeaponReloadUseCaseInterface {
             )
             onReloadStarted(startedResponse)
             let endedResponse = WeaponReloadEndedResponse(
-                bulletsCountImageBaseName: "",
+                bulletsCountImageName: "",
                 bulletsCount: 0,
                 isReloading: false
             )

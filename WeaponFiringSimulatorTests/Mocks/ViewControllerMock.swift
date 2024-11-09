@@ -9,7 +9,8 @@ import Foundation
 @testable import WeaponFiringSimulator
 
 final class ViewControllerMock: ViewControllerInterface {
-    var updateWeaponTypeCalled = false
+    var showWeaponListCalled = false
+    var selectInitialItemCalled = false
     var updateBulletsCountCalled = false
     var updateReloadingFlagCalled = false
     var updateReloadingFlagCalledValues: [Bool] = []
@@ -21,8 +22,12 @@ final class ViewControllerMock: ViewControllerInterface {
     var playNoBulletsSoundCalled = false
     var executeAutoReloadCalled = false
     
-    func updateWeaponType(_ weaponType: WeaponFiringSimulator.WeaponType) {
-        updateWeaponTypeCalled = true
+    func showWeaponList(_ listItems: [WeaponFiringSimulator.WeaponListItem]) {
+        showWeaponListCalled = true
+    }
+    
+    func selectInitialItem(at indexPath: IndexPath) {
+        selectInitialItemCalled = true
     }
     
     func updateBulletsCount(_ bulletsCount: Int) {

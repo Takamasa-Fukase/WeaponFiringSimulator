@@ -9,21 +9,21 @@ import XCTest
 @testable import WeaponFiringSimulator
 
 final class WeaponReloadUseCaseTests: XCTestCase {
-    private var weaponRepository: WeaponRepositoryInterface!
+    private var weaponRepositoryMock: WeaponRepositoryMock!
     private var canReloadCheckUseCaseMock: CanReloadCheckUseCaseMock!
     private var weaponReloadUseCase: WeaponReloadUseCase!
     
     override func setUpWithError() throws {
-        weaponRepository = WeaponRepository()
+        weaponRepositoryMock = WeaponRepositoryMock()
         canReloadCheckUseCaseMock = CanReloadCheckUseCaseMock()
         weaponReloadUseCase = WeaponReloadUseCase(
-            weaponRepository: weaponRepository,
+            weaponRepository: weaponRepositoryMock,
             canReloadCheckUseCase: canReloadCheckUseCaseMock
         )
     }
     
     override func tearDownWithError() throws {
-        weaponRepository = nil
+        weaponRepositoryMock = nil
         canReloadCheckUseCaseMock = nil
         weaponReloadUseCase = nil
     }
@@ -35,7 +35,7 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         canReloadCheckUseCaseMock.canReload = true
         
         let request = WeaponReloadRequest(
-            weaponType: .pistol,
+            weaponId: 0,
             bulletsCount: 0,
             isReloading: false
         )
@@ -67,7 +67,7 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         canReloadCheckUseCaseMock.canReload = true
         
         let request = WeaponReloadRequest(
-            weaponType: .bazooka,
+            weaponId: 1,
             bulletsCount: 0,
             isReloading: false
         )
@@ -101,7 +101,7 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         
         let pistolReloadRequest = WeaponReloadRequest(
             // ピストルのリロードをリクエスト
-            weaponType: .pistol,
+            weaponId: 0,
             bulletsCount: 0,
             isReloading: false
         )
@@ -116,7 +116,7 @@ final class WeaponReloadUseCaseTests: XCTestCase {
         
         let bazookaReloadRequest = WeaponReloadRequest(
             // バズーカのリロードをリクエスト
-            weaponType: .bazooka,
+            weaponId: 1,
             bulletsCount: 0,
             isReloading: false
         )

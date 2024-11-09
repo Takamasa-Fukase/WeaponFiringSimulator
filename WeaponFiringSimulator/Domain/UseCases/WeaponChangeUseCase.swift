@@ -12,7 +12,6 @@ struct WeaponChangeRequest {
 }
 
 struct WeaponChangeResponse {
-    let weaponId: Int
     let weaponImageName: String
     let bulletsCountImageName: String
     let bulletsCount: Int
@@ -40,7 +39,6 @@ final class WeaponChangeUseCase: WeaponChangeUseCaseInterface {
     ) throws {
         let newWeapon = try weaponRepository.get(by: request.nextWeaponId)
         let response = WeaponChangeResponse(
-            weaponId: newWeapon.id,
             weaponImageName: newWeapon.weaponImageName,
             bulletsCountImageName: newWeapon.bulletsCountImageBaseName + String(newWeapon.capacity),
             bulletsCount: newWeapon.capacity,

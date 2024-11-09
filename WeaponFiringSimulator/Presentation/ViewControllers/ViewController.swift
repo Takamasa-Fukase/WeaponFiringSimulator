@@ -94,6 +94,7 @@ extension ViewController: ViewControllerInterface {
     
     func selectInitialItem(at indexPath: IndexPath) {
         weaponListCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
+        // selectItem()をコードから呼び出した場合はdidSelectItemAtのDelegateメソッドが発火しないので、手動で呼び出す
         collectionView(weaponListCollectionView, didSelectItemAt: indexPath)
     }
     

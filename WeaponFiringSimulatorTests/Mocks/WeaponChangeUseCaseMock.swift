@@ -14,9 +14,8 @@ final class WeaponChangeUseCaseMock: WeaponChangeUseCaseInterface {
         onCompleted: ((WeaponChangeResponse) -> Void)
     ) throws {
         let response = WeaponChangeResponse(
-            weaponType: .pistol,
             weaponImageName: "",
-            bulletsCountImageBaseName: "",
+            bulletsCountImageName: "",
             bulletsCount: 0,
             isReloading: false,
             showingSound: .pistolSet
