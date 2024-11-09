@@ -136,5 +136,45 @@ final class WeaponFireUseCaseTests: XCTestCase {
             }, onCanceled: { _ in
                 XCTFail()
             })
+        
+        // 自動リロードのテスト用の武器を追加
+        let testAutoReloadWeapon = Weapon(
+            id: 101,
+            weaponImageName: "testAutoReloadWeaponImage",
+            bulletsCountImageBaseName: "testAutoReloadWeaponBulletsCountImage",
+            capacity: 100,
+            reloadWaitingTime: 100,
+            reloadType: .auto,
+            showingSound: .bazookaSet,
+            firingSound: .bazookaShoot,
+            reloadingSound: .bazookaReload,
+            noBulletsSound: nil
+        )
+        weaponRepositoryMock.weapons.append(testAutoReloadWeapon)
+        // 自動リロードする様にする
+        needsAutoReloadCheckUseCaseMock.needsAutoReload = true
+        
+        let testAutoReloadWeaponFireRequest = WeaponFireRequest(
+            weaponId: 101,
+            bulletsCount: 100,
+            isReloading: false
+        )
+        try weaponFireUseCase.execute(
+            request: testAutoReloadWeaponFireRequest,
+            onFired: { response in
+                let expectedResponse = WeaponFireCompletedResponse(
+                    firingSound: .bazookaShoot,
+                    bulletsCountImageName: "testAutoReloadWeaponBulletsCountImage99",
+                    bulletsCount: 99,
+                    needsAutoReload: true
+                )
+                XCTAssertEqual(response.firingSound, expectedResponse.firingSound)
+                XCTAssertEqual(response.bulletsCountImageName, expectedResponse.bulletsCountImageName)
+                XCTAssertEqual(response.bulletsCount, expectedResponse.bulletsCount)
+                XCTAssertEqual(response.needsAutoReload, expectedResponse.needsAutoReload)
+
+            }, onCanceled: { _ in
+                XCTFail()
+            })
     }
 }
