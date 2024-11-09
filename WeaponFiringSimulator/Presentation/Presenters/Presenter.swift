@@ -42,21 +42,6 @@ final class Presenter {
         self.weaponReloadUseCase = weaponReloadUseCase
         self.weaponChangeUseCase = weaponChangeUseCase
     }
-    
-    private func setupAndShowNewWeapon(
-        weaponId: Int,
-        bulletsCount: Int,
-        isReloading: Bool,
-        weaponImageName: String,
-        bulletsCountImageName: String,
-        showingSound: SoundType
-    ) {
-        view?.updateBulletsCount(bulletsCount)
-        view?.updateReloadingFlag(isReloading)
-        view?.showWeaponImage(name: weaponImageName)
-        view?.showBulletsCountImage(name: bulletsCountImageName)
-        view?.playShowingSound(type: showingSound)
-    }
 }
 
 extension Presenter: PresenterInterface {
@@ -132,12 +117,11 @@ extension Presenter: PresenterInterface {
             try weaponChangeUseCase.execute(
                 request: request,
                 onCompleted: { response in
-                    setupAndShowNewWeapon(weaponId: response.weaponId,
-                               bulletsCount: response.bulletsCount,
-                               isReloading: response.isReloading,
-                               weaponImageName: response.weaponImageName,
-                               bulletsCountImageName: response.bulletsCountImageName,
-                               showingSound: response.showingSound)
+                    view?.updateBulletsCount(response.bulletsCount)
+                    view?.updateReloadingFlag(response.isReloading)
+                    view?.showWeaponImage(name: response.weaponImageName)
+                    view?.showBulletsCountImage(name: response.bulletsCountImageName)
+                    view?.playShowingSound(type: response.showingSound)
                 })
         } catch {
             print("weaponChangeUseCase error: \(error)")
