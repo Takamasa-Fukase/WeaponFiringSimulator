@@ -150,7 +150,7 @@ extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let nextWeaponId = weaponListItems[selectedIndex()].weaponId
+        let nextWeaponId = weaponListItems[indexPath.row].weaponId
         presenter.changeWeaponButtonTapped(nextWeaponId: nextWeaponId)
     }
 }
