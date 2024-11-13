@@ -9,16 +9,8 @@ import Foundation
 
 protocol PresenterInterface {
     func viewDidLoad()
-    func fireButtonTapped(
-        weaponId: Int,
-        bulletsCount: Int,
-        isReloading: Bool
-    )
-    func reloadButtonTapped(
-        weaponId: Int,
-        bulletsCount: Int,
-        isReloading: Bool
-    )
+    func fireButtonTapped(weaponId: Int, bulletsCount: Int, isReloading: Bool)
+    func reloadButtonTapped(weaponId: Int, bulletsCount: Int, isReloading: Bool)
     func changeWeaponButtonTapped(nextWeaponId: Int)
 }
 
