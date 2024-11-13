@@ -26,6 +26,29 @@ final class Presenter2 {
     private var bulletsCount: Int = 0
     private var isReloading = false
     
+    
+    
+    // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
+    func getBulletsCount() -> Int {
+        return bulletsCount
+    }
+    func getIsReloading() -> Bool {
+        return isReloading
+    }
+    func setWeaponListItems(_ weaponListItems: [WeaponListItem]) {
+        self.weaponListItems = weaponListItems
+    }
+    func setBulletsCount(_ bulletsCount: Int) {
+        self.bulletsCount = bulletsCount
+    }
+    func setIsReloading(_ isReloading: Bool) {
+        self.isReloading = isReloading
+    }
+    // ユニットテスト専用のコード
+    // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
+    
+    
+    
     init(
         view: ViewControllerInterface2,
         weaponListGetUseCase: WeaponListGetUseCaseInterface,
@@ -50,15 +73,15 @@ extension Presenter2: PresenterInterface2 {
     
     func fireButtonTapped(selectedIndex: Int) {
         let request = WeaponFireRequest(
-            weaponId: weaponListItems[selectedIndex].weaponId,
-            bulletsCount: bulletsCount,
-            isReloading: isReloading
+            weaponId: self.weaponListItems[selectedIndex].weaponId,
+            bulletsCount: self.bulletsCount,
+            isReloading: self.isReloading
         )
         do {
             try weaponFireUseCase.execute(
                 request: request,
                 onFired: { response in
-                    bulletsCount = response.bulletsCount
+                    self.bulletsCount = response.bulletsCount
                     view?.playFireSound(type: response.firingSound)
                     view?.showBulletsCountImage(name: response.bulletsCountImageName)
                     
@@ -79,16 +102,16 @@ extension Presenter2: PresenterInterface2 {
     
     func reloadButtonTapped(selectedIndex: Int) {
         let request = WeaponReloadRequest(
-            weaponId: weaponListItems[selectedIndex].weaponId,
-            bulletsCount: bulletsCount,
-            isReloading: isReloading
+            weaponId: self.weaponListItems[selectedIndex].weaponId,
+            bulletsCount: self.bulletsCount,
+            isReloading: self.isReloading
         )
         do {
             try weaponReloadUseCase.execute(
                 request: request,
                 onReloadStarted: { response in
                     view?.playReloadSound(type: response.reloadingSound)
-                    isReloading = response.isReloading
+                    self.isReloading = response.isReloading
                 },
                 onReloadEnded: { [weak self] response in
                     self?.bulletsCount = response.bulletsCount
@@ -106,8 +129,8 @@ extension Presenter2: PresenterInterface2 {
             try weaponChangeUseCase.execute(
                 request: request,
                 onCompleted: { response in
-                    bulletsCount = response.bulletsCount
-                    isReloading = response.isReloading
+                    self.bulletsCount = response.bulletsCount
+                    self.isReloading = response.isReloading
                     view?.showWeaponImage(name: response.weaponImageName)
                     view?.showBulletsCountImage(name: response.bulletsCountImageName)
                     view?.playShowingSound(type: response.showingSound)
