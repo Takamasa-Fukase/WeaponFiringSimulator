@@ -11,7 +11,6 @@ import XCTest
 final class Presenter2Tests: XCTestCase {
     private var presenter: Presenter2!
     private var vcMock: ViewControllerMock2!
-    private var weaponListGetUseCase: WeaponListGetUseCase!
     private var weaponFireUseCase: WeaponFireUseCase!
     private var weaponReloadUseCase: WeaponReloadUseCase!
     private var weaponChangeUseCase: WeaponChangeUseCase!

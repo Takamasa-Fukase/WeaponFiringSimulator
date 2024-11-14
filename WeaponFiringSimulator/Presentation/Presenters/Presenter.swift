@@ -2,121 +2,140 @@
 //  Presenter.swift
 //  WeaponFiringSimulator
 //
-//  Created by ウルトラ深瀬 on 5/11/24.
+//  Created by ウルトラ深瀬 on 13/11/24.
 //
 
-//import Foundation
-//
-//protocol PresenterInterface {
-//    func viewDidLoad()
-//    func fireButtonTapped(weaponId: Int, bulletsCount: Int, isReloading: Bool)
-//    func reloadButtonTapped(weaponId: Int, bulletsCount: Int, isReloading: Bool)
-//    func changeWeaponButtonTapped(nextWeaponId: Int)
-//}
-//
-//final class Presenter {
-//    private weak var view: ViewControllerInterface?
-//    private let weaponListGetUseCase: WeaponListGetUseCaseInterface
-//    private let weaponFireUseCase: WeaponFireUseCaseInterface
-//    private let weaponReloadUseCase: WeaponReloadUseCaseInterface
-//    private let weaponChangeUseCase: WeaponChangeUseCaseInterface
-//    
-//    init(
-//        view: ViewControllerInterface,
-//        weaponListGetUseCase: WeaponListGetUseCaseInterface,
-//        weaponFireUseCase: WeaponFireUseCaseInterface,
-//        weaponReloadUseCase: WeaponReloadUseCaseInterface,
-//        weaponChangeUseCase: WeaponChangeUseCaseInterface
-//    ) {
-//        self.view = view
-//        self.weaponListGetUseCase = weaponListGetUseCase
-//        self.weaponFireUseCase = weaponFireUseCase
-//        self.weaponReloadUseCase = weaponReloadUseCase
-//        self.weaponChangeUseCase = weaponChangeUseCase
+import Foundation
+
+protocol PresenterInterface {
+    func viewDidLoad()
+    func fireButtonTapped()
+    func reloadButtonTapped()
+    func weaponSelected(weaponId: Int)
+}
+
+final class Presenter {
+    private weak var view: ViewControllerInterface?
+    private let defaultWeaponGetUseCase: DefaultWeaponGetUseCaseInterface
+    private let weaponDetailGetUseCase: WeaponDetailGetUseCaseInterface
+    private let weaponFireUseCase: WeaponFireUseCaseInterface
+    private let weaponReloadUseCase: WeaponReloadUseCaseInterface
+    
+    private var currentWeaponData: CurrentWeaponData?
+    
+    
+    
+    // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
+//    func getBulletsCount() -> Int {
+//        return bulletsCount
 //    }
-//}
-//
-//extension Presenter: PresenterInterface {
-//    func viewDidLoad() {
-//        let weaponListItems = weaponListGetUseCase.execute().weaponListItems
-//        view?.showWeaponList(weaponListItems)
-//        view?.selectInitialItem(at: IndexPath(row: 0, section: 0))
+//    func getIsReloading() -> Bool {
+//        return isReloading
 //    }
-//    
-//    func fireButtonTapped(
-//        weaponId: Int,
-//        bulletsCount: Int,
-//        isReloading: Bool
-//    ) {
-//        let request = WeaponFireRequest(
-//            weaponId: weaponId,
-//            bulletsCount: bulletsCount,
-//            isReloading: isReloading
-//        )
-//        do {
-//            try weaponFireUseCase.execute(
-//                request: request,
-//                onFired: { response in
-//                    view?.updateBulletsCount(response.bulletsCount)
-//                    view?.playFireSound(type: response.firingSound)
-//                    view?.showBulletsCountImage(name: response.bulletsCountImageName)
-//                    
-//                    if response.needsAutoReload {
-//                        // リロードを自動的に実行
-//                        view?.executeAutoReload()
-//                    }
-//                },
-//                onCanceled: { response in
-//                    if let noBulletsSound = response.noBulletsSound {
-//                        view?.playNoBulletsSound(type: noBulletsSound)
-//                    }
-//                })
-//        } catch {
-//            print("weaponFireUseCase error: \(error)")
-//        }
+//    func setBulletsCount(_ bulletsCount: Int) {
+//        self.bulletsCount = bulletsCount
 //    }
-//    
-//    func reloadButtonTapped(
-//        weaponId: Int,
-//        bulletsCount: Int,
-//        isReloading: Bool
-//    ) {
-//        let request = WeaponReloadRequest(
-//            weaponId: weaponId,
-//            bulletsCount: bulletsCount,
-//            isReloading: isReloading
-//        )
-//        do {
-//            try weaponReloadUseCase.execute(
-//                request: request,
-//                onReloadStarted: { response in
-//                    view?.playReloadSound(type: response.reloadingSound)
-//                    view?.updateReloadingFlag(response.isReloading)
-//                },
-//                onReloadEnded: { [weak self] response in
-//                    self?.view?.updateBulletsCount(response.bulletsCount)
-//                    self?.view?.updateReloadingFlag(response.isReloading)
-//                    self?.view?.showBulletsCountImage(name: response.bulletsCountImageName)
-//                })
-//        } catch {
-//            print("weaponReloadUseCase error: \(error)")
-//        }
+//    func setIsReloading(_ isReloading: Bool) {
+//        self.isReloading = isReloading
 //    }
-//    
-//    func changeWeaponButtonTapped(nextWeaponId: Int) {
-//        let request = WeaponChangeRequest(nextWeaponId: nextWeaponId)
-//        do {
-//            try weaponChangeUseCase.execute(
-//                request: request,
-//                onCompleted: { response in
-//                    view?.updateBulletsCount(response.bulletsCount)
-//                    view?.updateReloadingFlag(response.isReloading)
-//                    view?.showWeaponImage(name: response.weaponImageName)
-//                    view?.showBulletsCountImage(name: response.bulletsCountImageName)
-//                    view?.playShowingSound(type: response.showingSound)
-//                })
-//        } catch {
-//            print("weaponChangeUseCase error: \(error)")
-//        }
-//    }
-//}
+    // ユニットテスト専用のコード
+    // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
+    
+    
+    
+    init(
+        view: ViewControllerInterface,
+        defaultWeaponGetUseCase: DefaultWeaponGetUseCaseInterface,
+        weaponDetailGetUseCase: WeaponDetailGetUseCaseInterface,
+        weaponFireUseCase: WeaponFireUseCaseInterface,
+        weaponReloadUseCase: WeaponReloadUseCaseInterface
+    ) {
+        self.view = view
+        self.defaultWeaponGetUseCase = defaultWeaponGetUseCase
+        self.weaponDetailGetUseCase = weaponDetailGetUseCase
+        self.weaponFireUseCase = weaponFireUseCase
+        self.weaponReloadUseCase = weaponReloadUseCase
+    }
+    
+    private func showSelectedWeapon(_ currentWeaponData: CurrentWeaponData) {
+        self.currentWeaponData = currentWeaponData
+        view?.showWeaponImage(name: currentWeaponData.weaponImageName)
+        view?.showBulletsCountImage(name: currentWeaponData.bulletsCountImageName())
+        view?.playShowingSound(type: currentWeaponData.showingSound)
+    }
+}
+
+extension Presenter: PresenterInterface {
+    func viewDidLoad() {
+        do {
+            let currentWeaponData = try defaultWeaponGetUseCase.execute()
+            showSelectedWeapon(currentWeaponData)
+            
+        } catch {
+            print("defaultWeaponGetUseCase error: \(error)")
+        }
+    }
+    
+    func fireButtonTapped() {
+        let request = WeaponFireRequest(
+            weaponId: currentWeaponData?.id ?? 0,
+            bulletsCount: currentWeaponData?.bulletsCount ?? 0,
+            isReloading: currentWeaponData?.isReloading ?? false
+        )
+        do {
+            try weaponFireUseCase.execute(
+                request: request,
+                onFired: { response in
+                    currentWeaponData?.bulletsCount = response.bulletsCount
+                    view?.playFireSound(type: currentWeaponData?.firingSound ?? .pistolShoot)
+                    view?.showBulletsCountImage(name: currentWeaponData?.bulletsCountImageName() ?? "")
+                    
+                    if response.needsAutoReload {
+                        // リロードを自動的に実行
+                        view?.executeAutoReload()
+                    }
+                },
+                onCanceled: {
+                    if let noBulletsSound = currentWeaponData?.noBulletsSound {
+                        view?.playNoBulletsSound(type: noBulletsSound)
+                    }
+                })
+        } catch {
+            print("weaponFireUseCase error: \(error)")
+        }
+    }
+    
+    func reloadButtonTapped() {
+        let request = WeaponReloadRequest(
+            weaponId: currentWeaponData?.id ?? 0,
+            bulletsCount: currentWeaponData?.bulletsCount ?? 0,
+            isReloading: currentWeaponData?.isReloading ?? false
+        )
+        do {
+            try weaponReloadUseCase.execute(
+                request: request,
+                onReloadStarted: { response in
+                    currentWeaponData?.isReloading = response.isReloading
+                    view?.playReloadSound(type: currentWeaponData?.reloadingSound ?? .pistolReload)
+                },
+                onReloadEnded: { [weak self] response in
+                    self?.currentWeaponData?.bulletsCount = response.bulletsCount
+                    self?.currentWeaponData?.isReloading = response.isReloading
+                    self?.view?.showBulletsCountImage(name: self?.currentWeaponData?.bulletsCountImageName() ?? "")
+                })
+        } catch {
+            print("weaponReloadUseCase error: \(error)")
+        }
+    }
+    
+    func weaponSelected(weaponId: Int) {
+        let request = WeaponDetailGetRequest(weaponId: weaponId)
+        do {
+            let currentWeaponData = try weaponDetailGetUseCase.execute(request: request)
+            showSelectedWeapon(currentWeaponData)
+            
+        } catch {
+            print("WeaponDetailGetRequest error: \(error)")
+        }
+    }
+}

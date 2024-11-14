@@ -2,173 +2,102 @@
 //  ViewController.swift
 //  WeaponFiringSimulator
 //
-//  Created by ウルトラ深瀬 on 3/11/24.
+//  Created by ウルトラ深瀬 on 13/11/24.
 //
 
-//import UIKit
-//
-//protocol ViewControllerInterface: AnyObject {
-//    func showWeaponList(_ listItems: [WeaponListItem])
-//    func selectInitialItem(at indexPath: IndexPath)
-//    func updateBulletsCount(_ bulletsCount: Int)
-//    func updateReloadingFlag(_ isReloading: Bool)
-//    func showWeaponImage(name: String)
-//    func showBulletsCountImage(name: String)
-//    func playShowingSound(type: SoundType)
-//    func playFireSound(type: SoundType)
-//    func playReloadSound(type: SoundType)
-//    func playNoBulletsSound(type: SoundType)
-//    func executeAutoReload()
-//}
-//
-//final class ViewController: UIViewController {
-//    private var soundPlayer: SoundPlayerInterface!
-//    private var presenter: PresenterInterface!
-//
-//    private var weaponListItems: [WeaponListItem] = []
-//    private var bulletsCount: Int = 0
-//    private var isReloading = false
-//    
-//    @IBOutlet private weak var weaponImageView: UIImageView!
-//    @IBOutlet private weak var bulletsCountImageView: UIImageView!
-//    @IBOutlet private weak var weaponListCollectionView: UICollectionView!
-//    
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        
-//        setupCollectionView()
-//        soundPlayer = SoundPlayer()
-//        let weaponRepository = WeaponRepository()
-//        presenter = Presenter(
-//            view: self,
-//            weaponListGetUseCase: WeaponListGetUseCase(weaponRepository: weaponRepository),
-//            weaponFireUseCase: WeaponFireUseCase(
-//                weaponRepository: weaponRepository,
-//                canFireCheckUseCase: CanFireCheckUseCase(),
-//                needsAutoReloadCheckUseCase: NeedsAutoReloadCheckUseCase()
-//            ),
-//            weaponReloadUseCase: WeaponReloadUseCase(
-//                weaponRepository: weaponRepository,
-//                canReloadCheckUseCase: CanReloadCheckUseCase()
-//            ),
-//            weaponChangeUseCase: WeaponChangeUseCase(weaponRepository: weaponRepository)
-//        )
-//        presenter.viewDidLoad()
-//    }
-//    
-//    @IBAction func fireButtonTapped(_ sender: Any) {
-//        presenter.fireButtonTapped(weaponId: weaponId(),
-//                                   bulletsCount: bulletsCount,
-//                                   isReloading: isReloading)
-//    }
-//    
-//    @IBAction func reloadButtonTapped(_ sender: Any) {
-//        presenter.reloadButtonTapped(weaponId: weaponId(),
-//                                     bulletsCount: bulletsCount,
-//                                     isReloading: isReloading)
-//    }
-//    
-//    private func setupCollectionView() {
-//        weaponListCollectionView.delegate = self
-//        weaponListCollectionView.dataSource = self
-//        weaponListCollectionView.register(UINib(nibName: "WeaponListCell", bundle: nil), forCellWithReuseIdentifier: "WeaponListCell")
-//        weaponListCollectionView.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
-//        weaponListCollectionView.allowsMultipleSelection = false
-//        weaponListCollectionView.allowsSelection = true
-//    }
-//    
-//    private func selectedIndex() -> Int {
-//        return weaponListCollectionView.indexPathsForSelectedItems?.first?.row ?? 0
-//    }
-//    
-//    private func weaponId() -> Int {
-//        return weaponListItems[selectedIndex()].weaponId
-//    }
-//}
-//
-//extension ViewController: ViewControllerInterface {
-//    func showWeaponList(_ listItems: [WeaponListItem]) {
-//        weaponListItems = listItems
-//        weaponListCollectionView.reloadData()
-//    }
-//    
-//    func selectInitialItem(at indexPath: IndexPath) {
-//        weaponListCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: .left)
-//        // selectItem()をコードから呼び出した場合はdidSelectItemAtのDelegateメソッドが発火しないので、手動で呼び出す
-//        collectionView(weaponListCollectionView, didSelectItemAt: indexPath)
-//    }
-//    
-//    func updateBulletsCount(_ bulletsCount: Int) {
-//        self.bulletsCount = bulletsCount
-//    }
-//    
-//    func updateReloadingFlag(_ isReloading: Bool) {
-//        self.isReloading = isReloading
-//    }
-//    
-//    func showWeaponImage(name: String) {
-//        weaponImageView.image = UIImage(named: name)
-//    }
-//    
-//    func showBulletsCountImage(name: String) {
-//        bulletsCountImageView.image = UIImage(named: name)
-//    }
-//    
-//    func playShowingSound(type: SoundType) {
-//        soundPlayer.play(type)
-//    }
-//    
-//    func playFireSound(type: SoundType) {
-//        soundPlayer.play(type)
-//    }
-//    
-//    func playReloadSound(type: SoundType) {
-//        soundPlayer.play(type)
-//    }
-//    
-//    func playNoBulletsSound(type: SoundType) {
-//        soundPlayer.play(type)
-//    }
-//    
-//    func executeAutoReload() {
-//        presenter.reloadButtonTapped(weaponId: weaponId(),
-//                                     bulletsCount: bulletsCount,
-//                                     isReloading: isReloading)
-//    }
-//}
-//
-//extension ViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        return weaponListItems.count
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WeaponListCell", for: indexPath) as! WeaponListCell
-//        let item = weaponListItems[indexPath.row]
-//        cell.weaponImageView.image = UIImage(named: item.weaponImageName)
-//        return cell
-//    }
-//    
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let nextWeaponId = weaponListItems[indexPath.row].weaponId
-//        presenter.changeWeaponButtonTapped(nextWeaponId: nextWeaponId)
-//    }
-//}
-//
-//extension ViewController: UICollectionViewDelegateFlowLayout {
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        return CGSize(width: collectionView.frame.height, height: collectionView.frame.height)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-//}
+import UIKit
+
+protocol ViewControllerInterface: AnyObject {
+    func showWeaponImage(name: String)
+    func showBulletsCountImage(name: String)
+    func playShowingSound(type: SoundType)
+    func playFireSound(type: SoundType)
+    func playReloadSound(type: SoundType)
+    func playNoBulletsSound(type: SoundType)
+    func executeAutoReload()
+}
+
+final class ViewController: UIViewController {
+    private var soundPlayer: SoundPlayerInterface!
+    private var presenter: PresenterInterface!
+
+    @IBOutlet private weak var weaponImageView: UIImageView!
+    @IBOutlet private weak var bulletsCountImageView: UIImageView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        soundPlayer = SoundPlayer()
+        let weaponRepository = WeaponRepository()
+        presenter = Presenter(
+            view: self,
+            defaultWeaponGetUseCase: DefaultWeaponGetUseCase(weaponRepository: weaponRepository),
+            weaponDetailGetUseCase: WeaponDetailGetUseCase(weaponRepository: weaponRepository),
+            weaponFireUseCase: WeaponFireUseCase(
+                weaponRepository: weaponRepository,
+                canFireCheckUseCase: CanFireCheckUseCase(),
+                needsAutoReloadCheckUseCase: NeedsAutoReloadCheckUseCase()
+            ),
+            weaponReloadUseCase: WeaponReloadUseCase(
+                weaponRepository: weaponRepository,
+                canReloadCheckUseCase: CanReloadCheckUseCase()
+            )
+        )
+        presenter.viewDidLoad()
+    }
+    
+    @IBAction func fireButtonTapped(_ sender: Any) {
+        presenter.fireButtonTapped()
+    }
+    
+    @IBAction func reloadButtonTapped(_ sender: Any) {
+        presenter.reloadButtonTapped()
+    }
+    
+    @IBAction func changeWeaponButtonTapped(_ sender: Any) {
+        let vc = WeaponSelectViewController()
+        
+        vc.weaponSelected = { [weak self] weaponId in
+            self?.presenter.weaponSelected(weaponId: weaponId)
+        }
+        
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [
+                .custom(resolver: { context in
+                    context.maximumDetentValue * 0.4
+                })
+            ]
+        }
+        present(vc, animated: true)
+    }
+}
+
+extension ViewController: ViewControllerInterface {
+    func showWeaponImage(name: String) {
+        weaponImageView.image = UIImage(named: name)
+    }
+    
+    func showBulletsCountImage(name: String) {
+        bulletsCountImageView.image = UIImage(named: name)
+    }
+    
+    func playShowingSound(type: SoundType) {
+        soundPlayer.play(type)
+    }
+    
+    func playFireSound(type: SoundType) {
+        soundPlayer.play(type)
+    }
+    
+    func playReloadSound(type: SoundType) {
+        soundPlayer.play(type)
+    }
+    
+    func playNoBulletsSound(type: SoundType) {
+        soundPlayer.play(type)
+    }
+    
+    func executeAutoReload() {
+        presenter.reloadButtonTapped()
+    }
+}
