@@ -2,18 +2,13 @@
 //  ViewControllerMock.swift
 //  WeaponFiringSimulatorTests
 //
-//  Created by ウルトラ深瀬 on 6/11/24.
+//  Created by ウルトラ深瀬 on 13/11/24.
 //
 
 import Foundation
 @testable import WeaponFiringSimulator
 
 final class ViewControllerMock: ViewControllerInterface {
-    var showWeaponListCalled = false
-    var selectInitialItemCalled = false
-    var updateBulletsCountCalled = false
-    var updateReloadingFlagCalled = false
-    var updateReloadingFlagCalledValues: [Bool] = []
     var showWeaponImageCalled = false
     var showBulletsCountImageCalled = false
     var playShowingSoundCalled = false
@@ -21,23 +16,6 @@ final class ViewControllerMock: ViewControllerInterface {
     var playReloadSoundCalled = false
     var playNoBulletsSoundCalled = false
     var executeAutoReloadCalled = false
-    
-    func showWeaponList(_ listItems: [WeaponFiringSimulator.WeaponListItem]) {
-        showWeaponListCalled = true
-    }
-    
-    func selectInitialItem(at indexPath: IndexPath) {
-        selectInitialItemCalled = true
-    }
-    
-    func updateBulletsCount(_ bulletsCount: Int) {
-        updateBulletsCountCalled = true
-    }
-    
-    func updateReloadingFlag(_ isReloading: Bool) {
-        updateReloadingFlagCalled = true
-        updateReloadingFlagCalledValues.append(isReloading)
-    }
     
     func showWeaponImage(name: String) {
         showWeaponImageCalled = true
