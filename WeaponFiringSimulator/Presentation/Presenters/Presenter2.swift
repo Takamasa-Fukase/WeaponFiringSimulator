@@ -23,6 +23,7 @@ final class Presenter2 {
     private let weaponChangeUseCase: WeaponChangeUseCaseInterface
     
     private(set) var weaponListItems: [WeaponListItem] = []
+    private var weaponDataModel: WeaponDataModel?
     private var bulletsCount: Int = 0
     private var isReloading = false
     
@@ -129,11 +130,12 @@ extension Presenter2: PresenterInterface2 {
             try weaponChangeUseCase.execute(
                 request: request,
                 onCompleted: { response in
-                    self.bulletsCount = response.bulletsCount
-                    self.isReloading = response.isReloading
-                    view?.showWeaponImage(name: response.weaponImageName)
-                    view?.showBulletsCountImage(name: response.bulletsCountImageName)
-                    view?.playShowingSound(type: response.showingSound)
+                    self.weaponDataModel = response.data
+                    self.bulletsCount = response.data.capacity
+                    self.isReloading = false
+                    view?.showWeaponImage(name: response.data.weaponImageName)
+                    view?.showBulletsCountImage(name: response.data.bulletsCountImageBaseName + String(response.data.capacity))
+                    view?.playShowingSound(type: response.data.showingSound)
                 })
         } catch {
             print("weaponChangeUseCase error: \(error)")

@@ -11,12 +11,21 @@ struct WeaponChangeRequest {
     let nextWeaponId: Int
 }
 
-struct WeaponChangeResponse {
+struct WeaponDataModel {
+    let id: Int
     let weaponImageName: String
-    let bulletsCountImageName: String
-    let bulletsCount: Int
-    let isReloading: Bool
+    let bulletsCountImageBaseName: String
+    let capacity: Int
+    let reloadWaitingTime: TimeInterval
+    let reloadType: ReloadType
     let showingSound: SoundType
+    let firingSound: SoundType
+    let reloadingSound: SoundType
+    let noBulletsSound: SoundType?
+}
+
+struct WeaponChangeResponse {
+    let data: WeaponDataModel
 }
 
 protocol WeaponChangeUseCaseInterface {
@@ -39,11 +48,18 @@ final class WeaponChangeUseCase: WeaponChangeUseCaseInterface {
     ) throws {
         let newWeapon = try weaponRepository.get(by: request.nextWeaponId)
         let response = WeaponChangeResponse(
-            weaponImageName: newWeapon.weaponImageName,
-            bulletsCountImageName: newWeapon.bulletsCountImageBaseName + String(newWeapon.capacity),
-            bulletsCount: newWeapon.capacity,
-            isReloading: false,
-            showingSound: newWeapon.showingSound
+            data: WeaponDataModel(
+                id: newWeapon.id,
+                weaponImageName: newWeapon.weaponImageName,
+                bulletsCountImageBaseName: newWeapon.bulletsCountImageBaseName,
+                capacity: newWeapon.capacity,
+                reloadWaitingTime: newWeapon.reloadWaitingTime,
+                reloadType: newWeapon.reloadType,
+                showingSound: newWeapon.showingSound,
+                firingSound: newWeapon.firingSound,
+                reloadingSound: newWeapon.reloadingSound,
+                noBulletsSound: newWeapon.noBulletsSound
+            )
         )
         onCompleted(response)
     }
