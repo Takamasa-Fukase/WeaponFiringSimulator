@@ -42,9 +42,9 @@ final class Presenter {
     
     private func showSelectedWeapon(_ currentWeaponData: CurrentWeaponData) {
         self.currentWeaponData = currentWeaponData
-        view?.showWeaponImage(name: currentWeaponData.weaponImageName)
-        view?.showBulletsCountImage(name: currentWeaponData.bulletsCountImageName())
-        view?.playShowingSound(type: currentWeaponData.showingSound)
+        view?.showWeaponImage(name: self.currentWeaponData?.weaponImageName ?? "")
+        view?.showBulletsCountImage(name: self.currentWeaponData?.bulletsCountImageName() ?? "")
+        view?.playShowingSound(type: self.currentWeaponData?.showingSound ?? .pistolSet)
     }
 }
 
