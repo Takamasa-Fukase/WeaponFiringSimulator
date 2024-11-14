@@ -24,7 +24,7 @@ class WeaponSelectViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        weaponListItems = WeaponListGetUseCase(weaponRepository: WeaponRepository()).execute().weaponListItems
+        weaponListItems = WeaponResourceGetUseCase(weaponRepository: WeaponRepository()).getWeaponListItems()
         setupCollectionView()
     }
     
