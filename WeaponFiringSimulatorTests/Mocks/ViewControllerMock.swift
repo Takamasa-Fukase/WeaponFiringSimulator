@@ -9,39 +9,39 @@ import Foundation
 @testable import WeaponFiringSimulator
 
 final class ViewControllerMock: ViewControllerInterface {
-    var showWeaponImageCalled = false
-    var showBulletsCountImageCalled = false
-    var playShowingSoundCalled = false
-    var playFireSoundCalled = false
-    var playReloadSoundCalled = false
-    var playNoBulletsSoundCalled = false
-    var executeAutoReloadCalled = false
-    
+    var showWeaponImageCalledValues = [String]()
+    var showBulletsCountImageCalledValues = [String]()
+    var playShowingSoundCalledValues = [SoundType]()
+    var playFireSoundCalledValues = [SoundType]()
+    var playReloadSoundCalledValues = [SoundType]()
+    var playNoBulletsSoundCalledValues = [SoundType]()
+    var executeAutoReloadCalledValues = [Void]()
+
     func showWeaponImage(name: String) {
-        showWeaponImageCalled = true
+        showWeaponImageCalledValues.append(name)
     }
     
     func showBulletsCountImage(name: String) {
-        showBulletsCountImageCalled = true
+        showBulletsCountImageCalledValues.append(name)
     }
     
     func playShowingSound(type: WeaponFiringSimulator.SoundType) {
-        playShowingSoundCalled = true
+        playShowingSoundCalledValues.append(type)
     }
     
     func playFireSound(type: WeaponFiringSimulator.SoundType) {
-        playFireSoundCalled = true
+        playFireSoundCalledValues.append(type)
     }
     
     func playReloadSound(type: WeaponFiringSimulator.SoundType) {
-        playReloadSoundCalled = true
+        playReloadSoundCalledValues.append(type)
     }
     
     func playNoBulletsSound(type: WeaponFiringSimulator.SoundType) {
-        playNoBulletsSoundCalled = true
+        playNoBulletsSoundCalledValues.append(type)
     }
     
     func executeAutoReload() {
-        executeAutoReloadCalled = true
+        executeAutoReloadCalledValues.append(Void())
     }
 }

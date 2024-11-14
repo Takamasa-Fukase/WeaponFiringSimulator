@@ -11,76 +11,40 @@ import XCTest
 final class PresenterTests: XCTestCase {
     private var presenter: Presenter!
     private var vcMock: ViewControllerMock!
-    private var weaponFireUseCase: WeaponFireUseCase!
-    private var weaponReloadUseCase: WeaponReloadUseCase!
-    private var weaponChangeUseCase: WeaponChangeUseCase!
-    private var weaponRepositoryMock: WeaponRepositoryMock!
+    private var weaponResourceGetUseCaseMock: WeaponResourceGetUseCaseMock!
+    private var weaponActionExecuteUseCase: WeaponActionExecuteUseCase!
+//    private let weaponRepositoryMock: WeaponRepositoryMock!
     
     override func setUpWithError() throws {
-        vcMock = ViewControllerMock2()
-        weaponRepositoryMock = WeaponRepositoryMock()
-        weaponListGetUseCase = WeaponListGetUseCase(weaponRepository: weaponRepositoryMock)
-        weaponFireUseCase = WeaponFireUseCase(weaponRepository: weaponRepositoryMock)
-        weaponReloadUseCase = WeaponReloadUseCase(weaponRepository: weaponRepositoryMock)
-        weaponChangeUseCase = WeaponChangeUseCase(weaponRepository: weaponRepositoryMock)
-        presenter = .init(view: vcMock,
-                          weaponListGetUseCase: weaponListGetUseCase,
-                          weaponFireUseCase: weaponFireUseCase,
-                          weaponReloadUseCase: weaponReloadUseCase,
-                          weaponChangeUseCase: weaponChangeUseCase)
+        vcMock = ViewControllerMock()
+//        weaponRepositoryMock = .init()
+        weaponResourceGetUseCaseMock = WeaponResourceGetUseCaseMock()
+        weaponActionExecuteUseCase = .init(weaponStatusCheckUseCase: WeaponStatusCheckUseCase())
     }
     
     override func tearDownWithError() throws {
-        presenter = nil
         vcMock = nil
-        weaponListGetUseCase = nil
-        weaponFireUseCase = nil
-        weaponReloadUseCase = nil
-        weaponChangeUseCase = nil
+        weaponResourceGetUseCaseMock = nil
+        weaponActionExecuteUseCase = nil
+//        weaponRepositoryMock = nil
     }
     
-    func test_viewDidLoad_武器一覧表示と初期アイテム選択が実行されたら成功() throws {
-        XCTAssertEqual(false, vcMock.showWeaponListCalled)
-        XCTAssertEqual(false, vcMock.selectInitialItemCalled)
+    /*
+     期待すること
+     - 取得する武器が、Repositoryがデフォルトの武器として返却するものと同じこと
+     - 取得した武器の値でshowWeaponImage()が呼ばれること
+     - 取得した武器の値でshowBulletsCountImage()が呼ばれること
+     - 取得した武器の値でplayShowingSound()が呼ばれること
+     */
+    func test_viewDidLoad() throws {
+        XCTAssertEqual(vcMock.showWeaponImageCalledValues, [])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [])
+        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [])
         
         presenter.viewDidLoad()
-
-        XCTAssertEqual(true, vcMock.showWeaponListCalled)
-        XCTAssertEqual(true, vcMock.selectInitialItemCalled)
-    }
-    
-    func test_fireButtonTapped_canFireがtrueでneedsAutoReloadがfalseの時に弾数と発射音声再生と弾数画像が更新される且つ自動リロードと弾切れ音声が呼ばれなければ成功() throws {
-        // 武器リストに値を入れる
-        presenter.setWeaponListItems([
-            .init(
-                weaponId: 0,
-                weaponImageName: "pistol"
-            ),
-            .init(
-                weaponId: 1,
-                weaponImageName: "bazooka"
-            )
-        ])
         
-        
-        
-        // TODO: bulletsCountの更新処理が呼ばれたかどうかをチェックしたい
-//        XCTAssertEqual(false, vcMock.updateBulletsCountCalled)
-        
-        XCTAssertEqual(false, vcMock.playFireSoundCalled)
-        XCTAssertEqual(false, vcMock.showBulletsCountImageCalled)
-        XCTAssertEqual(false, vcMock.executeAutoReloadCalled)
-        XCTAssertEqual(false, vcMock.playNoBulletsSoundCalled)
-
-        
-        
-        presenter.fireButtonTapped(selectedIndex: 0)
-
-//        XCTAssertEqual(true, vcMock.updateBulletsCountCalled)
-        
-        XCTAssertEqual(true, vcMock.playFireSoundCalled)
-        XCTAssertEqual(true, vcMock.showBulletsCountImageCalled)
-        XCTAssertEqual(false, vcMock.executeAutoReloadCalled)
-        XCTAssertEqual(false, vcMock.playNoBulletsSoundCalled)
+        XCTAssertEqual(vcMock.showWeaponImageCalledValues, [weaponResourceGetUseCaseMock.defaultWeaponDetail.weaponImageName])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [weaponResourceGetUseCaseMock.defaultWeaponDetail.bulletsCountImageName()])
+        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [weaponResourceGetUseCaseMock.defaultWeaponDetail.showingSound])
     }
 }
