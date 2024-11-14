@@ -61,7 +61,6 @@ extension Presenter: PresenterInterface {
     
     func fireButtonTapped() {
         weaponActionExecuteUseCase.fireWeapon(
-            weaponId: currentWeaponData?.id ?? 0,
             bulletsCount: currentWeaponData?.bulletsCount ?? 0,
             isReloading: currentWeaponData?.isReloading ?? false,
             reloadType: currentWeaponData?.reloadType ?? .manual,
@@ -84,7 +83,6 @@ extension Presenter: PresenterInterface {
     
     func reloadButtonTapped() {
         weaponActionExecuteUseCase.reloadWeapon(
-            weaponId: currentWeaponData?.id ?? 0,
             bulletsCount: currentWeaponData?.bulletsCount ?? 0,
             isReloading: currentWeaponData?.isReloading ?? false,
             capacity: currentWeaponData?.capacity ?? 0,
