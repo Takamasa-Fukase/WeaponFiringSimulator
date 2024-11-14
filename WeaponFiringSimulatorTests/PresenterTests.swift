@@ -31,8 +31,8 @@ final class PresenterTests: XCTestCase {
     
     /*
      期待すること
-     - WeaponResourceGetUseCase.getWeaponListItems()が1回だけ呼ばれること
-     - 取得する武器が、useCaseのデフォルト武器として返却されるものと同じこと
+     - WeaponResourceGetUseCase.getDefaultWeaponDetail()が1回だけ呼ばれること
+     - 取得した武器が、useCaseのデフォルト武器として返却されるものと同じこと
      - 取得した武器の値でshowWeaponImage()が呼ばれること
      - 取得した武器の値でshowBulletsCountImage()が呼ばれること
      - 取得した武器の値でplayShowingSound()が呼ばれること
@@ -59,21 +59,21 @@ final class PresenterTests: XCTestCase {
         XCTAssertEqual(weaponResourceGetUseCaseMock.getDefaultWeaponDetailCalledCount, 0)
         XCTAssertEqual(vcMock.showWeaponImageCalledValues, [])
         XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [])
-        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [])
+        XCTAssertEqual(vcMock.playSoundCalledValues, [])
         
         presenter.viewDidLoad()
         
         XCTAssertEqual(weaponResourceGetUseCaseMock.getDefaultWeaponDetailCalledCount, 1)
         XCTAssertEqual(vcMock.showWeaponImageCalledValues, [defaultWeaponDetailMock.weaponImageName])
         XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [defaultWeaponDetailMock.bulletsCountImageName()])
-        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [defaultWeaponDetailMock.showingSound])
+        XCTAssertEqual(vcMock.playSoundCalledValues, [defaultWeaponDetailMock.showingSound])
     }
     
     /*
      期待すること
      - WeaponResourceGetUseCase.getWeaponDetail()が1回だけ呼ばれること
      - 引数で渡したweaponIdがgetWeaponDetailの引数にも渡されていること
-     - 取得する武器が、useCaseのgetWeaponDetailで返却されるものと同じこと
+     - 取得した武器が、useCaseのgetWeaponDetailで返却されるものと同じこと
      - 取得した武器の値でshowWeaponImage()が呼ばれること
      - 取得した武器の値でshowBulletsCountImage()が呼ばれること
      - 取得した武器の値でplayShowingSound()が呼ばれること
@@ -99,13 +99,13 @@ final class PresenterTests: XCTestCase {
         XCTAssertEqual(weaponResourceGetUseCaseMock.getWeaponDetailCalledValues, [])
         XCTAssertEqual(vcMock.showWeaponImageCalledValues, [])
         XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [])
-        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [])
+        XCTAssertEqual(vcMock.playSoundCalledValues, [])
         
         presenter.weaponSelected(weaponId: expectedWeapon.id)
         
         XCTAssertEqual(weaponResourceGetUseCaseMock.getWeaponDetailCalledValues, [expectedWeapon.id])
         XCTAssertEqual(vcMock.showWeaponImageCalledValues, [expectedWeapon.weaponImageName])
         XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [expectedWeapon.bulletsCountImageName()])
-        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [expectedWeapon.showingSound])
+        XCTAssertEqual(vcMock.playSoundCalledValues, [expectedWeapon.showingSound])
     }
 }

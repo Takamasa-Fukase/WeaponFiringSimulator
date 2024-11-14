@@ -11,10 +11,7 @@ import Foundation
 final class ViewControllerMock: ViewControllerInterface {
     var showWeaponImageCalledValues = [String]()
     var showBulletsCountImageCalledValues = [String]()
-    var playShowingSoundCalledValues = [SoundType]()
-    var playFireSoundCalledValues = [SoundType]()
-    var playReloadSoundCalledValues = [SoundType]()
-    var playNoBulletsSoundCalledValues = [SoundType]()
+    var playSoundCalledValues = [SoundType]()
     var executeAutoReloadCalledCount: Int = 0
 
     func showWeaponImage(name: String) {
@@ -25,20 +22,8 @@ final class ViewControllerMock: ViewControllerInterface {
         showBulletsCountImageCalledValues.append(name)
     }
     
-    func playShowingSound(type: WeaponFiringSimulator.SoundType) {
-        playShowingSoundCalledValues.append(type)
-    }
-    
-    func playFireSound(type: WeaponFiringSimulator.SoundType) {
-        playFireSoundCalledValues.append(type)
-    }
-    
-    func playReloadSound(type: WeaponFiringSimulator.SoundType) {
-        playReloadSoundCalledValues.append(type)
-    }
-    
-    func playNoBulletsSound(type: WeaponFiringSimulator.SoundType) {
-        playNoBulletsSoundCalledValues.append(type)
+    func playSound(type: WeaponFiringSimulator.SoundType) {
+        playSoundCalledValues.append(type)
     }
     
     func executeAutoReload() {
