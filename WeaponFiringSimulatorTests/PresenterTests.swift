@@ -66,9 +66,9 @@ final class PresenterTests: XCTestCase {
         presenter.viewDidLoad()
         
         XCTAssertEqual(weaponResourceGetUseCaseMock.getDefaultWeaponDetailCalledCount, 1)
-        XCTAssertEqual(vcMock.showWeaponImageCalledValues, [defaultWeaponDetailMock.weaponImageName])
-        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [defaultWeaponDetailMock.bulletsCountImageName()])
-        XCTAssertEqual(vcMock.playSoundCalledValues, [defaultWeaponDetailMock.showingSound])
+        XCTAssertEqual(vcMock.showWeaponImageCalledValues, ["mock_weaponImageName"])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, ["mock_bulletsCountImageBaseName100"])
+        XCTAssertEqual(vcMock.playSoundCalledValues, [.pistolSet])
     }
     
     // MARK: fireButtonTapped()のテスト
@@ -101,7 +101,7 @@ final class PresenterTests: XCTestCase {
         presenter.setCurrentWeaponData(currentWeaponData)
         
         XCTAssertEqual(weaponActionExecuteUseCaseMock.onFiredCalledValues.count, 0)
-        XCTAssertEqual(presenter.getCurrentWeaponData()?.bulletsCount ?? 0, currentWeaponData.bulletsCount)
+        XCTAssertEqual(presenter.getCurrentWeaponData()?.bulletsCount ?? 0, 2)
         XCTAssertEqual(vcMock.playSoundCalledValues, [])
         XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [])
         XCTAssertEqual(vcMock.executeAutoReloadCalledCount, 0)
@@ -110,9 +110,9 @@ final class PresenterTests: XCTestCase {
         presenter.fireButtonTapped()
         
         XCTAssertEqual(weaponActionExecuteUseCaseMock.onFiredCalledValues.count, 1)
-        XCTAssertEqual(presenter.getCurrentWeaponData()?.bulletsCount ?? 0, currentWeaponData.bulletsCount - 1)
-        XCTAssertEqual(vcMock.playSoundCalledValues, [currentWeaponData.firingSound])
-        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [currentWeaponData.bulletsCountImageBaseName + String(currentWeaponData.bulletsCount - 1)])
+        XCTAssertEqual(presenter.getCurrentWeaponData()?.bulletsCount ?? 0, 1)
+        XCTAssertEqual(vcMock.playSoundCalledValues, [.pistolShoot])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, ["mock_bulletsCountImageBaseName1"])
         XCTAssertEqual(vcMock.executeAutoReloadCalledCount, 0)
         XCTAssertEqual(weaponActionExecuteUseCaseMock.onCanceledCalledCount, 0)
     }
@@ -172,9 +172,9 @@ final class PresenterTests: XCTestCase {
         
         presenter.weaponSelected(weaponId: expectedWeapon.id)
         
-        XCTAssertEqual(weaponResourceGetUseCaseMock.getWeaponDetailCalledValues, [expectedWeapon.id])
-        XCTAssertEqual(vcMock.showWeaponImageCalledValues, [expectedWeapon.weaponImageName])
-        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [expectedWeapon.bulletsCountImageName()])
-        XCTAssertEqual(vcMock.playSoundCalledValues, [expectedWeapon.showingSound])
+        XCTAssertEqual(weaponResourceGetUseCaseMock.getWeaponDetailCalledValues, [777])
+        XCTAssertEqual(vcMock.showWeaponImageCalledValues, ["mock_weaponImageName777"])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, ["mock_bulletsCountImageBaseName777100"])
+        XCTAssertEqual(vcMock.playSoundCalledValues, [.bazookaSet])
     }
 }
