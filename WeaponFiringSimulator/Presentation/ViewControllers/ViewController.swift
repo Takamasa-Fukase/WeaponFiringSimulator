@@ -10,10 +10,7 @@ import UIKit
 protocol ViewControllerInterface: AnyObject {
     func showWeaponImage(name: String)
     func showBulletsCountImage(name: String)
-    func playShowingSound(type: SoundType)
-    func playFireSound(type: SoundType)
-    func playReloadSound(type: SoundType)
-    func playNoBulletsSound(type: SoundType)
+    func playSound(type: SoundType)
     func executeAutoReload()
 }
 
@@ -71,19 +68,7 @@ extension ViewController: ViewControllerInterface {
         bulletsCountImageView.image = UIImage(named: name)
     }
     
-    func playShowingSound(type: SoundType) {
-        soundPlayer.play(type)
-    }
-    
-    func playFireSound(type: SoundType) {
-        soundPlayer.play(type)
-    }
-    
-    func playReloadSound(type: SoundType) {
-        soundPlayer.play(type)
-    }
-    
-    func playNoBulletsSound(type: SoundType) {
+    func playSound(type: SoundType) {
         soundPlayer.play(type)
     }
     

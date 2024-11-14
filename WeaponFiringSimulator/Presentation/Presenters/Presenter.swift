@@ -44,7 +44,7 @@ final class Presenter {
         self.currentWeaponData = currentWeaponData
         view?.showWeaponImage(name: self.currentWeaponData?.weaponImageName ?? "")
         view?.showBulletsCountImage(name: self.currentWeaponData?.bulletsCountImageName() ?? "")
-        view?.playShowingSound(type: self.currentWeaponData?.showingSound ?? .pistolSet)
+        view?.playSound(type: self.currentWeaponData?.showingSound ?? .pistolSet)
     }
 }
 
@@ -66,7 +66,7 @@ extension Presenter: PresenterInterface {
             reloadType: currentWeaponData?.reloadType ?? .manual,
             onFired: { response in
                 currentWeaponData?.bulletsCount = response.bulletsCount
-                view?.playFireSound(type: currentWeaponData?.firingSound ?? .pistolShoot)
+                view?.playSound(type: currentWeaponData?.firingSound ?? .pistolShoot)
                 view?.showBulletsCountImage(name: currentWeaponData?.bulletsCountImageName() ?? "")
                 
                 if response.needsAutoReload {
@@ -76,7 +76,7 @@ extension Presenter: PresenterInterface {
             },
             onCanceled: {
                 if let noBulletsSound = currentWeaponData?.noBulletsSound {
-                    view?.playNoBulletsSound(type: noBulletsSound)
+                    view?.playSound(type: noBulletsSound)
                 }
             })
     }
@@ -89,7 +89,7 @@ extension Presenter: PresenterInterface {
             reloadWaitingTime: currentWeaponData?.reloadWaitingTime ?? 0,
             onReloadStarted: { response in
                 currentWeaponData?.isReloading = response.isReloading
-                view?.playReloadSound(type: currentWeaponData?.reloadingSound ?? .pistolReload)
+                view?.playSound(type: currentWeaponData?.reloadingSound ?? .pistolReload)
             },
             onReloadEnded: { [weak self] response in
                 self?.currentWeaponData?.bulletsCount = response.bulletsCount
