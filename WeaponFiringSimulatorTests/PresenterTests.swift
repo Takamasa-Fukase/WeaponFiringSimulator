@@ -13,20 +13,20 @@ final class PresenterTests: XCTestCase {
     private var vcMock: ViewControllerMock!
     private var weaponResourceGetUseCaseMock: WeaponResourceGetUseCaseMock!
     private var weaponActionExecuteUseCase: WeaponActionExecuteUseCase!
-//    private let weaponRepositoryMock: WeaponRepositoryMock!
     
     override func setUpWithError() throws {
         vcMock = ViewControllerMock()
-//        weaponRepositoryMock = .init()
-        weaponResourceGetUseCaseMock = WeaponResourceGetUseCaseMock()
+        weaponResourceGetUseCaseMock = .init()
         weaponActionExecuteUseCase = .init(weaponStatusCheckUseCase: WeaponStatusCheckUseCase())
+        presenter = .init(view: vcMock,
+                          weaponResourceGetUseCase: weaponResourceGetUseCaseMock,
+                          weaponActionExecuteUseCase: weaponActionExecuteUseCase)
     }
     
     override func tearDownWithError() throws {
         vcMock = nil
         weaponResourceGetUseCaseMock = nil
         weaponActionExecuteUseCase = nil
-//        weaponRepositoryMock = nil
     }
     
     /*
