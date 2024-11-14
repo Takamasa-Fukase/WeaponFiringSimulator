@@ -60,7 +60,6 @@ final class Presenter2 {
     }
     
     private func showSelectedWeapon(weaponDataModel: WeaponDataModel) {
-        print("showSelectedWeapon: \(weaponDataModel)")
         self.weaponDataModel = weaponDataModel
         self.bulletsCount = weaponDataModel.capacity
         self.isReloading = false
@@ -135,10 +134,8 @@ extension Presenter2: PresenterInterface2 {
     
     func weaponSelected(weaponId: Int) {
         let request = WeaponDetailGetRequest(weaponId: weaponId)
-        print("request: \(request)")
         do {
             let weaponDataModel = try weaponDetailGetUseCase.execute(request: request)
-            print("weaponDataModel: \(weaponDataModel)")
             showSelectedWeapon(weaponDataModel: weaponDataModel)
             
         } catch {

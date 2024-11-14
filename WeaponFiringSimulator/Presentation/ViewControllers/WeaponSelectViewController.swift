@@ -32,7 +32,7 @@ class WeaponSelectViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.register(UINib(nibName: "WeaponListCell", bundle: nil), forCellWithReuseIdentifier: "WeaponListCell")
-        collectionView.contentInset = UIEdgeInsets(top: 0, left: 24, bottom: 0, right: 24)
+        collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         collectionView.allowsMultipleSelection = false
         collectionView.allowsSelection = true
     }
@@ -70,9 +70,7 @@ extension WeaponSelectViewController: UICollectionViewDelegate, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("index \(indexPath.row)")
         let nextWeaponId = weaponListItems[indexPath.row].weaponId
-        print("nextWeaponId: \(nextWeaponId)")
         weaponSelected(nextWeaponId)
         dismiss(animated: true)
     }
