@@ -31,20 +31,81 @@ final class PresenterTests: XCTestCase {
     
     /*
      期待すること
-     - 取得する武器が、Repositoryがデフォルトの武器として返却するものと同じこと
+     - WeaponResourceGetUseCase.getWeaponListItems()が1回だけ呼ばれること
+     - 取得する武器が、useCaseのデフォルト武器として返却されるものと同じこと
      - 取得した武器の値でshowWeaponImage()が呼ばれること
      - 取得した武器の値でshowBulletsCountImage()が呼ばれること
      - 取得した武器の値でplayShowingSound()が呼ばれること
      */
     func test_viewDidLoad() throws {
+        let defaultWeaponDetailMock = CurrentWeaponData(
+            id: 100,
+            weaponImageName: "mock_weaponImageName",
+            bulletsCountImageBaseName: "mock_bulletsCountImageBaseName",
+            capacity: 100,
+            // MEMO: リロード待ち時間はテスト時も実際に待機されるので大き過ぎない値にしている
+            reloadWaitingTime: 0.5,
+            reloadType: .manual,
+            showingSound: .pistolSet,
+            firingSound: .pistolShoot,
+            reloadingSound: .pistolReload,
+            noBulletsSound: .pistolOutBullets,
+            bulletsCount: 100,
+            isReloading: false
+        )
+        // useCaseがデフォルト武器として返却する値を上書き
+        weaponResourceGetUseCaseMock.defaultWeaponDetail = defaultWeaponDetailMock
+        
+        XCTAssertEqual(weaponResourceGetUseCaseMock.getDefaultWeaponDetailCalledCount, 0)
         XCTAssertEqual(vcMock.showWeaponImageCalledValues, [])
         XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [])
         XCTAssertEqual(vcMock.playShowingSoundCalledValues, [])
         
         presenter.viewDidLoad()
         
-        XCTAssertEqual(vcMock.showWeaponImageCalledValues, [weaponResourceGetUseCaseMock.defaultWeaponDetail.weaponImageName])
-        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [weaponResourceGetUseCaseMock.defaultWeaponDetail.bulletsCountImageName()])
-        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [weaponResourceGetUseCaseMock.defaultWeaponDetail.showingSound])
+        XCTAssertEqual(weaponResourceGetUseCaseMock.getDefaultWeaponDetailCalledCount, 1)
+        XCTAssertEqual(vcMock.showWeaponImageCalledValues, [defaultWeaponDetailMock.weaponImageName])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [defaultWeaponDetailMock.bulletsCountImageName()])
+        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [defaultWeaponDetailMock.showingSound])
+    }
+    
+    /*
+     期待すること
+     - WeaponResourceGetUseCase.getWeaponDetail()が1回だけ呼ばれること
+     - 引数で渡したweaponIdがgetWeaponDetailの引数にも渡されていること
+     - 取得する武器が、useCaseのgetWeaponDetailで返却されるものと同じこと
+     - 取得した武器の値でshowWeaponImage()が呼ばれること
+     - 取得した武器の値でshowBulletsCountImage()が呼ばれること
+     - 取得した武器の値でplayShowingSound()が呼ばれること
+     */
+    func test_weaponSelected() {
+        let expectedWeapon = CurrentWeaponData(
+            id: 777,
+            weaponImageName: "mock_weaponImageName777",
+            bulletsCountImageBaseName: "mock_bulletsCountImageBaseName777",
+            capacity: 100,
+            // MEMO: リロード待ち時間はテスト時も実際に待機されるので大き過ぎない値にしている
+            reloadWaitingTime: 0.5,
+            reloadType: .auto,
+            showingSound: .bazookaSet,
+            firingSound: .bazookaShoot,
+            reloadingSound: .bazookaReload,
+            noBulletsSound: nil,
+            bulletsCount: 100,
+            isReloading: false
+        )
+        weaponResourceGetUseCaseMock.weaponDetail = expectedWeapon
+        
+        XCTAssertEqual(weaponResourceGetUseCaseMock.getWeaponDetailCalledValues, [])
+        XCTAssertEqual(vcMock.showWeaponImageCalledValues, [])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [])
+        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [])
+        
+        presenter.weaponSelected(weaponId: expectedWeapon.id)
+        
+        XCTAssertEqual(weaponResourceGetUseCaseMock.getWeaponDetailCalledValues, [expectedWeapon.id])
+        XCTAssertEqual(vcMock.showWeaponImageCalledValues, [expectedWeapon.weaponImageName])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [expectedWeapon.bulletsCountImageName()])
+        XCTAssertEqual(vcMock.playShowingSoundCalledValues, [expectedWeapon.showingSound])
     }
 }

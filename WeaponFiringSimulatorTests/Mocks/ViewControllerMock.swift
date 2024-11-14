@@ -15,7 +15,7 @@ final class ViewControllerMock: ViewControllerInterface {
     var playFireSoundCalledValues = [SoundType]()
     var playReloadSoundCalledValues = [SoundType]()
     var playNoBulletsSoundCalledValues = [SoundType]()
-    var executeAutoReloadCalledValues = [Void]()
+    var executeAutoReloadCalledCount: Int = 0
 
     func showWeaponImage(name: String) {
         showWeaponImageCalledValues.append(name)
@@ -42,6 +42,6 @@ final class ViewControllerMock: ViewControllerInterface {
     }
     
     func executeAutoReload() {
-        executeAutoReloadCalledValues.append(Void())
+        executeAutoReloadCalledCount += 1
     }
 }
