@@ -11,6 +11,7 @@ final class WeaponRepository: WeaponRepositoryInterface {
     private let weapons: [Weapon] = [
         .init(
             id: 0,
+            isDefault: true,
             weaponImageName: "pistol",
             bulletsCountImageBaseName: "pistol_bullets_",
             capacity: 7,
@@ -23,6 +24,7 @@ final class WeaponRepository: WeaponRepositoryInterface {
         ),
         .init(
             id: 1,
+            isDefault: false,
             weaponImageName: "bazooka",
             bulletsCountImageBaseName: "bazooka_bullets_",
             capacity: 1,
@@ -44,9 +46,9 @@ final class WeaponRepository: WeaponRepositoryInterface {
     }
     
     func getDefault() throws -> Weapon {
-        guard let weapon = weapons.first else {
+        guard let weapon = weapons.first(where: { $0.isDefault }) else {
             //　エラーをthrowする
-            throw CustomError.other(message: "武器が1つも存在しません")
+            throw CustomError.other(message: "デフォルトの武器が存在しません")
         }
         return weapon
     }

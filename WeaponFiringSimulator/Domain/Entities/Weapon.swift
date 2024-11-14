@@ -14,6 +14,7 @@ enum ReloadType {
 
 struct Weapon {
     let id: Int
+    let isDefault: Bool
     let weaponImageName: String
     let bulletsCountImageBaseName: String
     let capacity: Int
