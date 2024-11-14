@@ -8,21 +8,19 @@
 import Foundation
 
 protocol PresenterInterface2 {
-    var weaponListItems: [WeaponListItem] { get }
     func viewDidLoad()
-    func fireButtonTapped(selectedIndex: Int)
-    func reloadButtonTapped(selectedIndex: Int)
-    func changeWeaponButtonTapped(nextWeaponId: Int)
+    func fireButtonTapped()
+    func reloadButtonTapped()
+    func weaponSelected(weaponId: Int)
 }
 
 final class Presenter2 {
     private weak var view: ViewControllerInterface2?
-    private let weaponListGetUseCase: WeaponListGetUseCaseInterface
+    private let defaultWeaponGetUseCase: DefaultWeaponGetUseCaseInterface
+    private let weaponDetailGetUseCase: WeaponDetailGetUseCaseInterface
     private let weaponFireUseCase: WeaponFireUseCaseInterface
     private let weaponReloadUseCase: WeaponReloadUseCaseInterface
-    private let weaponChangeUseCase: WeaponChangeUseCaseInterface
     
-    private(set) var weaponListItems: [WeaponListItem] = []
     private var weaponDataModel: WeaponDataModel?
     private var bulletsCount: Int = 0
     private var isReloading = false
@@ -35,9 +33,6 @@ final class Presenter2 {
     }
     func getIsReloading() -> Bool {
         return isReloading
-    }
-    func setWeaponListItems(_ weaponListItems: [WeaponListItem]) {
-        self.weaponListItems = weaponListItems
     }
     func setBulletsCount(_ bulletsCount: Int) {
         self.bulletsCount = bulletsCount
@@ -52,29 +47,43 @@ final class Presenter2 {
     
     init(
         view: ViewControllerInterface2,
-        weaponListGetUseCase: WeaponListGetUseCaseInterface,
+        defaultWeaponGetUseCase: DefaultWeaponGetUseCaseInterface,
+        weaponDetailGetUseCase: WeaponDetailGetUseCaseInterface,
         weaponFireUseCase: WeaponFireUseCaseInterface,
-        weaponReloadUseCase: WeaponReloadUseCaseInterface,
-        weaponChangeUseCase: WeaponChangeUseCaseInterface
+        weaponReloadUseCase: WeaponReloadUseCaseInterface
     ) {
         self.view = view
-        self.weaponListGetUseCase = weaponListGetUseCase
+        self.defaultWeaponGetUseCase = defaultWeaponGetUseCase
+        self.weaponDetailGetUseCase = weaponDetailGetUseCase
         self.weaponFireUseCase = weaponFireUseCase
         self.weaponReloadUseCase = weaponReloadUseCase
-        self.weaponChangeUseCase = weaponChangeUseCase
+    }
+    
+    private func showSelectedWeapon(weaponDataModel: WeaponDataModel) {
+        print("showSelectedWeapon: \(weaponDataModel)")
+        self.weaponDataModel = weaponDataModel
+        self.bulletsCount = weaponDataModel.capacity
+        self.isReloading = false
+        view?.showWeaponImage(name: weaponDataModel.weaponImageName)
+        view?.showBulletsCountImage(name: weaponDataModel.bulletsCountImageBaseName + String(weaponDataModel.capacity))
+        view?.playShowingSound(type: weaponDataModel.showingSound)
     }
 }
 
 extension Presenter2: PresenterInterface2 {
     func viewDidLoad() {
-        weaponListItems = weaponListGetUseCase.execute().weaponListItems
-        view?.showWeaponList()
-        view?.selectInitialItem(at: IndexPath(row: 0, section: 0))
+        do {
+            let weaponDataModel = try defaultWeaponGetUseCase.execute()
+            showSelectedWeapon(weaponDataModel: weaponDataModel)
+            
+        } catch {
+            print("defaultWeaponGetUseCase error: \(error)")
+        }
     }
     
-    func fireButtonTapped(selectedIndex: Int) {
+    func fireButtonTapped() {
         let request = WeaponFireRequest(
-            weaponId: self.weaponListItems[selectedIndex].weaponId,
+            weaponId: weaponDataModel?.id ?? 0,
             bulletsCount: self.bulletsCount,
             isReloading: self.isReloading
         )
@@ -101,9 +110,9 @@ extension Presenter2: PresenterInterface2 {
         }
     }
     
-    func reloadButtonTapped(selectedIndex: Int) {
+    func reloadButtonTapped() {
         let request = WeaponReloadRequest(
-            weaponId: self.weaponListItems[selectedIndex].weaponId,
+            weaponId: weaponDataModel?.id ?? 0,
             bulletsCount: self.bulletsCount,
             isReloading: self.isReloading
         )
@@ -124,21 +133,16 @@ extension Presenter2: PresenterInterface2 {
         }
     }
     
-    func changeWeaponButtonTapped(nextWeaponId: Int) {
-        let request = WeaponChangeRequest(nextWeaponId: nextWeaponId)
+    func weaponSelected(weaponId: Int) {
+        let request = WeaponDetailGetRequest(weaponId: weaponId)
+        print("request: \(request)")
         do {
-            try weaponChangeUseCase.execute(
-                request: request,
-                onCompleted: { response in
-                    self.weaponDataModel = response.data
-                    self.bulletsCount = response.data.capacity
-                    self.isReloading = false
-                    view?.showWeaponImage(name: response.data.weaponImageName)
-                    view?.showBulletsCountImage(name: response.data.bulletsCountImageBaseName + String(response.data.capacity))
-                    view?.playShowingSound(type: response.data.showingSound)
-                })
+            let weaponDataModel = try weaponDetailGetUseCase.execute(request: request)
+            print("weaponDataModel: \(weaponDataModel)")
+            showSelectedWeapon(weaponDataModel: weaponDataModel)
+            
         } catch {
-            print("weaponChangeUseCase error: \(error)")
+            print("WeaponDetailGetRequest error: \(error)")
         }
     }
 }
