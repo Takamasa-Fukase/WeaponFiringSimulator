@@ -37,14 +37,6 @@ class WeaponSelectViewController: UIViewController {
         collectionView.allowsSelection = true
     }
     
-    private func selectedIndex() -> Int {
-        return collectionView.indexPathsForSelectedItems?.first?.row ?? 0
-    }
-    
-    private func weaponId() -> Int {
-        return weaponListItems[selectedIndex()].weaponId
-    }
-    
     func showWeaponList() {
         collectionView.reloadData()
     }
