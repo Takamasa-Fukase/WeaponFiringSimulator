@@ -29,6 +29,8 @@ final class PresenterTests: XCTestCase {
         weaponActionExecuteUseCaseMock = nil
     }
     
+    // MARK: viewDidLoad()のテスト
+    
     /*
      期待すること
      - WeaponResourceGetUseCase.getDefaultWeaponDetail()が1回だけ呼ばれること
@@ -69,15 +71,17 @@ final class PresenterTests: XCTestCase {
         XCTAssertEqual(vcMock.playSoundCalledValues, [defaultWeaponDetailMock.showingSound])
     }
     
+    // MARK: fireButtonTapped()のテスト
+    
     /*
      期待すること
-     currentWeaponDataのbulletsCountが２以上でisReloading＝falseでreloadType＝manualの時
-        - onFiredが1回だけ呼ばれること
-        - currentWeaponDataのbulletsCountが1つ減っていること
-        - currentWeaponDataのfiringSoundでplaySound()が1回だけ呼ばれること
-        - 1つ減っているbulletsCountでshowBulletsCountImage()が1回だけ呼ばれていること
-        - executeAutoReload()が呼ばれないこと
-        - onCanceledが呼ばれないこと
+     currentWeaponDataのbulletsCountが2でisReloading＝falseでreloadType＝manualの時
+     - onFiredが1回だけ呼ばれること
+     - currentWeaponDataのbulletsCountが1つ減っていること
+     - currentWeaponDataのfiringSoundでplaySound()が1回だけ呼ばれること
+     - 1つ減っているbulletsCountでshowBulletsCountImage()が1回だけ呼ばれていること
+     - executeAutoReload()が呼ばれないこと
+     - onCanceledが呼ばれないこと
      */
     func test_fireButtonTapped_currentWeaponDataのbulletsCountが2でisReloading＝falseでreloadType＝manualの時() throws {
         let currentWeaponData = CurrentWeaponData(
@@ -113,6 +117,27 @@ final class PresenterTests: XCTestCase {
         XCTAssertEqual(weaponActionExecuteUseCaseMock.onCanceledCalledCount, 0)
     }
     
+    // MARK: reloadButtonTapped()のテスト
+    /*
+     期待すること
+     currentWeaponDataのbulletsCountが0でisReloading＝falseの時
+     <reloadWaitingTimeの経過前>
+     - onReloadStartedが1回だけ呼ばれること
+     - isReloadingがtrueになっていること
+     - currentWeaponDataのreloadingSoundでplaySound()が1回だけ呼ばれること
+     
+     <reloadWaitingTimeの経過後>
+     - onReloadEndedが1回だけ呼ばれること
+     - bulletsCountがcurrentWeaponDataのcapacityと同じになっていること
+     - isReloadingがfalseになっていること
+     - capacityと同じbulletsCountでshowBulletsCountImage()が1回だけ呼ばれていること
+     */
+    func test_reloadButtonTapped_currentWeaponDataのbulletsCountが0でisReloading＝falseの時() throws {
+        
+    }
+    
+    // MARK: weaponSelected()のテスト
+
     /*
      期待すること
      - WeaponResourceGetUseCase.getWeaponDetail()が1回だけ呼ばれること
