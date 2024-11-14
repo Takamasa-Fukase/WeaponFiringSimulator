@@ -21,25 +21,23 @@ final class Presenter2 {
     private let weaponFireUseCase: WeaponFireUseCaseInterface
     private let weaponReloadUseCase: WeaponReloadUseCaseInterface
     
-    private var weaponDataModel: WeaponDataModel?
-    private var bulletsCount: Int = 0
-    private var isReloading = false
+    private var currentWeaponData: CurrentWeaponData?
     
     
     
     // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
-    func getBulletsCount() -> Int {
-        return bulletsCount
-    }
-    func getIsReloading() -> Bool {
-        return isReloading
-    }
-    func setBulletsCount(_ bulletsCount: Int) {
-        self.bulletsCount = bulletsCount
-    }
-    func setIsReloading(_ isReloading: Bool) {
-        self.isReloading = isReloading
-    }
+//    func getBulletsCount() -> Int {
+//        return bulletsCount
+//    }
+//    func getIsReloading() -> Bool {
+//        return isReloading
+//    }
+//    func setBulletsCount(_ bulletsCount: Int) {
+//        self.bulletsCount = bulletsCount
+//    }
+//    func setIsReloading(_ isReloading: Bool) {
+//        self.isReloading = isReloading
+//    }
     // ユニットテスト専用のコード
     // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
     
@@ -59,21 +57,19 @@ final class Presenter2 {
         self.weaponReloadUseCase = weaponReloadUseCase
     }
     
-    private func showSelectedWeapon(weaponDataModel: WeaponDataModel) {
-        self.weaponDataModel = weaponDataModel
-        self.bulletsCount = weaponDataModel.capacity
-        self.isReloading = false
-        view?.showWeaponImage(name: weaponDataModel.weaponImageName)
-        view?.showBulletsCountImage(name: weaponDataModel.bulletsCountImageBaseName + String(weaponDataModel.capacity))
-        view?.playShowingSound(type: weaponDataModel.showingSound)
+    private func showSelectedWeapon(_ currentWeaponData: CurrentWeaponData) {
+        self.currentWeaponData = currentWeaponData
+        view?.showWeaponImage(name: currentWeaponData.weaponImageName)
+        view?.showBulletsCountImage(name: currentWeaponData.bulletsCountImageBaseName + String(currentWeaponData.capacity))
+        view?.playShowingSound(type: currentWeaponData.showingSound)
     }
 }
 
 extension Presenter2: PresenterInterface2 {
     func viewDidLoad() {
         do {
-            let weaponDataModel = try defaultWeaponGetUseCase.execute()
-            showSelectedWeapon(weaponDataModel: weaponDataModel)
+            let currentWeaponData = try defaultWeaponGetUseCase.execute()
+            showSelectedWeapon(currentWeaponData)
             
         } catch {
             print("defaultWeaponGetUseCase error: \(error)")
@@ -82,15 +78,15 @@ extension Presenter2: PresenterInterface2 {
     
     func fireButtonTapped() {
         let request = WeaponFireRequest(
-            weaponId: weaponDataModel?.id ?? 0,
-            bulletsCount: self.bulletsCount,
-            isReloading: self.isReloading
+            weaponId: currentWeaponData?.id ?? 0,
+            bulletsCount: currentWeaponData?.bulletsCount ?? 0,
+            isReloading: currentWeaponData?.isReloading ?? false
         )
         do {
             try weaponFireUseCase.execute(
                 request: request,
                 onFired: { response in
-                    self.bulletsCount = response.bulletsCount
+                    currentWeaponData?.bulletsCount = response.bulletsCount
                     view?.playFireSound(type: response.firingSound)
                     view?.showBulletsCountImage(name: response.bulletsCountImageName)
                     
@@ -111,20 +107,20 @@ extension Presenter2: PresenterInterface2 {
     
     func reloadButtonTapped() {
         let request = WeaponReloadRequest(
-            weaponId: weaponDataModel?.id ?? 0,
-            bulletsCount: self.bulletsCount,
-            isReloading: self.isReloading
+            weaponId: currentWeaponData?.id ?? 0,
+            bulletsCount: currentWeaponData?.bulletsCount ?? 0,
+            isReloading: currentWeaponData?.isReloading ?? false
         )
         do {
             try weaponReloadUseCase.execute(
                 request: request,
                 onReloadStarted: { response in
                     view?.playReloadSound(type: response.reloadingSound)
-                    self.isReloading = response.isReloading
+                    currentWeaponData?.isReloading = response.isReloading
                 },
                 onReloadEnded: { [weak self] response in
-                    self?.bulletsCount = response.bulletsCount
-                    self?.isReloading = response.isReloading
+                    self?.currentWeaponData?.bulletsCount = response.bulletsCount
+                    self?.currentWeaponData?.isReloading = response.isReloading
                     self?.view?.showBulletsCountImage(name: response.bulletsCountImageName)
                 })
         } catch {
@@ -135,8 +131,8 @@ extension Presenter2: PresenterInterface2 {
     func weaponSelected(weaponId: Int) {
         let request = WeaponDetailGetRequest(weaponId: weaponId)
         do {
-            let weaponDataModel = try weaponDetailGetUseCase.execute(request: request)
-            showSelectedWeapon(weaponDataModel: weaponDataModel)
+            let currentWeaponData = try weaponDetailGetUseCase.execute(request: request)
+            showSelectedWeapon(currentWeaponData)
             
         } catch {
             print("WeaponDetailGetRequest error: \(error)")

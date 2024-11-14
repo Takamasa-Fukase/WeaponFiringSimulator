@@ -11,21 +11,8 @@ struct WeaponDetailGetRequest {
     let weaponId: Int
 }
 
-struct WeaponDataModel {
-    let id: Int
-    let weaponImageName: String
-    let bulletsCountImageBaseName: String
-    let capacity: Int
-    let reloadWaitingTime: TimeInterval
-    let reloadType: ReloadType
-    let showingSound: SoundType
-    let firingSound: SoundType
-    let reloadingSound: SoundType
-    let noBulletsSound: SoundType?
-}
-
 protocol WeaponDetailGetUseCaseInterface {
-    func execute(request: WeaponDetailGetRequest) throws -> WeaponDataModel
+    func execute(request: WeaponDetailGetRequest) throws -> CurrentWeaponData
 }
 
 final class WeaponDetailGetUseCase: WeaponDetailGetUseCaseInterface {
@@ -35,9 +22,9 @@ final class WeaponDetailGetUseCase: WeaponDetailGetUseCaseInterface {
         self.weaponRepository = weaponRepository
     }
     
-    func execute(request: WeaponDetailGetRequest) throws -> WeaponDataModel {
+    func execute(request: WeaponDetailGetRequest) throws -> CurrentWeaponData {
         let weapon = try weaponRepository.get(by: request.weaponId)
-        return WeaponDataModel(
+        return CurrentWeaponData(
             id: weapon.id,
             weaponImageName: weapon.weaponImageName,
             bulletsCountImageBaseName: weapon.bulletsCountImageBaseName,
@@ -47,7 +34,9 @@ final class WeaponDetailGetUseCase: WeaponDetailGetUseCaseInterface {
             showingSound: weapon.showingSound,
             firingSound: weapon.firingSound,
             reloadingSound: weapon.reloadingSound,
-            noBulletsSound: weapon.noBulletsSound
+            noBulletsSound: weapon.noBulletsSound,
+            bulletsCount: weapon.capacity,
+            isReloading: false
         )
     }
 }

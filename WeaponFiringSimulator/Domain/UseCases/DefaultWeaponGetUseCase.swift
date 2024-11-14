@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DefaultWeaponGetUseCaseInterface {
-    func execute() throws -> WeaponDataModel
+    func execute() throws -> CurrentWeaponData
 }
 
 final class DefaultWeaponGetUseCase: DefaultWeaponGetUseCaseInterface {
@@ -18,9 +18,9 @@ final class DefaultWeaponGetUseCase: DefaultWeaponGetUseCaseInterface {
         self.weaponRepository = weaponRepository
     }
     
-    func execute() throws -> WeaponDataModel {
+    func execute() throws -> CurrentWeaponData {
         let weapon = try weaponRepository.getDefault()
-        return WeaponDataModel(
+        return CurrentWeaponData(
             id: weapon.id,
             weaponImageName: weapon.weaponImageName,
             bulletsCountImageBaseName: weapon.bulletsCountImageBaseName,
@@ -30,7 +30,9 @@ final class DefaultWeaponGetUseCase: DefaultWeaponGetUseCaseInterface {
             showingSound: weapon.showingSound,
             firingSound: weapon.firingSound,
             reloadingSound: weapon.reloadingSound,
-            noBulletsSound: weapon.noBulletsSound
+            noBulletsSound: weapon.noBulletsSound,
+            bulletsCount: weapon.capacity,
+            isReloading: false
         )
     }
 }
