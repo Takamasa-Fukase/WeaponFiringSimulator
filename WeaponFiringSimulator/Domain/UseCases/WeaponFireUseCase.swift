@@ -13,10 +13,10 @@ struct WeaponFireRequest {
     let isReloading: Bool
 }
 
-struct WeaponFireCompletedResponse {
-    let bulletsCount: Int
-    let needsAutoReload: Bool
-}
+//struct WeaponFireCompletedResponse {
+//    let bulletsCount: Int
+//    let needsAutoReload: Bool
+//}
 
 protocol WeaponFireUseCaseInterface {
     func execute(

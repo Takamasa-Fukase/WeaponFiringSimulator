@@ -13,14 +13,14 @@ struct WeaponReloadRequest {
     let isReloading: Bool
 }
 
-struct WeaponReloadStartedResponse {
-    let isReloading: Bool
-}
-
-struct WeaponReloadEndedResponse {
-    let bulletsCount: Int
-    let isReloading: Bool
-}
+//struct WeaponReloadStartedResponse {
+//    let isReloading: Bool
+//}
+//
+//struct WeaponReloadEndedResponse {
+//    let bulletsCount: Int
+//    let isReloading: Bool
+//}
 
 protocol WeaponReloadUseCaseInterface {
     func execute(

@@ -26,18 +26,7 @@ final class Presenter {
     
     
     // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
-//    func getBulletsCount() -> Int {
-//        return bulletsCount
-//    }
-//    func getIsReloading() -> Bool {
-//        return isReloading
-//    }
-//    func setBulletsCount(_ bulletsCount: Int) {
-//        self.bulletsCount = bulletsCount
-//    }
-//    func setIsReloading(_ isReloading: Bool) {
-//        self.isReloading = isReloading
-//    }
+
     // ユニットテスト専用のコード
     // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
     
