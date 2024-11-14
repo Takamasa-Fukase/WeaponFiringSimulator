@@ -21,4 +21,8 @@ struct CurrentWeaponData {
     
     var bulletsCount: Int
     var isReloading: Bool
+    
+    func bulletsCountImageName() -> String {
+        return bulletsCountImageBaseName + String(bulletsCount)
+    }
 }

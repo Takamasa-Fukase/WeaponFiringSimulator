@@ -14,12 +14,10 @@ struct WeaponReloadRequest {
 }
 
 struct WeaponReloadStartedResponse {
-    let reloadingSound: SoundType
     let isReloading: Bool
 }
 
 struct WeaponReloadEndedResponse {
-    let bulletsCountImageName: String
     let bulletsCount: Int
     let isReloading: Bool
 }
@@ -58,14 +56,12 @@ final class WeaponReloadUseCase: WeaponReloadUseCaseInterface {
 
         if canReload {
             let startedResponse = WeaponReloadStartedResponse(
-                reloadingSound: weapon.reloadingSound,
                 isReloading: true
             )
             onReloadStarted(startedResponse)
             
             DispatchQueue.main.asyncAfter(deadline: .now() + weapon.reloadWaitingTime, execute: {
                 let endedResponse = WeaponReloadEndedResponse(
-                    bulletsCountImageName: weapon.bulletsCountImageBaseName + String(weapon.capacity),
                     bulletsCount: weapon.capacity,
                     isReloading: false
                 )

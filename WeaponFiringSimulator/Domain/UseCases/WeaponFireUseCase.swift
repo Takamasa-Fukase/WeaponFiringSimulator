@@ -14,21 +14,15 @@ struct WeaponFireRequest {
 }
 
 struct WeaponFireCompletedResponse {
-    let firingSound: SoundType
-    let bulletsCountImageName: String
     let bulletsCount: Int
     let needsAutoReload: Bool
-}
-
-struct WeaponFireCanceledResponse {
-    let noBulletsSound: SoundType?
 }
 
 protocol WeaponFireUseCaseInterface {
     func execute(
         request: WeaponFireRequest,
         onFired: ((WeaponFireCompletedResponse) -> Void),
-        onCanceled: ((WeaponFireCanceledResponse) -> Void)
+        onCanceled: (() -> Void)
     ) throws
 }
 
@@ -50,7 +44,7 @@ final class WeaponFireUseCase: WeaponFireUseCaseInterface {
     func execute(
         request: WeaponFireRequest,
         onFired: ((WeaponFireCompletedResponse) -> Void),
-        onCanceled: ((WeaponFireCanceledResponse) -> Void)
+        onCanceled: (() -> Void)
     ) throws {
         let weapon = try weaponRepository.get(by: request.weaponId)
         let canFireCheckRequest = CanFireCheckRequest(
@@ -68,16 +62,13 @@ final class WeaponFireUseCase: WeaponFireUseCaseInterface {
             let needsAutoReload = needsAutoReloadCheckUseCase.execute(request: needsAutoReloadCheckRequest).needsAutoReload
             
             let response = WeaponFireCompletedResponse(
-                firingSound: weapon.firingSound,
-                bulletsCountImageName: weapon.bulletsCountImageBaseName + String(request.bulletsCount - 1),
                 bulletsCount: request.bulletsCount - 1,
                 needsAutoReload: needsAutoReload
             )
             onFired(response)
             
         }else {
-            let response = WeaponFireCanceledResponse(noBulletsSound: weapon.noBulletsSound)
-            onCanceled(response)
+            onCanceled()
         }
     }
 }

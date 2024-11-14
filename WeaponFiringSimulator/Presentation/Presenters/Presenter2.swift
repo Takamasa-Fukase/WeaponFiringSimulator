@@ -60,7 +60,7 @@ final class Presenter2 {
     private func showSelectedWeapon(_ currentWeaponData: CurrentWeaponData) {
         self.currentWeaponData = currentWeaponData
         view?.showWeaponImage(name: currentWeaponData.weaponImageName)
-        view?.showBulletsCountImage(name: currentWeaponData.bulletsCountImageBaseName + String(currentWeaponData.capacity))
+        view?.showBulletsCountImage(name: currentWeaponData.bulletsCountImageName())
         view?.playShowingSound(type: currentWeaponData.showingSound)
     }
 }
@@ -87,16 +87,16 @@ extension Presenter2: PresenterInterface2 {
                 request: request,
                 onFired: { response in
                     currentWeaponData?.bulletsCount = response.bulletsCount
-                    view?.playFireSound(type: response.firingSound)
-                    view?.showBulletsCountImage(name: response.bulletsCountImageName)
+                    view?.playFireSound(type: currentWeaponData?.firingSound ?? .pistolShoot)
+                    view?.showBulletsCountImage(name: currentWeaponData?.bulletsCountImageName() ?? "")
                     
                     if response.needsAutoReload {
                         // リロードを自動的に実行
                         view?.executeAutoReload()
                     }
                 },
-                onCanceled: { response in
-                    if let noBulletsSound = response.noBulletsSound {
+                onCanceled: {
+                    if let noBulletsSound = currentWeaponData?.noBulletsSound {
                         view?.playNoBulletsSound(type: noBulletsSound)
                     }
                 })
@@ -115,13 +115,13 @@ extension Presenter2: PresenterInterface2 {
             try weaponReloadUseCase.execute(
                 request: request,
                 onReloadStarted: { response in
-                    view?.playReloadSound(type: response.reloadingSound)
                     currentWeaponData?.isReloading = response.isReloading
+                    view?.playReloadSound(type: currentWeaponData?.reloadingSound ?? .pistolReload)
                 },
                 onReloadEnded: { [weak self] response in
                     self?.currentWeaponData?.bulletsCount = response.bulletsCount
                     self?.currentWeaponData?.isReloading = response.isReloading
-                    self?.view?.showBulletsCountImage(name: response.bulletsCountImageName)
+                    self?.view?.showBulletsCountImage(name: self?.currentWeaponData?.bulletsCountImageName() ?? "")
                 })
         } catch {
             print("weaponReloadUseCase error: \(error)")
