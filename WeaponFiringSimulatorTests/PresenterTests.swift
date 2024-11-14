@@ -12,21 +12,21 @@ final class PresenterTests: XCTestCase {
     private var presenter: Presenter!
     private var vcMock: ViewControllerMock!
     private var weaponResourceGetUseCaseMock: WeaponResourceGetUseCaseMock!
-    private var weaponActionExecuteUseCase: WeaponActionExecuteUseCase!
+    private var weaponActionExecuteUseCaseMock: WeaponActionExecuteUseCaseMock!
     
     override func setUpWithError() throws {
         vcMock = ViewControllerMock()
         weaponResourceGetUseCaseMock = .init()
-        weaponActionExecuteUseCase = .init(weaponStatusCheckUseCase: WeaponStatusCheckUseCase())
+        weaponActionExecuteUseCaseMock = .init(weaponStatusCheckUseCase: WeaponStatusCheckUseCase())
         presenter = .init(view: vcMock,
                           weaponResourceGetUseCase: weaponResourceGetUseCaseMock,
-                          weaponActionExecuteUseCase: weaponActionExecuteUseCase)
+                          weaponActionExecuteUseCase: weaponActionExecuteUseCaseMock)
     }
     
     override func tearDownWithError() throws {
         vcMock = nil
         weaponResourceGetUseCaseMock = nil
-        weaponActionExecuteUseCase = nil
+        weaponActionExecuteUseCaseMock = nil
     }
     
     /*
@@ -35,7 +35,7 @@ final class PresenterTests: XCTestCase {
      - 取得した武器が、useCaseのデフォルト武器として返却されるものと同じこと
      - 取得した武器の値でshowWeaponImage()が呼ばれること
      - 取得した武器の値でshowBulletsCountImage()が呼ばれること
-     - 取得した武器の値でplayShowingSound()が呼ばれること
+     - 取得した武器の値でplaySound()が呼ばれること
      */
     func test_viewDidLoad() throws {
         let defaultWeaponDetailMock = CurrentWeaponData(
@@ -71,12 +71,56 @@ final class PresenterTests: XCTestCase {
     
     /*
      期待すること
+     currentWeaponDataのbulletsCountが２以上でisReloading＝falseでreloadType＝manualの時
+        - onFiredが1回だけ呼ばれること
+        - currentWeaponDataのbulletsCountが1つ減っていること
+        - currentWeaponDataのfiringSoundでplaySound()が1回だけ呼ばれること
+        - 1つ減っているbulletsCountでshowBulletsCountImage()が1回だけ呼ばれていること
+        - executeAutoReload()が呼ばれないこと
+        - onCanceledが呼ばれないこと
+     */
+    func test_fireButtonTapped_currentWeaponDataのbulletsCountが2でisReloading＝falseでreloadType＝manualの時() throws {
+        let currentWeaponData = CurrentWeaponData(
+            id: 100,
+            weaponImageName: "",
+            bulletsCountImageBaseName: "mock_bulletsCountImageBaseName",
+            capacity: 100,
+            reloadWaitingTime: 0.5,
+            reloadType: .manual,
+            showingSound: .pistolSet,
+            firingSound: .pistolShoot,
+            reloadingSound: .pistolReload,
+            noBulletsSound: .pistolOutBullets,
+            bulletsCount: 2,
+            isReloading: false
+        )
+        presenter.setCurrentWeaponData(currentWeaponData)
+        
+        XCTAssertEqual(weaponActionExecuteUseCaseMock.onFiredCalledValues.count, 0)
+        XCTAssertEqual(presenter.getCurrentWeaponData()?.bulletsCount ?? 0, currentWeaponData.bulletsCount)
+        XCTAssertEqual(vcMock.playSoundCalledValues, [])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [])
+        XCTAssertEqual(vcMock.executeAutoReloadCalledCount, 0)
+        XCTAssertEqual(weaponActionExecuteUseCaseMock.onCanceledCalledCount, 0)
+        
+        presenter.fireButtonTapped()
+        
+        XCTAssertEqual(weaponActionExecuteUseCaseMock.onFiredCalledValues.count, 1)
+        XCTAssertEqual(presenter.getCurrentWeaponData()?.bulletsCount ?? 0, currentWeaponData.bulletsCount - 1)
+        XCTAssertEqual(vcMock.playSoundCalledValues, [currentWeaponData.firingSound])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [currentWeaponData.bulletsCountImageBaseName + String(currentWeaponData.bulletsCount - 1)])
+        XCTAssertEqual(vcMock.executeAutoReloadCalledCount, 0)
+        XCTAssertEqual(weaponActionExecuteUseCaseMock.onCanceledCalledCount, 0)
+    }
+    
+    /*
+     期待すること
      - WeaponResourceGetUseCase.getWeaponDetail()が1回だけ呼ばれること
      - 引数で渡したweaponIdがgetWeaponDetailの引数にも渡されていること
      - 取得した武器が、useCaseのgetWeaponDetailで返却されるものと同じこと
      - 取得した武器の値でshowWeaponImage()が呼ばれること
      - 取得した武器の値でshowBulletsCountImage()が呼ばれること
-     - 取得した武器の値でplayShowingSound()が呼ばれること
+     - 取得した武器の値でplaySound()が呼ばれること
      */
     func test_weaponSelected() {
         let expectedWeapon = CurrentWeaponData(
