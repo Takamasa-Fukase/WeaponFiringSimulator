@@ -16,10 +16,8 @@ protocol PresenterInterface {
 
 final class Presenter {
     private weak var view: ViewControllerInterface?
-    private let defaultWeaponGetUseCase: DefaultWeaponGetUseCaseInterface
-    private let weaponDetailGetUseCase: WeaponDetailGetUseCaseInterface
-    private let weaponFireUseCase: WeaponFireUseCaseInterface
-    private let weaponReloadUseCase: WeaponReloadUseCaseInterface
+    private let weaponResourceGetUseCase: WeaponResourceGetUseCaseInterface
+    private let weaponActionExecuteUseCase: WeaponActionExecuteUseCaseInterface
     
     private var currentWeaponData: CurrentWeaponData?
     
@@ -34,16 +32,12 @@ final class Presenter {
     
     init(
         view: ViewControllerInterface,
-        defaultWeaponGetUseCase: DefaultWeaponGetUseCaseInterface,
-        weaponDetailGetUseCase: WeaponDetailGetUseCaseInterface,
-        weaponFireUseCase: WeaponFireUseCaseInterface,
-        weaponReloadUseCase: WeaponReloadUseCaseInterface
+        weaponResourceGetUseCase: WeaponResourceGetUseCaseInterface,
+        weaponActionExecuteUseCase: WeaponActionExecuteUseCaseInterface
     ) {
         self.view = view
-        self.defaultWeaponGetUseCase = defaultWeaponGetUseCase
-        self.weaponDetailGetUseCase = weaponDetailGetUseCase
-        self.weaponFireUseCase = weaponFireUseCase
-        self.weaponReloadUseCase = weaponReloadUseCase
+        self.weaponResourceGetUseCase = weaponResourceGetUseCase
+        self.weaponActionExecuteUseCase = weaponActionExecuteUseCase
     }
     
     private func showSelectedWeapon(_ currentWeaponData: CurrentWeaponData) {
@@ -57,7 +51,7 @@ final class Presenter {
 extension Presenter: PresenterInterface {
     func viewDidLoad() {
         do {
-            let currentWeaponData = try defaultWeaponGetUseCase.execute()
+            let currentWeaponData = try weaponResourceGetUseCase.getDefaultWeaponDetail()
             showSelectedWeapon(currentWeaponData)
             
         } catch {
@@ -66,61 +60,49 @@ extension Presenter: PresenterInterface {
     }
     
     func fireButtonTapped() {
-        let request = WeaponFireRequest(
+        weaponActionExecuteUseCase.fireWeapon(
             weaponId: currentWeaponData?.id ?? 0,
             bulletsCount: currentWeaponData?.bulletsCount ?? 0,
-            isReloading: currentWeaponData?.isReloading ?? false
-        )
-        do {
-            try weaponFireUseCase.execute(
-                request: request,
-                onFired: { response in
-                    currentWeaponData?.bulletsCount = response.bulletsCount
-                    view?.playFireSound(type: currentWeaponData?.firingSound ?? .pistolShoot)
-                    view?.showBulletsCountImage(name: currentWeaponData?.bulletsCountImageName() ?? "")
-                    
-                    if response.needsAutoReload {
-                        // リロードを自動的に実行
-                        view?.executeAutoReload()
-                    }
-                },
-                onCanceled: {
-                    if let noBulletsSound = currentWeaponData?.noBulletsSound {
-                        view?.playNoBulletsSound(type: noBulletsSound)
-                    }
-                })
-        } catch {
-            print("weaponFireUseCase error: \(error)")
-        }
+            isReloading: currentWeaponData?.isReloading ?? false,
+            reloadType: currentWeaponData?.reloadType ?? .manual,
+            onFired: { response in
+                currentWeaponData?.bulletsCount = response.bulletsCount
+                view?.playFireSound(type: currentWeaponData?.firingSound ?? .pistolShoot)
+                view?.showBulletsCountImage(name: currentWeaponData?.bulletsCountImageName() ?? "")
+                
+                if response.needsAutoReload {
+                    // リロードを自動的に実行
+                    view?.executeAutoReload()
+                }
+            },
+            onCanceled: {
+                if let noBulletsSound = currentWeaponData?.noBulletsSound {
+                    view?.playNoBulletsSound(type: noBulletsSound)
+                }
+            })
     }
     
     func reloadButtonTapped() {
-        let request = WeaponReloadRequest(
+        weaponActionExecuteUseCase.reloadWeapon(
             weaponId: currentWeaponData?.id ?? 0,
             bulletsCount: currentWeaponData?.bulletsCount ?? 0,
-            isReloading: currentWeaponData?.isReloading ?? false
-        )
-        do {
-            try weaponReloadUseCase.execute(
-                request: request,
-                onReloadStarted: { response in
-                    currentWeaponData?.isReloading = response.isReloading
-                    view?.playReloadSound(type: currentWeaponData?.reloadingSound ?? .pistolReload)
-                },
-                onReloadEnded: { [weak self] response in
-                    self?.currentWeaponData?.bulletsCount = response.bulletsCount
-                    self?.currentWeaponData?.isReloading = response.isReloading
-                    self?.view?.showBulletsCountImage(name: self?.currentWeaponData?.bulletsCountImageName() ?? "")
-                })
-        } catch {
-            print("weaponReloadUseCase error: \(error)")
-        }
+            isReloading: currentWeaponData?.isReloading ?? false,
+            capacity: currentWeaponData?.capacity ?? 0,
+            reloadWaitingTime: currentWeaponData?.reloadWaitingTime ?? 0,
+            onReloadStarted: { response in
+                currentWeaponData?.isReloading = response.isReloading
+                view?.playReloadSound(type: currentWeaponData?.reloadingSound ?? .pistolReload)
+            },
+            onReloadEnded: { [weak self] response in
+                self?.currentWeaponData?.bulletsCount = response.bulletsCount
+                self?.currentWeaponData?.isReloading = response.isReloading
+                self?.view?.showBulletsCountImage(name: self?.currentWeaponData?.bulletsCountImageName() ?? "")
+            })
     }
     
     func weaponSelected(weaponId: Int) {
-        let request = WeaponDetailGetRequest(weaponId: weaponId)
         do {
-            let currentWeaponData = try weaponDetailGetUseCase.execute(request: request)
+            let currentWeaponData = try weaponResourceGetUseCase.getWeaponDetail(of: weaponId)
             showSelectedWeapon(currentWeaponData)
             
         } catch {

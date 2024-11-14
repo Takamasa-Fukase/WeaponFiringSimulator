@@ -28,20 +28,10 @@ final class ViewController: UIViewController {
         super.viewDidLoad()
         
         soundPlayer = SoundPlayer()
-        let weaponRepository = WeaponRepository()
         presenter = Presenter(
             view: self,
-            defaultWeaponGetUseCase: DefaultWeaponGetUseCase(weaponRepository: weaponRepository),
-            weaponDetailGetUseCase: WeaponDetailGetUseCase(weaponRepository: weaponRepository),
-            weaponFireUseCase: WeaponFireUseCase(
-                weaponRepository: weaponRepository,
-                canFireCheckUseCase: CanFireCheckUseCase(),
-                needsAutoReloadCheckUseCase: NeedsAutoReloadCheckUseCase()
-            ),
-            weaponReloadUseCase: WeaponReloadUseCase(
-                weaponRepository: weaponRepository,
-                canReloadCheckUseCase: CanReloadCheckUseCase()
-            )
+            weaponResourceGetUseCase: WeaponResourceGetUseCase(weaponRepository: WeaponRepository()),
+            weaponActionExecuteUseCase: WeaponActionExecuteUseCase(weaponStatusCheckUseCase: WeaponStatusCheckUseCase())
         )
         presenter.viewDidLoad()
     }
