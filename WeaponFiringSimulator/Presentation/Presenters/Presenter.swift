@@ -23,15 +23,14 @@ final class Presenter {
     
     
     
-    // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
+    #if TEST
     func getCurrentWeaponData() -> CurrentWeaponData? {
         return currentWeaponData
     }
     func setCurrentWeaponData(_ currentWeaponData: CurrentWeaponData?) {
         self.currentWeaponData = currentWeaponData
     }
-    // ↑ ユニットテスト専用のコード
-    // TODO: #if TEST的な分岐を追加して、プロダクトコードからはアクセス不可にする
+    #endif
     
     
     
