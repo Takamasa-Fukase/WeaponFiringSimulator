@@ -125,7 +125,6 @@ final class PresenterTests: XCTestCase {
      - onReloadStartedが1回だけ呼ばれること
      - isReloadingがtrueになっていること
      - currentWeaponDataのreloadingSoundでplaySound()が1回だけ呼ばれること
-     
      <reloadWaitingTimeの経過後>
      - onReloadEndedが1回だけ呼ばれること
      - bulletsCountがcurrentWeaponDataのcapacityと同じになっていること
@@ -133,7 +132,56 @@ final class PresenterTests: XCTestCase {
      - capacityと同じbulletsCountでshowBulletsCountImage()が1回だけ呼ばれていること
      */
     func test_reloadButtonTapped_currentWeaponDataのbulletsCountが0でisReloading＝falseの時() throws {
+        let expectation = expectation(description: "")
         
+        let currentWeaponData = CurrentWeaponData(
+            id: 100,
+            weaponImageName: "",
+            bulletsCountImageBaseName: "mock_bulletsCountImageBaseName",
+            capacity: 100,
+            reloadWaitingTime: 0.5,
+            reloadType: .manual,
+            showingSound: .pistolSet,
+            firingSound: .pistolShoot,
+            reloadingSound: .pistolReload,
+            noBulletsSound: .pistolOutBullets,
+            bulletsCount: 0,
+            isReloading: false
+        )
+        presenter.setCurrentWeaponData(currentWeaponData)
+        
+        XCTAssertEqual(weaponActionExecuteUseCaseMock.onReloadStartedCalledValues.count, 0)
+        XCTAssertEqual(presenter.getCurrentWeaponData()?.bulletsCount ?? 0, 0)
+        XCTAssertEqual(presenter.getCurrentWeaponData()?.isReloading ?? false, false)
+        XCTAssertEqual(vcMock.playSoundCalledValues, [])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [])
+        XCTAssertEqual(weaponActionExecuteUseCaseMock.onReloadEndedCalledValues.count, 0)
+        
+        presenter.reloadButtonTapped()
+        
+        // <reloadWaitingTimeの経過前>
+        XCTAssertEqual(weaponActionExecuteUseCaseMock.onReloadStartedCalledValues.count, 1)
+        XCTAssertEqual(presenter.getCurrentWeaponData()?.bulletsCount ?? 0, 0)
+        XCTAssertEqual(presenter.getCurrentWeaponData()?.isReloading ?? false, true)
+        XCTAssertEqual(vcMock.playSoundCalledValues, [.pistolReload])
+        XCTAssertEqual(vcMock.showBulletsCountImageCalledValues, [])
+        XCTAssertEqual(weaponActionExecuteUseCaseMock.onReloadEndedCalledValues.count, 0)
+        
+        // <reloadWaitingTimeの経過後>
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75, execute: { [weak self] in
+            XCTAssertEqual(self?.weaponActionExecuteUseCaseMock.onReloadStartedCalledValues.count, 1)
+            XCTAssertEqual(self?.presenter.getCurrentWeaponData()?.bulletsCount ?? 0, 100)
+            XCTAssertEqual(self?.presenter.getCurrentWeaponData()?.isReloading ?? false, false)
+            XCTAssertEqual(self?.vcMock.playSoundCalledValues, [.pistolReload])
+            XCTAssertEqual(self?.vcMock.showBulletsCountImageCalledValues, ["mock_bulletsCountImageBaseName100"])
+            XCTAssertEqual(self?.weaponActionExecuteUseCaseMock.onReloadEndedCalledValues.count, 1)
+            
+            // 0.75秒時点で終了させる
+            expectation.fulfill()
+        })
+        
+        // 最大1秒待機させる
+        wait(for: [expectation], timeout: 1)
     }
     
     // MARK: weaponSelected()のテスト
