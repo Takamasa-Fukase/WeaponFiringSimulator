@@ -24,8 +24,7 @@ final class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        soundPlayer = SoundPlayer()
-        soundPlayer = SoundPlayer2()
+        soundPlayer = SoundPlayer.shared
         presenter = Presenter(
             view: self,
             weaponResourceGetUseCase: WeaponResourceGetUseCase(weaponRepository: WeaponRepository()),
