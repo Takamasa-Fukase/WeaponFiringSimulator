@@ -36,6 +36,7 @@
 		BC5AC9D22CD74E4300025518 /* WeaponFiringSimulatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9D12CD74E4300025518 /* WeaponFiringSimulatorUITests.swift */; };
 		BC5AC9D42CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9D32CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift */; };
 		BCB712042CE623050018A93F /* WeaponActionExecuteUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB712032CE623050018A93F /* WeaponActionExecuteUseCaseMock.swift */; };
+		BCC651DB2CEDB3ED000E1DC5 /* SoundPlayer2.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC651DA2CEDB3ED000E1DC5 /* SoundPlayer2.swift */; };
 		BCE1714E2CE46B2400476A03 /* Presenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE1714D2CE46B2400476A03 /* Presenter.swift */; };
 		BCE171502CE46C4200476A03 /* PresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE1714F2CE46C4200476A03 /* PresenterTests.swift */; };
 		BCE171522CE4A48800476A03 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE171512CE4A48800476A03 /* ViewController.swift */; };
@@ -104,6 +105,7 @@
 		BC5AC9D12CD74E4300025518 /* WeaponFiringSimulatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFiringSimulatorUITests.swift; sourceTree = "<group>"; };
 		BC5AC9D32CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFiringSimulatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		BCB712032CE623050018A93F /* WeaponActionExecuteUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponActionExecuteUseCaseMock.swift; sourceTree = "<group>"; };
+		BCC651DA2CEDB3ED000E1DC5 /* SoundPlayer2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundPlayer2.swift; sourceTree = "<group>"; };
 		BCE1714D2CE46B2400476A03 /* Presenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presenter.swift; sourceTree = "<group>"; };
 		BCE1714F2CE46C4200476A03 /* PresenterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresenterTests.swift; sourceTree = "<group>"; };
 		BCE171512CE4A48800476A03 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */,
 				BC4B2EB42CDA0AD300C82827 /* SoundType.swift */,
 				BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */,
+				BCC651DA2CEDB3ED000E1DC5 /* SoundPlayer2.swift */,
 				BC15DED72CDA59220058EBE7 /* Presentation */,
 				BC15DEDB2CDA59BD0058EBE7 /* Domain */,
 				BC15DEDF2CDB1B310058EBE7 /* Data */,
@@ -497,6 +500,7 @@
 				BCE1719C2CE58AD000476A03 /* WeaponSelectViewController.swift in Sources */,
 				BC15DEE72CDB1DFA0058EBE7 /* CustomError.swift in Sources */,
 				BCE1714E2CE46B2400476A03 /* Presenter.swift in Sources */,
+				BCC651DB2CEDB3ED000E1DC5 /* SoundPlayer2.swift in Sources */,
 				BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */,
 				BC15DED12CDA3E000058EBE7 /* Weapon.swift in Sources */,
 				BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */,
