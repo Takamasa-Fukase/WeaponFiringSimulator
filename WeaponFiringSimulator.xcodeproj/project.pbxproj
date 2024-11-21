@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		BC1022AA2CEF09AB00645F03 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = BC1022A92CEF09AB00645F03 /* Data */; };
 		BC103DF52CEECCD300BA9B98 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = BC103DF42CEECCD300BA9B98 /* Domain */; };
-		BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */; };
+		BC215A2C2CEF0E7900AE7FC1 /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = BC215A2B2CEF0E7900AE7FC1 /* Presentation */; };
 		BC4B2ECA2CDA113100C82827 /* bazookaHit_small2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC4B2EB82CDA113100C82827 /* bazookaHit_small2.mp3 */; };
 		BC4B2ECB2CDA113100C82827 /* bazookaHit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC4B2EB92CDA113100C82827 /* bazookaHit.mp3 */; };
 		BC4B2ECC2CDA113100C82827 /* bazookaReload.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC4B2EBA2CDA113100C82827 /* bazookaReload.mp3 */; };
@@ -31,7 +31,6 @@
 		BC5AC9BD2CD74E4300025518 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BC5AC9BC2CD74E4300025518 /* Base */; };
 		BC5AC9D22CD74E4300025518 /* WeaponFiringSimulatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9D12CD74E4300025518 /* WeaponFiringSimulatorUITests.swift */; };
 		BC5AC9D42CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9D32CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift */; };
-		BC9ADADB2CEF0CAD00D414A9 /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = BC9ADADA2CEF0CAD00D414A9 /* Presentation */; };
 		BCB712042CE623050018A93F /* WeaponActionExecuteUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB712032CE623050018A93F /* WeaponActionExecuteUseCaseMock.swift */; };
 		BCE171502CE46C4200476A03 /* PresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE1714F2CE46C4200476A03 /* PresenterTests.swift */; };
 		BCE171542CE4AC9C00476A03 /* ViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE171532CE4AC9C00476A03 /* ViewControllerMock.swift */; };
@@ -58,7 +57,6 @@
 
 /* Begin PBXFileReference section */
 		BC1022A72CEF086000645F03 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = SOURCE_ROOT; };
-		BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		BC4B2EB82CDA113100C82827 /* bazookaHit_small2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bazookaHit_small2.mp3; sourceTree = "<group>"; };
 		BC4B2EB92CDA113100C82827 /* bazookaHit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bazookaHit.mp3; sourceTree = "<group>"; };
 		BC4B2EBA2CDA113100C82827 /* bazookaReload.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bazookaReload.mp3; sourceTree = "<group>"; };
@@ -99,7 +97,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC1022AA2CEF09AB00645F03 /* Data in Frameworks */,
-				BC9ADADB2CEF0CAD00D414A9 /* Presentation in Frameworks */,
+				BC215A2C2CEF0E7900AE7FC1 /* Presentation in Frameworks */,
 				BC103DF52CEECCD300BA9B98 /* Domain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -187,7 +185,6 @@
 				BCC6521A2CEEC609000E1DC5 /* Domain */,
 				BC5AC9B02CD74E4200025518 /* AppDelegate.swift */,
 				BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */,
-				BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */,
 				BC4B2EC92CDA113100C82827 /* Resources */,
 				BC5AC9B92CD74E4300025518 /* Assets.xcassets */,
 				BC5AC9BB2CD74E4300025518 /* LaunchScreen.storyboard */,
@@ -244,7 +241,7 @@
 			packageProductDependencies = (
 				BC103DF42CEECCD300BA9B98 /* Domain */,
 				BC1022A92CEF09AB00645F03 /* Data */,
-				BC9ADADA2CEF0CAD00D414A9 /* Presentation */,
+				BC215A2B2CEF0E7900AE7FC1 /* Presentation */,
 			);
 			productName = WeaponFiringSimulater;
 			productReference = BC5AC9AD2CD74E4200025518 /* WeaponFiringSimulator.app */;
@@ -375,7 +372,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */,
 				BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */,
 				BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */,
 			);
@@ -863,7 +859,7 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;
 		};
-		BC9ADADA2CEF0CAD00D414A9 /* Presentation */ = {
+		BC215A2B2CEF0E7900AE7FC1 /* Presentation */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Presentation;
 		};
