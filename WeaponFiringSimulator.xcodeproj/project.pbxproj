@@ -180,15 +180,15 @@
 		BC5AC9AF2CD74E4200025518 /* WeaponFiringSimulator */ = {
 			isa = PBXGroup;
 			children = (
-				BC9ADAD92CEF0BC200D414A9 /* Presentation */,
-				BC1022A72CEF086000645F03 /* Data */,
-				BCC6521A2CEEC609000E1DC5 /* Domain */,
 				BC5AC9B02CD74E4200025518 /* AppDelegate.swift */,
 				BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */,
 				BC4B2EC92CDA113100C82827 /* Resources */,
 				BC5AC9B92CD74E4300025518 /* Assets.xcassets */,
 				BC5AC9BB2CD74E4300025518 /* LaunchScreen.storyboard */,
 				BC5AC9BE2CD74E4300025518 /* Info.plist */,
+				BC1022A72CEF086000645F03 /* Data */,
+				BCC6521A2CEEC609000E1DC5 /* Domain */,
+				BC9ADAD92CEF0BC200D414A9 /* Presentation */,
 			);
 			path = WeaponFiringSimulator;
 			sourceTree = "<group>";
