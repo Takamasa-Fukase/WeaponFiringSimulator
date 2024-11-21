@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC1022AA2CEF09AB00645F03 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = BC1022A92CEF09AB00645F03 /* Data */; };
 		BC103DF52CEECCD300BA9B98 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = BC103DF42CEECCD300BA9B98 /* Domain */; };
-		BC15DEE12CDB1B5F0058EBE7 /* WeaponRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DEE02CDB1B5F0058EBE7 /* WeaponRepository.swift */; };
-		BC15DEE72CDB1DFA0058EBE7 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC15DEE62CDB1DFA0058EBE7 /* CustomError.swift */; };
 		BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */; };
 		BC4B2ECA2CDA113100C82827 /* bazookaHit_small2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC4B2EB82CDA113100C82827 /* bazookaHit_small2.mp3 */; };
 		BC4B2ECB2CDA113100C82827 /* bazookaHit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC4B2EB92CDA113100C82827 /* bazookaHit.mp3 */; };
@@ -64,8 +63,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		BC15DEE02CDB1B5F0058EBE7 /* WeaponRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponRepository.swift; sourceTree = "<group>"; };
-		BC15DEE62CDB1DFA0058EBE7 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		BC1022A72CEF086000645F03 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = SOURCE_ROOT; };
 		BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundPlayer.swift; sourceTree = "<group>"; };
 		BC4B2EB82CDA113100C82827 /* bazookaHit_small2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bazookaHit_small2.mp3; sourceTree = "<group>"; };
 		BC4B2EB92CDA113100C82827 /* bazookaHit.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bazookaHit.mp3; sourceTree = "<group>"; };
@@ -112,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC1022AA2CEF09AB00645F03 /* Data in Frameworks */,
 				BC103DF52CEECCD300BA9B98 /* Domain in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,6 +132,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BC1022A82CEF09AB00645F03 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		BC15DED62CDA58F50058EBE7 /* Presenters */ = {
 			isa = PBXGroup;
 			children = (
@@ -161,23 +167,6 @@
 				BCE1719A2CE58AD000476A03 /* WeaponSelectViewController.xib */,
 			);
 			path = ViewControllers;
-			sourceTree = "<group>";
-		};
-		BC15DEDF2CDB1B310058EBE7 /* DataLayer */ = {
-			isa = PBXGroup;
-			children = (
-				BC15DEE32CDB1B880058EBE7 /* Repository */,
-			);
-			path = DataLayer;
-			sourceTree = "<group>";
-		};
-		BC15DEE32CDB1B880058EBE7 /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				BC15DEE02CDB1B5F0058EBE7 /* WeaponRepository.swift */,
-				BC15DEE62CDB1DFA0058EBE7 /* CustomError.swift */,
-			);
-			path = Repository;
 			sourceTree = "<group>";
 		};
 		BC4B2EC72CDA113100C82827 /* mp3 */ = {
@@ -217,7 +206,7 @@
 				BC5AC9C62CD74E4300025518 /* WeaponFiringSimulatorTests */,
 				BC5AC9D02CD74E4300025518 /* WeaponFiringSimulatorUITests */,
 				BC5AC9AE2CD74E4200025518 /* Products */,
-				BCC6521B2CEEC67A000E1DC5 /* Frameworks */,
+				BC1022A82CEF09AB00645F03 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -234,12 +223,12 @@
 		BC5AC9AF2CD74E4200025518 /* WeaponFiringSimulator */ = {
 			isa = PBXGroup;
 			children = (
+				BC1022A72CEF086000645F03 /* Data */,
 				BCC6521A2CEEC609000E1DC5 /* Domain */,
 				BC5AC9B02CD74E4200025518 /* AppDelegate.swift */,
 				BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */,
 				BC4B2EB22CDA0AC300C82827 /* SoundPlayer.swift */,
 				BC15DED72CDA59220058EBE7 /* PresentationLayer */,
-				BC15DEDF2CDB1B310058EBE7 /* DataLayer */,
 				BC4B2EC92CDA113100C82827 /* Resources */,
 				BC5AC9B92CD74E4300025518 /* Assets.xcassets */,
 				BC5AC9BB2CD74E4300025518 /* LaunchScreen.storyboard */,
@@ -264,13 +253,6 @@
 				BC5AC9D32CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift */,
 			);
 			path = WeaponFiringSimulatorUITests;
-			sourceTree = "<group>";
-		};
-		BCC6521B2CEEC67A000E1DC5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		BCE5BCEE2CDB903D0040C14A /* Mocks */ = {
@@ -302,6 +284,7 @@
 			name = WeaponFiringSimulator;
 			packageProductDependencies = (
 				BC103DF42CEECCD300BA9B98 /* Domain */,
+				BC1022A92CEF09AB00645F03 /* Data */,
 			);
 			productName = WeaponFiringSimulater;
 			productReference = BC5AC9AD2CD74E4200025518 /* WeaponFiringSimulator.app */;
@@ -438,9 +421,7 @@
 				BCE5BD042CDE07670040C14A /* WeaponListCell.swift in Sources */,
 				BC4B2EB32CDA0AC300C82827 /* SoundPlayer.swift in Sources */,
 				BCE171522CE4A48800476A03 /* ViewController.swift in Sources */,
-				BC15DEE12CDB1B5F0058EBE7 /* WeaponRepository.swift in Sources */,
 				BCE1719C2CE58AD000476A03 /* WeaponSelectViewController.swift in Sources */,
-				BC15DEE72CDB1DFA0058EBE7 /* CustomError.swift in Sources */,
 				BCE1714E2CE46B2400476A03 /* Presenter.swift in Sources */,
 				BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */,
 				BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */,
@@ -929,6 +910,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		BC1022A92CEF09AB00645F03 /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
 		BC103DF42CEECCD300BA9B98 /* Domain */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Domain;

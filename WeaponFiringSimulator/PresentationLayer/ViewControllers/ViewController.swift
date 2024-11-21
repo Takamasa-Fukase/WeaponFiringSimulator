@@ -7,6 +7,7 @@
 
 import UIKit
 import Domain
+import Data
 
 protocol ViewControllerInterface: AnyObject {
     func showWeaponImage(name: String)

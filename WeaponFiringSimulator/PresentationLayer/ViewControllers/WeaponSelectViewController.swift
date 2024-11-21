@@ -7,6 +7,7 @@
 
 import UIKit
 import Domain
+import Data
 
 class WeaponSelectViewController: UIViewController {
     var weaponSelected: ((_ weaponId: Int) -> Void) = { _ in }
