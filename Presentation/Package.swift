@@ -13,11 +13,20 @@ let package = Package(
             name: "Presentation",
             targets: ["Presentation"]),
     ],
+    dependencies: [
+        .package(path: "Data"),
+        .package(path: "Domain")
+    ],
     targets: [
         // Targets are the basic building blocks of a package, defining a module or a test suite.
         // Targets can depend on other targets in this package and products from dependencies.
         .target(
-            name: "Presentation"),
+            name: "Presentation",
+            dependencies: [
+                "Data",
+                "Domain"
+            ]
+        ),
         .testTarget(
             name: "PresentationTests",
             dependencies: ["Presentation"]),
