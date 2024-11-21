@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum SoundType: String, CaseIterable {
+public enum SoundType: String, CaseIterable {
     case pistolSet = "pistol-slide"
     case pistolShoot = "pistol-fire"
     case pistolOutBullets = "pistol-out-bullets"
@@ -23,7 +23,7 @@ enum SoundType: String, CaseIterable {
     case kyuiin = "kyuiin"
     case westernPistolShoot = "westernPistolShoot"
     
-    var needsPlayVibration: Bool {
+    public var needsPlayVibration: Bool {
         return self == .pistolShoot || self == .bazookaShoot
     }
 }

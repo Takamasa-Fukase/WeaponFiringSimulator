@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import Domain
 
 protocol SoundPlayerInterface {
     func play(_ sound: SoundType)

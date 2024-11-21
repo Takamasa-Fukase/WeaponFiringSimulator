@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol WeaponStatusCheckUseCaseInterface {
+public protocol WeaponStatusCheckUseCaseInterface {
     func checkCanFire(bulletsCount: Int,
                       isReloading: Bool) -> Bool
     func checkCanReload(bulletsCount: Int,
@@ -17,8 +17,12 @@ protocol WeaponStatusCheckUseCaseInterface {
                               reloadType: ReloadType) -> Bool
 }
 
-final class WeaponStatusCheckUseCase: WeaponStatusCheckUseCaseInterface {
-    func checkCanFire(bulletsCount: Int, isReloading: Bool) -> Bool {
+public final class WeaponStatusCheckUseCase {
+    public init() {}
+}
+
+extension WeaponStatusCheckUseCase: WeaponStatusCheckUseCaseInterface {
+    public func checkCanFire(bulletsCount: Int, isReloading: Bool) -> Bool {
         if isReloading { return false }
         if bulletsCount > 0 {
             return true
@@ -27,7 +31,7 @@ final class WeaponStatusCheckUseCase: WeaponStatusCheckUseCaseInterface {
         }
     }
     
-    func checkCanReload(bulletsCount: Int, isReloading: Bool) -> Bool {
+    public func checkCanReload(bulletsCount: Int, isReloading: Bool) -> Bool {
         if isReloading { return false }
         if bulletsCount <= 0 {
             return true
@@ -36,7 +40,7 @@ final class WeaponStatusCheckUseCase: WeaponStatusCheckUseCaseInterface {
         }
     }
     
-    func checkNeedsAutoReload(bulletsCount: Int, isReloading: Bool, reloadType: ReloadType) -> Bool {
+    public func checkNeedsAutoReload(bulletsCount: Int, isReloading: Bool, reloadType: ReloadType) -> Bool {
         if isReloading { return false }
         if bulletsCount == 0 && reloadType == .auto {
             return true

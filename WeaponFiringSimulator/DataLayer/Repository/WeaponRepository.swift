@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Domain
 
 final class WeaponRepository: WeaponRepositoryInterface {
     private let weapons: [Weapon] = [

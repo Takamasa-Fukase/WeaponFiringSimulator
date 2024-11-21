@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct WeaponListItem: Equatable {
-    let weaponId: Int
-    let weaponImageName: String
+public struct WeaponListItem: Equatable {
+    public let weaponId: Int
+    public let weaponImageName: String
 }
