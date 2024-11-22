@@ -7,9 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		BC1022AA2CEF09AB00645F03 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = BC1022A92CEF09AB00645F03 /* Data */; };
-		BC103DF52CEECCD300BA9B98 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = BC103DF42CEECCD300BA9B98 /* Domain */; };
-		BC215A2C2CEF0E7900AE7FC1 /* Presentation in Frameworks */ = {isa = PBXBuildFile; productRef = BC215A2B2CEF0E7900AE7FC1 /* Presentation */; };
 		BC4B2ECA2CDA113100C82827 /* bazookaHit_small2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC4B2EB82CDA113100C82827 /* bazookaHit_small2.mp3 */; };
 		BC4B2ECB2CDA113100C82827 /* bazookaHit.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC4B2EB92CDA113100C82827 /* bazookaHit.mp3 */; };
 		BC4B2ECC2CDA113100C82827 /* bazookaReload.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = BC4B2EBA2CDA113100C82827 /* bazookaReload.mp3 */; };
@@ -98,9 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC1022AA2CEF09AB00645F03 /* Data in Frameworks */,
-				BC215A2C2CEF0E7900AE7FC1 /* Presentation in Frameworks */,
-				BC103DF52CEECCD300BA9B98 /* Domain in Frameworks */,
 				BC8487642CF024DA00458A6A /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -251,9 +245,6 @@
 			);
 			name = WeaponFiringSimulator;
 			packageProductDependencies = (
-				BC103DF42CEECCD300BA9B98 /* Domain */,
-				BC1022A92CEF09AB00645F03 /* Data */,
-				BC215A2B2CEF0E7900AE7FC1 /* Presentation */,
 				BC8487632CF024DA00458A6A /* Factory */,
 			);
 			productName = WeaponFiringSimulater;
@@ -861,18 +852,6 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		BC1022A92CEF09AB00645F03 /* Data */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Data;
-		};
-		BC103DF42CEECCD300BA9B98 /* Domain */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Domain;
-		};
-		BC215A2B2CEF0E7900AE7FC1 /* Presentation */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Presentation;
-		};
 		BC8487632CF024DA00458A6A /* Factory */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Factory;
