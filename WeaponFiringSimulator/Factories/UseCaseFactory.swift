@@ -10,15 +10,15 @@ import Data
 import Domain
 
 public final class UseCaseFactory {
-    public static func makeWeaponResourceGetUseCase() -> WeaponResourceGetUseCase {
-        return .init(weaponRepository: RepositoryFactory.makeWeaponRepository())
+    public static func create() -> WeaponResourceGetUseCaseInterface {
+        return WeaponResourceGetUseCase(weaponRepository: RepositoryFactory.create())
     }
     
-    public static func makeWeaponStatusCheckUseCase() -> WeaponStatusCheckUseCase {
-        return .init()
+    public static func create() -> WeaponStatusCheckUseCaseInterface {
+        return WeaponStatusCheckUseCase()
     }
     
-    public static func makeWeaponActionExecuteUseCase() -> WeaponActionExecuteUseCase {
-        return .init(weaponStatusCheckUseCase: makeWeaponStatusCheckUseCase())
+    public static func create() -> WeaponActionExecuteUseCaseInterface {
+        return WeaponActionExecuteUseCase(weaponStatusCheckUseCase: create())
     }
 }

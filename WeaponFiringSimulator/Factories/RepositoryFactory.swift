@@ -6,10 +6,11 @@
 //
 
 import Foundation
+import Domain
 import Data
 
 public final class RepositoryFactory {
-    public static func makeWeaponRepository() -> WeaponRepository {
-        return .init()
+    public static func create() -> WeaponRepositoryInterface {
+        return WeaponRepository()
     }
 }
