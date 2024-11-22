@@ -25,6 +25,8 @@
 		BC5097832CF082F10080F344 /* ViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC5097822CF082F10080F344 /* ViewController.storyboard */; };
 		BC5097852CF085AF0080F344 /* WeaponListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC5097842CF085AF0080F344 /* WeaponListCell.xib */; };
 		BC5097872CF085EF0080F344 /* WeaponSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC5097862CF085EF0080F344 /* WeaponSelectViewController.xib */; };
+		BC5097A22CF08F050080F344 /* Data in Frameworks */ = {isa = PBXBuildFile; productRef = BC5097A12CF08F050080F344 /* Data */; };
+		BC5097A42CF08F050080F344 /* Domain in Frameworks */ = {isa = PBXBuildFile; productRef = BC5097A32CF08F050080F344 /* Domain */; };
 		BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9B02CD74E4200025518 /* AppDelegate.swift */; };
 		BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */; };
 		BC5AC9BA2CD74E4300025518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC5AC9B92CD74E4300025518 /* Assets.xcassets */; };
@@ -114,6 +116,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC5097A42CF08F050080F344 /* Domain in Frameworks */,
+				BC5097A22CF08F050080F344 /* Data in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -171,20 +175,6 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		BC5097892CF08A430080F344 /* DataLayer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DataLayer;
-			sourceTree = "<group>";
-		};
-		BC50978A2CF08A490080F344 /* DomainLayer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = DomainLayer;
-			sourceTree = "<group>";
-		};
 		BC5AC9A42CD74E4200025518 = {
 			isa = PBXGroup;
 			children = (
@@ -213,8 +203,6 @@
 			children = (
 				BC5AC9B02CD74E4200025518 /* AppDelegate.swift */,
 				BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */,
-				BC5097892CF08A430080F344 /* DataLayer */,
-				BC50978A2CF08A490080F344 /* DomainLayer */,
 				BCDE43672CF0101B002AEBAE /* Factories */,
 				BCEF3C9F2CF07DCC0023F45E /* Presentation */,
 				BC4B2EC92CDA113100C82827 /* Resources */,
@@ -312,6 +300,8 @@
 			);
 			name = WeaponFiringSimulator;
 			packageProductDependencies = (
+				BC5097A12CF08F050080F344 /* Data */,
+				BC5097A32CF08F050080F344 /* Domain */,
 			);
 			productName = WeaponFiringSimulater;
 			productReference = BC5AC9AD2CD74E4200025518 /* WeaponFiringSimulator.app */;
@@ -927,6 +917,17 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BC5097A12CF08F050080F344 /* Data */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Data;
+		};
+		BC5097A32CF08F050080F344 /* Domain */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Domain;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BC5AC9A52CD74E4200025518 /* Project object */;
 }
