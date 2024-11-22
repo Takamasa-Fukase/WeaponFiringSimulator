@@ -9,29 +9,23 @@ import UIKit
 import Domain
 import Data
 
-protocol ViewControllerInterface: AnyObject {
+public protocol ViewControllerInterface: AnyObject {
+    func inject(soundPlayer: SoundPlayerInterface, presenter: PresenterInterface)
     func showWeaponImage(name: String)
     func showBulletsCountImage(name: String)
     func playSound(type: SoundType)
     func executeAutoReload()
 }
 
-final class ViewController: UIViewController {
+public final class ViewController: UIViewController {
     private var soundPlayer: SoundPlayerInterface!
     private var presenter: PresenterInterface!
 
     @IBOutlet private weak var weaponImageView: UIImageView!
     @IBOutlet private weak var bulletsCountImageView: UIImageView!
     
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
-        
-        soundPlayer = SoundPlayer()
-        presenter = Presenter(
-            view: self,
-            weaponResourceGetUseCase: WeaponResourceGetUseCase(weaponRepository: WeaponRepository()),
-            weaponActionExecuteUseCase: WeaponActionExecuteUseCase(weaponStatusCheckUseCase: WeaponStatusCheckUseCase())
-        )
         presenter.viewDidLoad()
     }
     
@@ -62,19 +56,24 @@ final class ViewController: UIViewController {
 }
 
 extension ViewController: ViewControllerInterface {
-    func showWeaponImage(name: String) {
+    public func inject(soundPlayer: SoundPlayerInterface, presenter: PresenterInterface) {
+        self.soundPlayer = soundPlayer
+        self.presenter = presenter
+    }
+
+    public func showWeaponImage(name: String) {
         weaponImageView.image = UIImage(named: name)
     }
     
-    func showBulletsCountImage(name: String) {
+    public func showBulletsCountImage(name: String) {
         bulletsCountImageView.image = UIImage(named: name)
     }
     
-    func playSound(type: SoundType) {
+    public func playSound(type: SoundType) {
         soundPlayer.play(type)
     }
     
-    func executeAutoReload() {
+    public func executeAutoReload() {
         presenter.reloadButtonTapped()
     }
 }

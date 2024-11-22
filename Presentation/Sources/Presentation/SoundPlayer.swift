@@ -8,14 +8,14 @@
 import AVFoundation
 import Domain
 
-protocol SoundPlayerInterface {
+public protocol SoundPlayerInterface {
     func play(_ sound: SoundType)
 }
 
-final class SoundPlayer {
+public final class SoundPlayer {
     private var audioPlayers: [SoundType: AVAudioPlayer] = [:]
     
-    init() {
+    public init() {
         initAudioPlayers()
         forceSoundOn()
     }
@@ -57,7 +57,7 @@ final class SoundPlayer {
 }
 
 extension SoundPlayer: SoundPlayerInterface {
-    func play(_ sound: SoundType) {
+    public func play(_ sound: SoundType) {
         playSound(of: sound)
         if sound.needsPlayVibration {
             playVibration()

@@ -8,14 +8,14 @@
 import Foundation
 import Domain
 
-protocol PresenterInterface {
+public protocol PresenterInterface {
     func viewDidLoad()
     func fireButtonTapped()
     func reloadButtonTapped()
     func weaponSelected(weaponId: Int)
 }
 
-final class Presenter {
+public final class Presenter {
     private weak var view: ViewControllerInterface?
     private let weaponResourceGetUseCase: WeaponResourceGetUseCaseInterface
     private let weaponActionExecuteUseCase: WeaponActionExecuteUseCaseInterface
@@ -35,7 +35,7 @@ final class Presenter {
     
     
     
-    init(
+    public init(
         view: ViewControllerInterface,
         weaponResourceGetUseCase: WeaponResourceGetUseCaseInterface,
         weaponActionExecuteUseCase: WeaponActionExecuteUseCaseInterface
@@ -54,7 +54,7 @@ final class Presenter {
 }
 
 extension Presenter: PresenterInterface {
-    func viewDidLoad() {
+    public func viewDidLoad() {
         do {
             let currentWeaponData = try weaponResourceGetUseCase.getDefaultWeaponDetail()
             showSelectedWeapon(currentWeaponData)
@@ -64,7 +64,7 @@ extension Presenter: PresenterInterface {
         }
     }
     
-    func fireButtonTapped() {
+    public func fireButtonTapped() {
         weaponActionExecuteUseCase.fireWeapon(
             bulletsCount: currentWeaponData?.bulletsCount ?? 0,
             isReloading: currentWeaponData?.isReloading ?? false,
@@ -86,7 +86,7 @@ extension Presenter: PresenterInterface {
             })
     }
     
-    func reloadButtonTapped() {
+    public func reloadButtonTapped() {
         weaponActionExecuteUseCase.reloadWeapon(
             bulletsCount: currentWeaponData?.bulletsCount ?? 0,
             isReloading: currentWeaponData?.isReloading ?? false,
@@ -103,7 +103,7 @@ extension Presenter: PresenterInterface {
             })
     }
     
-    func weaponSelected(weaponId: Int) {
+    public func weaponSelected(weaponId: Int) {
         do {
             let currentWeaponData = try weaponResourceGetUseCase.getWeaponDetail(of: weaponId)
             showSelectedWeapon(currentWeaponData)
