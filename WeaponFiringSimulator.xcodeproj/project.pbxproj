@@ -102,6 +102,8 @@
 		BC5097942CF08A6C0080F344 /* WeaponListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponListItem.swift; sourceTree = "<group>"; };
 		BC5097952CF08A6C0080F344 /* WeaponResourceGetUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponResourceGetUseCase.swift; sourceTree = "<group>"; };
 		BC5097962CF08A6C0080F344 /* WeaponRepositoryInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponRepositoryInterface.swift; sourceTree = "<group>"; };
+		BC50979F2CF08C090080F344 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
+		BC5097A02CF08CF70080F344 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
 		BC5AC9AD2CD74E4200025518 /* WeaponFiringSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeaponFiringSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5AC9B02CD74E4200025518 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -219,6 +221,8 @@
 				BC5AC9AF2CD74E4200025518 /* WeaponFiringSimulator */,
 				BC5AC9C62CD74E4300025518 /* WeaponFiringSimulatorTests */,
 				BC5AC9D02CD74E4300025518 /* WeaponFiringSimulatorUITests */,
+				BC50979F2CF08C090080F344 /* Data */,
+				BC5097A02CF08CF70080F344 /* Domain */,
 				BC5AC9AE2CD74E4200025518 /* Products */,
 				BC1022A82CEF09AB00645F03 /* Frameworks */,
 			);
