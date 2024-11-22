@@ -196,16 +196,9 @@
 			children = (
 				BC5AC9B02CD74E4200025518 /* AppDelegate.swift */,
 				BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */,
-				BCEF3C8C2CF07D010023F45E /* Bundle+Extension.swift */,
-				BCEF3C8E2CF07D0C0023F45E /* Presenter.swift */,
-				BCEF3C902CF07D0F0023F45E /* Main.storyboard */,
-				BCEF3C952CF07D150023F45E /* ViewController.swift */,
-				BCEF3C932CF07D150023F45E /* WeaponListCell.swift */,
-				BCEF3C912CF07D150023F45E /* WeaponListCell.xib */,
-				BCEF3C922CF07D150023F45E /* WeaponSelectViewController.swift */,
-				BCEF3C942CF07D150023F45E /* WeaponSelectViewController.xib */,
-				BCEF3C962CF07D150023F45E /* SoundPlayer.swift */,
+				BCEF3C9C2CF07D7E0023F45E /* Extensions */,
 				BCDE43672CF0101B002AEBAE /* Factories */,
+				BCEF3C9F2CF07DCC0023F45E /* Presentation */,
 				BC4B2EC92CDA113100C82827 /* Resources */,
 				BC5AC9B92CD74E4300025518 /* Assets.xcassets */,
 				BC5AC9BB2CD74E4300025518 /* LaunchScreen.storyboard */,
@@ -253,6 +246,46 @@
 				BCE5BD072CDF246A0040C14A /* WeaponRepositoryMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		BCEF3C9C2CF07D7E0023F45E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				BCEF3C8C2CF07D010023F45E /* Bundle+Extension.swift */,
+			);
+			name = Extensions;
+			path = WeaponFiringSimulator/Extensions;
+			sourceTree = SOURCE_ROOT;
+		};
+		BCEF3C9D2CF07D9E0023F45E /* Top */ = {
+			isa = PBXGroup;
+			children = (
+				BCEF3C8E2CF07D0C0023F45E /* Presenter.swift */,
+				BCEF3C902CF07D0F0023F45E /* Main.storyboard */,
+				BCEF3C952CF07D150023F45E /* ViewController.swift */,
+			);
+			path = Top;
+			sourceTree = "<group>";
+		};
+		BCEF3C9E2CF07DB60023F45E /* WeaponSelect */ = {
+			isa = PBXGroup;
+			children = (
+				BCEF3C932CF07D150023F45E /* WeaponListCell.swift */,
+				BCEF3C912CF07D150023F45E /* WeaponListCell.xib */,
+				BCEF3C922CF07D150023F45E /* WeaponSelectViewController.swift */,
+				BCEF3C942CF07D150023F45E /* WeaponSelectViewController.xib */,
+			);
+			path = WeaponSelect;
+			sourceTree = "<group>";
+		};
+		BCEF3C9F2CF07DCC0023F45E /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				BCEF3C9D2CF07D9E0023F45E /* Top */,
+				BCEF3C9E2CF07DB60023F45E /* WeaponSelect */,
+				BCEF3C962CF07D150023F45E /* SoundPlayer.swift */,
+			);
+			path = Presentation;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
