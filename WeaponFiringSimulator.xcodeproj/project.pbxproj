@@ -28,12 +28,14 @@
 		BC5AC9BD2CD74E4300025518 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = BC5AC9BC2CD74E4300025518 /* Base */; };
 		BC5AC9D22CD74E4300025518 /* WeaponFiringSimulatorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9D12CD74E4300025518 /* WeaponFiringSimulatorUITests.swift */; };
 		BC5AC9D42CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9D32CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift */; };
-		BC8487642CF024DA00458A6A /* Factory in Frameworks */ = {isa = PBXBuildFile; productRef = BC8487632CF024DA00458A6A /* Factory */; };
 		BCB712042CE623050018A93F /* WeaponActionExecuteUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB712032CE623050018A93F /* WeaponActionExecuteUseCaseMock.swift */; };
 		BCE171502CE46C4200476A03 /* PresenterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE1714F2CE46C4200476A03 /* PresenterTests.swift */; };
 		BCE171542CE4AC9C00476A03 /* ViewControllerMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE171532CE4AC9C00476A03 /* ViewControllerMock.swift */; };
 		BCE171AD2CE5E34700476A03 /* WeaponResourceGetUseCaseMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE171AC2CE5E34700476A03 /* WeaponResourceGetUseCaseMock.swift */; };
 		BCE5BD082CDF246A0040C14A /* WeaponRepositoryMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE5BD072CDF246A0040C14A /* WeaponRepositoryMock.swift */; };
+		BCEF3C892CF07CA40023F45E /* PresentationFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEF3C862CF07CA30023F45E /* PresentationFactory.swift */; };
+		BCEF3C8A2CF07CA40023F45E /* UseCaseFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEF3C872CF07CA30023F45E /* UseCaseFactory.swift */; };
+		BCEF3C8B2CF07CA40023F45E /* RepositoryFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCEF3C882CF07CA30023F45E /* RepositoryFactory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +82,6 @@
 		BC5AC9CD2CD74E4300025518 /* WeaponFiringSimulatorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeaponFiringSimulatorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5AC9D12CD74E4300025518 /* WeaponFiringSimulatorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFiringSimulatorUITests.swift; sourceTree = "<group>"; };
 		BC5AC9D32CD74E4300025518 /* WeaponFiringSimulatorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponFiringSimulatorUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		BC8487622CF0249300458A6A /* Factory */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Factory; sourceTree = SOURCE_ROOT; };
 		BC9ADAD92CEF0BC200D414A9 /* Presentation */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Presentation; sourceTree = SOURCE_ROOT; };
 		BCB712032CE623050018A93F /* WeaponActionExecuteUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponActionExecuteUseCaseMock.swift; sourceTree = "<group>"; };
 		BCC6521A2CEEC609000E1DC5 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
@@ -88,6 +89,9 @@
 		BCE171532CE4AC9C00476A03 /* ViewControllerMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMock.swift; sourceTree = "<group>"; };
 		BCE171AC2CE5E34700476A03 /* WeaponResourceGetUseCaseMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponResourceGetUseCaseMock.swift; sourceTree = "<group>"; };
 		BCE5BD072CDF246A0040C14A /* WeaponRepositoryMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeaponRepositoryMock.swift; sourceTree = "<group>"; };
+		BCEF3C862CF07CA30023F45E /* PresentationFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresentationFactory.swift; sourceTree = "<group>"; };
+		BCEF3C872CF07CA30023F45E /* UseCaseFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UseCaseFactory.swift; sourceTree = "<group>"; };
+		BCEF3C882CF07CA30023F45E /* RepositoryFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepositoryFactory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +99,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC8487642CF024DA00458A6A /* Factory in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,7 +189,6 @@
 				BC5AC9BE2CD74E4300025518 /* Info.plist */,
 				BC1022A72CEF086000645F03 /* Data */,
 				BCC6521A2CEEC609000E1DC5 /* Domain */,
-				BC8487622CF0249300458A6A /* Factory */,
 				BC9ADAD92CEF0BC200D414A9 /* Presentation */,
 			);
 			path = WeaponFiringSimulator;
@@ -213,6 +215,9 @@
 		BCDE43672CF0101B002AEBAE /* Factories */ = {
 			isa = PBXGroup;
 			children = (
+				BCEF3C862CF07CA30023F45E /* PresentationFactory.swift */,
+				BCEF3C882CF07CA30023F45E /* RepositoryFactory.swift */,
+				BCEF3C872CF07CA30023F45E /* UseCaseFactory.swift */,
 			);
 			path = Factories;
 			sourceTree = "<group>";
@@ -245,7 +250,6 @@
 			);
 			name = WeaponFiringSimulator;
 			packageProductDependencies = (
-				BC8487632CF024DA00458A6A /* Factory */,
 			);
 			productName = WeaponFiringSimulater;
 			productReference = BC5AC9AD2CD74E4200025518 /* WeaponFiringSimulator.app */;
@@ -376,6 +380,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCEF3C8A2CF07CA40023F45E /* UseCaseFactory.swift in Sources */,
+				BCEF3C8B2CF07CA40023F45E /* RepositoryFactory.swift in Sources */,
+				BCEF3C892CF07CA40023F45E /* PresentationFactory.swift in Sources */,
 				BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */,
 				BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */,
 			);
@@ -850,13 +857,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		BC8487632CF024DA00458A6A /* Factory */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = Factory;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = BC5AC9A52CD74E4200025518 /* Project object */;
 }
