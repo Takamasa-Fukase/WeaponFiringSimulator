@@ -9,7 +9,7 @@ import UIKit
 import Presentation
 
 public final class ViewControllerFactory {
-    public static func create() -> ViewController {
+    public static func createMainViewController() -> ViewController {
         let vc = UIStoryboard(name: "Main", bundle: Bundle.presentation).instantiateInitialViewController() as! ViewController
         let presenter = Presenter(
             view: vc,
