@@ -8,8 +8,8 @@
 import UIKit
 import Presentation
 
-struct ViewControllerFactory {
-    static func create() -> ViewController {
+public final class ViewControllerFactory {
+    public static func create() -> ViewController {
         let vc = UIStoryboard(name: "Main", bundle: Bundle.presentation).instantiateInitialViewController() as! ViewController
         let presenter = Presenter(
             view: vc,

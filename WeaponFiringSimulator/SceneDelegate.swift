@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Presentation
+import Factory
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     var window: UIWindow?
