@@ -6,11 +6,10 @@
 //
 
 import UIKit
-import Presentation
 
 public final class PresentationFactory {
     public static func createMainViewController() -> ViewController {
-        let vc = UIStoryboard(name: "Main", bundle: Bundle.presentation).instantiateInitialViewController() as! ViewController
+        let vc = UIStoryboard(name: "ViewController", bundle: Bundle.main).instantiateInitialViewController() as! ViewController
         let presenter = Presenter(
             view: vc,
             weaponResourceGetUseCase: UseCaseFactory.create(),

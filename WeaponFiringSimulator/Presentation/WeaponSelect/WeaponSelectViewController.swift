@@ -16,7 +16,7 @@ class WeaponSelectViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     
     init() {
-        super.init(nibName: "WeaponSelectViewController", bundle: Bundle.module)
+        super.init(nibName: "WeaponSelectViewController", bundle: Bundle.main)
     }
     
     required init?(coder: NSCoder) {
@@ -33,7 +33,7 @@ class WeaponSelectViewController: UIViewController {
     private func setupCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(UINib(nibName: "WeaponListCell", bundle: Bundle.module), forCellWithReuseIdentifier: "WeaponListCell")
+        collectionView.register(UINib(nibName: "WeaponListCell", bundle: Bundle.main), forCellWithReuseIdentifier: "WeaponListCell")
         collectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
         collectionView.allowsMultipleSelection = false
         collectionView.allowsSelection = true

@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import Domain
 import Data
+import Domain
 
 public final class RepositoryFactory {
     public static func create() -> WeaponRepositoryInterface {

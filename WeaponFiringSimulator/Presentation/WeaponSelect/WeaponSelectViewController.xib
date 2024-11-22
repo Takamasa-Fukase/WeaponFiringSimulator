@@ -2,31 +2,30 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22684"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeaponSelectViewController" customModule="Presentation">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeaponSelectViewController" customModule="WeaponFiringSimulator" customModuleProvider="target">
             <connections>
-                <outlet property="collectionView" destination="zA2-Bp-pLX" id="4yy-fk-hNU"/>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="collectionView" destination="jGy-05-81I" id="EOI-Jd-tf5"/>
+                <outlet property="view" destination="Mnr-NV-GXP" id="Lct-6T-E9W"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Mnr-NV-GXP">
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="zA2-Bp-pLX">
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="jGy-05-81I">
                     <rect key="frame" x="0.0" y="59" width="393" height="120"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="120" id="pd9-6s-1FG"/>
+                        <constraint firstAttribute="height" constant="120" id="8Bz-hj-J4S"/>
                     </constraints>
-                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="yfn-KZ-Dxj">
+                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="d99-3n-7A7">
                         <size key="itemSize" width="128" height="128"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -35,12 +34,12 @@
                     <cells/>
                 </collectionView>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <viewLayoutGuide key="safeArea" id="rK3-Q0-4r4"/>
             <color key="backgroundColor" systemColor="labelColor"/>
             <constraints>
-                <constraint firstItem="zA2-Bp-pLX" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="9HW-YE-HZp"/>
-                <constraint firstItem="zA2-Bp-pLX" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="EWy-67-lBe"/>
-                <constraint firstAttribute="trailing" secondItem="zA2-Bp-pLX" secondAttribute="trailing" id="vS8-Li-iTS"/>
+                <constraint firstAttribute="trailing" secondItem="jGy-05-81I" secondAttribute="trailing" id="OTX-SX-kXw"/>
+                <constraint firstItem="jGy-05-81I" firstAttribute="leading" secondItem="rK3-Q0-4r4" secondAttribute="leading" id="XzF-vN-479"/>
+                <constraint firstItem="jGy-05-81I" firstAttribute="top" secondItem="rK3-Q0-4r4" secondAttribute="top" id="fZH-Y7-gVv"/>
             </constraints>
             <point key="canvasLocation" x="-10" y="21"/>
         </view>
