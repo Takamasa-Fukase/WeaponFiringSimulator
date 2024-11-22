@@ -25,16 +25,6 @@
 		BC5097832CF082F10080F344 /* ViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC5097822CF082F10080F344 /* ViewController.storyboard */; };
 		BC5097852CF085AF0080F344 /* WeaponListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC5097842CF085AF0080F344 /* WeaponListCell.xib */; };
 		BC5097872CF085EF0080F344 /* WeaponSelectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = BC5097862CF085EF0080F344 /* WeaponSelectViewController.xib */; };
-		BC50978D2CF08A5E0080F344 /* WeaponRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC50978B2CF08A5E0080F344 /* WeaponRepository.swift */; };
-		BC50978E2CF08A5E0080F344 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC50978C2CF08A5E0080F344 /* CustomError.swift */; };
-		BC5097972CF08A6C0080F344 /* Weapon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC50978F2CF08A6B0080F344 /* Weapon.swift */; };
-		BC5097982CF08A6C0080F344 /* CurrentWeaponData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5097902CF08A6B0080F344 /* CurrentWeaponData.swift */; };
-		BC5097992CF08A6C0080F344 /* SoundType.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5097912CF08A6B0080F344 /* SoundType.swift */; };
-		BC50979A2CF08A6C0080F344 /* WeaponActionExecuteUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5097922CF08A6C0080F344 /* WeaponActionExecuteUseCase.swift */; };
-		BC50979B2CF08A6C0080F344 /* WeaponStatusCheckUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5097932CF08A6C0080F344 /* WeaponStatusCheckUseCase.swift */; };
-		BC50979C2CF08A6C0080F344 /* WeaponListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5097942CF08A6C0080F344 /* WeaponListItem.swift */; };
-		BC50979D2CF08A6C0080F344 /* WeaponResourceGetUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5097952CF08A6C0080F344 /* WeaponResourceGetUseCase.swift */; };
-		BC50979E2CF08A6C0080F344 /* WeaponRepositoryInterface.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5097962CF08A6C0080F344 /* WeaponRepositoryInterface.swift */; };
 		BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9B02CD74E4200025518 /* AppDelegate.swift */; };
 		BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5AC9B22CD74E4200025518 /* SceneDelegate.swift */; };
 		BC5AC9BA2CD74E4300025518 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC5AC9B92CD74E4300025518 /* Assets.xcassets */; };
@@ -92,16 +82,6 @@
 		BC5097822CF082F10080F344 /* ViewController.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ViewController.storyboard; sourceTree = "<group>"; };
 		BC5097842CF085AF0080F344 /* WeaponListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeaponListCell.xib; sourceTree = "<group>"; };
 		BC5097862CF085EF0080F344 /* WeaponSelectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WeaponSelectViewController.xib; sourceTree = "<group>"; };
-		BC50978B2CF08A5E0080F344 /* WeaponRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponRepository.swift; sourceTree = "<group>"; };
-		BC50978C2CF08A5E0080F344 /* CustomError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
-		BC50978F2CF08A6B0080F344 /* Weapon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weapon.swift; sourceTree = "<group>"; };
-		BC5097902CF08A6B0080F344 /* CurrentWeaponData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CurrentWeaponData.swift; sourceTree = "<group>"; };
-		BC5097912CF08A6B0080F344 /* SoundType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundType.swift; sourceTree = "<group>"; };
-		BC5097922CF08A6C0080F344 /* WeaponActionExecuteUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponActionExecuteUseCase.swift; sourceTree = "<group>"; };
-		BC5097932CF08A6C0080F344 /* WeaponStatusCheckUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponStatusCheckUseCase.swift; sourceTree = "<group>"; };
-		BC5097942CF08A6C0080F344 /* WeaponListItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponListItem.swift; sourceTree = "<group>"; };
-		BC5097952CF08A6C0080F344 /* WeaponResourceGetUseCase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponResourceGetUseCase.swift; sourceTree = "<group>"; };
-		BC5097962CF08A6C0080F344 /* WeaponRepositoryInterface.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeaponRepositoryInterface.swift; sourceTree = "<group>"; };
 		BC50979F2CF08C090080F344 /* Data */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Data; sourceTree = "<group>"; };
 		BC5097A02CF08CF70080F344 /* Domain */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Domain; sourceTree = "<group>"; };
 		BC5AC9AD2CD74E4200025518 /* WeaponFiringSimulator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WeaponFiringSimulator.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -194,8 +174,6 @@
 		BC5097892CF08A430080F344 /* DataLayer */ = {
 			isa = PBXGroup;
 			children = (
-				BC50978C2CF08A5E0080F344 /* CustomError.swift */,
-				BC50978B2CF08A5E0080F344 /* WeaponRepository.swift */,
 			);
 			path = DataLayer;
 			sourceTree = "<group>";
@@ -203,14 +181,6 @@
 		BC50978A2CF08A490080F344 /* DomainLayer */ = {
 			isa = PBXGroup;
 			children = (
-				BC50978F2CF08A6B0080F344 /* Weapon.swift */,
-				BC5097902CF08A6B0080F344 /* CurrentWeaponData.swift */,
-				BC5097942CF08A6C0080F344 /* WeaponListItem.swift */,
-				BC5097962CF08A6C0080F344 /* WeaponRepositoryInterface.swift */,
-				BC5097922CF08A6C0080F344 /* WeaponActionExecuteUseCase.swift */,
-				BC5097952CF08A6C0080F344 /* WeaponResourceGetUseCase.swift */,
-				BC5097932CF08A6C0080F344 /* WeaponStatusCheckUseCase.swift */,
-				BC5097912CF08A6B0080F344 /* SoundType.swift */,
 			);
 			path = DomainLayer;
 			sourceTree = "<group>";
@@ -475,25 +445,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BC50978D2CF08A5E0080F344 /* WeaponRepository.swift in Sources */,
 				BCEF3C992CF07D150023F45E /* ViewController.swift in Sources */,
 				BCEF3C972CF07D150023F45E /* WeaponSelectViewController.swift in Sources */,
 				BCEF3C8A2CF07CA40023F45E /* UseCaseFactory.swift in Sources */,
-				BC5097972CF08A6C0080F344 /* Weapon.swift in Sources */,
-				BC50979E2CF08A6C0080F344 /* WeaponRepositoryInterface.swift in Sources */,
 				BCEF3C8F2CF07D0C0023F45E /* Presenter.swift in Sources */,
-				BC50979B2CF08A6C0080F344 /* WeaponStatusCheckUseCase.swift in Sources */,
-				BC50978E2CF08A5E0080F344 /* CustomError.swift in Sources */,
 				BCEF3C9A2CF07D150023F45E /* WeaponListCell.swift in Sources */,
 				BCEF3C982CF07D150023F45E /* SoundPlayer.swift in Sources */,
-				BC5097982CF08A6C0080F344 /* CurrentWeaponData.swift in Sources */,
 				BCEF3C8B2CF07CA40023F45E /* RepositoryFactory.swift in Sources */,
-				BC5097992CF08A6C0080F344 /* SoundType.swift in Sources */,
 				BCEF3C892CF07CA40023F45E /* PresentationFactory.swift in Sources */,
 				BC5AC9B12CD74E4200025518 /* AppDelegate.swift in Sources */,
-				BC50979A2CF08A6C0080F344 /* WeaponActionExecuteUseCase.swift in Sources */,
-				BC50979D2CF08A6C0080F344 /* WeaponResourceGetUseCase.swift in Sources */,
-				BC50979C2CF08A6C0080F344 /* WeaponListItem.swift in Sources */,
 				BC5AC9B32CD74E4200025518 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
